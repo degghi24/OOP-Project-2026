@@ -1,0 +1,12 @@
+debug/AbstractTask.o
+debug/TimedTask.o
+debug/RepeatableTask.o
+debug/Deadline.o
+debug/Activity.o
+debug/Reminder.o
+debug/Work.o
+debug/Bill.o
+debug/Project.o
+debug/mainwindow.o
+debug/main.o
+debug/moc_mainwindow.o
