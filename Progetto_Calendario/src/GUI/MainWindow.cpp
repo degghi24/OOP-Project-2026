@@ -1,7 +1,9 @@
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent){
+    : QMainWindow(parent) {
+
+    Calendar::getInstance();
 
     toolBar = new ToolBar(this);
     addToolBar(toolBar);
@@ -9,14 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
     splitter = new QSplitter(Qt::Horizontal);
     setCentralWidget(splitter);
 
-    //first half for the list
     taskListWindow = new TaskListWindow();
     splitter->addWidget(taskListWindow);
 
-    //second half is for the calendar
     splitter->addWidget(calendar = new QCalendarWidget());
-
-
 }
 
-MainWindow::~MainWindow() {}
+MainWindow::~MainWindow() {
+    delete Calendar::getInstance();
+}

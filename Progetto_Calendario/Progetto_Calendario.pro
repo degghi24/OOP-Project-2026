@@ -3,7 +3,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 HEADERS += \
+    src/Model/Headers/TaskFactory.h \
     src/Model/Headers/AbstractTask.h \
+    src/Model/Headers/Calendar.h \
     src/Model/Headers/TimedTask.h \
     src/Model/Headers/RepeatableTask.h \
     src/Model/Headers/Deadline.h \
@@ -12,17 +14,20 @@ HEADERS += \
     src/Model/Headers/Work.h \
     src/Model/Headers/Bill.h \
     src/Model/Headers/Project.h \
-    src/Model/Headers/TaskListManager.h\
-    src/Model/data_persistancy/Visitor.h\
-    src/Model/data_persistancy/TaskReader.h\
-    src/Model/data_persistancy/json/jsonReader.h\
-    src/GUI/MainWindow.h\
-    src/GUI/ToolBar.h\
-    src/GUI/TaskListWindow.h\
+    src/Model/Headers/TaskListManager.h \
+    src/Model/data_persistancy/Visitor.h \
+    src/Model/data_persistancy/TaskReader.h \
+    src/Model/data_persistancy/json/jsonReader.h \
+    src/Model/data_persistancy/xml/xmlReader.h \
+    src/GUI/MainWindow.h \
+    src/GUI/ToolBar.h \
+    src/GUI/TaskListWindow.h \
 
 SOURCES += \
-    src/Model/data_persistancy/json/jsonReader.cpp\
-    src/Model/data_persistancy/xml\
+    src/Model/TaskFactory.cpp \
+    src/Model/data_persistancy/json/jsonReader.cpp \
+    src/Model/data_persistancy/xml/xmlReader.cpp \
+    src/Model/Calendar.cpp \
     src/Model/AbstractTask.cpp \
     src/Model/TimedTask.cpp \
     src/Model/RepeatableTask.cpp \
@@ -37,7 +42,9 @@ SOURCES += \
     src/GUI/ToolBar.cpp\
     src/GUI/TaskListWindow.cpp\
     src/GUI/main.cpp\
-INCLUDEPATH += src
+
+INCLUDEPATH += src \
+
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
