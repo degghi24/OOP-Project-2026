@@ -1,6 +1,16 @@
 #include "Headers/TaskListManager.h"
+#include "data_persistancy/json/jsonVisitor.h"
+
+#include "QFile"
+#include "QJsonDocument"
 
 TaskListManager::TaskListManager():taskList(){};
+
+TaskListManager::~TaskListManager() {
+    for (AbstractTask* t : taskList)
+        delete t;
+    taskList.clear();
+}
 
 
 void TaskListManager::addTask(AbstractTask *task){
@@ -41,6 +51,26 @@ bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the libr
     }
 
     if(dataType == ".json"){
+        QFile File(filepath.c_str());
+        jsonVisitor visitor = jsonVisitor();
+
+        QJsonArray jsonItems;
+
+        for(const auto& it : taskList){
+            it->accept(visitor);
+            jsonItems.push_back(visitor.getObject());
+        }
+
+        QJsonDocument doc(jsonItems);
+
+        if(File.open(QIODevice::WriteOnly | QIODevice::Truncate)){
+            qDebug() <<"File open";
+            File.write(doc.toJson());
+            File.close();
+        }else{
+            //throw exception
+        }
+
 
     }
 

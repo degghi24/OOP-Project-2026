@@ -1,4 +1,5 @@
 #include "data_persistancy/Visitor.h"
+#include "qcontainerfwd.h"
 #include "Headers/Project.h"
 #include <iostream>
 #include <algorithm>
@@ -9,8 +10,8 @@ Project::Project(string id, string title, string description,
                  string assignee, string creationDate,
                  string dueDate, Priority priority,
                  bool completed, bool skipped,
-                 string milestone, vector<string> team,
-                 double budget, string status, vector<string> tags)
+                 string milestone, QStringList team,
+                 double budget, string status, QStringList tags)
     : AbstractTask(id, title, description, assignee, creationDate),
     Deadline(id, title, description, assignee, creationDate,
              dueDate, priority, completed, skipped),
@@ -19,16 +20,16 @@ Project::Project(string id, string title, string description,
 {}
 
 string         Project::getMilestone() const { return milestone; }
-vector<string> Project::getTeam()      const { return team;      }
+QStringList    Project::getTeam()      const { return team;      }
 double         Project::getBudget()    const { return budget;    }
 string         Project::getStatus()    const { return status;    }
-vector<string> Project::getTags()      const { return tags;      }
+QStringList    Project::getTags()      const { return tags;      }
 
 void Project::setMilestone(const string& newMilestone) { milestone = newMilestone; }
 void Project::setBudget   (const double& newBudget)    { budget    = newBudget;    }
 void Project::setStatus   (const string& newStatus)    { status    = newStatus;    }
 
-void Project::addMember(const string& member) {
+void Project::addMember(const QString& member) {
     team.push_back(member);
 }
 
@@ -41,7 +42,7 @@ bool Project::removeMember(const string& member) {
     return false;
 }
 
-void Project::addTag(const string& tag) {
+void Project::addTag(const QString& tag) {
     tags.push_back(tag);
 }
 

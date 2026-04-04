@@ -3,13 +3,14 @@
 
 #include <string>
 #include <vector>
+#include "QList"
 using std::string;
 using std::vector;
 #include "RepeatableTask.h"
 
 class Work : public RepeatableTask {
 private:
-    vector<string> subTasks;
+    QStringList subTasks;
     int progress;
     string client;
     string category;
@@ -18,26 +19,26 @@ private:
 public:
     Work(string id, string title, string description,
          string assignee, string creationDate,
-         vector<int> weekDays, int intervalDays,
+         QBitArray weekDays, int intervalDays,
          string repeatEndDate, bool active,
-         vector<string> subTasks, int progress,
+         QStringList subTasks, int progress,
          string client, string category, string notes);
     virtual ~Work() = default;
 
-    vector<string> getSubTasks()  const;
+    QStringList getSubTasks()  const;
     int            getProgress()  const;
     string         getClient()    const;
     string         getCategory()  const;
     string         getNotes()     const;
 
-    void setSubTasks (const vector<string>& newSubTasks);
+    void setSubTasks (const QStringList& newSubTasks);
     void setProgress (const int& newProgress);
     void setClient   (const string& newClient);
     void setCategory (const string& newCategory);
     void setNotes    (const string& newNotes);
 
-    void addSubTask   (const string& task);
-    bool removeSubTask(const string& task);
+    void addSubTask   (const QString& task);
+    bool removeSubTask(const QString& task);
 
     void display()          override;
     bool remove()           override;

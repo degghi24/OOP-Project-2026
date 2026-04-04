@@ -3,13 +3,17 @@
 
 #include <string>
 #include <vector>
+#include <QBitArray>
 using std::string;
 using std::vector;
 #include "AbstractTask.h"
 
+
+
 class RepeatableTask : virtual public AbstractTask {
 private:
-    vector<int> weekDays;
+
+    QBitArray weekDays;
     int intervalDays;
     string repeatEndDate;
     bool active;
@@ -17,16 +21,16 @@ private:
 public:
     RepeatableTask(string id, string title, string description,
                    string assignee, string creationDate,
-                   vector<int> weekDays, int intervalDays,
+                   QBitArray weekDays, int intervalDays,
                    string repeatEndDate, bool active);
     virtual ~RepeatableTask() = default;
 
-    vector<int> getWeekDays()      const;
+    QBitArray    getWeekDays()      const;
     int         getIntervalDays()  const;
     string      getRepeatEndDate() const;
     bool        isActive()         const;
 
-    void setWeekDays     (const vector<int>& newWeekDays);
+    void setWeekDays     (const QBitArray& newWeekDays);
     void setIntervalDays (const int& newIntervalDays);
     void setRepeatEndDate(const string& newRepeatEndDate);
     void setActive       (const bool& newActive);

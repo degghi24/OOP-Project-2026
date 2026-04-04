@@ -27,8 +27,8 @@ JsonReader::RepeatableTaskData JsonReader::readRepeatableTaskData(const QJsonObj
     d.intervalDays  = obj["intervalDays"].toInt();
     d.repeatEndDate = obj["repeatEndDate"].toString();
     d.active        = obj["active"].toBool();
-    for (const QJsonValue& v : obj["weekDays"].toArray())
-        d.weekDays.append(v.toInt());
+    for (int i = 0; i < obj["weekDays"].toArray().size(); ++i)
+        d.weekDays.setBit(i, obj["weekDays"].toArray()[i].toBool());
     return d;
 }
 
@@ -80,16 +80,15 @@ Work* JsonReader::readWork(const QJsonObject& obj) {
     AbstractTaskData   a = readAbstractTaskData(obj);
     RepeatableTaskData r = readRepeatableTaskData(obj);
 
-    std::vector<int> weekDays(r.weekDays.begin(), r.weekDays.end());
-    std::vector<std::string> subTasks;
+    QStringList subTasks;
     for (const QJsonValue& v : obj["subTasks"].toArray())
-        subTasks.push_back(v.toString().toStdString());
+        subTasks.push_back(v.toString());
 
     return new Work(
         a.id.toStdString(), a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        weekDays, r.intervalDays,
+        r.weekDays, r.intervalDays,
         r.repeatEndDate.toStdString(), r.active,
         subTasks, obj["progress"].toInt(),
         obj["client"].toString().toStdString(),
@@ -120,11 +119,11 @@ Project* JsonReader::readProject(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     DeadlineData     d = readDeadlineData(obj);
 
-    std::vector<std::string> team, tags;
+    QStringList team, tags;
     for (const QJsonValue& v : obj["team"].toArray())
-        team.push_back(v.toString().toStdString());
+        team.push_back(v.toString());
     for (const QJsonValue& v : obj["tags"].toArray())
-        tags.push_back(v.toString().toStdString());
+        tags.push_back(v.toString());
 
     return new Project(
         a.id.toStdString(), a.title.toStdString(),

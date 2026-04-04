@@ -18,6 +18,7 @@ HEADERS += \
     src/Model/data_persistancy/Visitor.h \
     src/Model/data_persistancy/TaskReader.h \
     src/Model/data_persistancy/json/jsonReader.h \
+    src/Model/data_persistancy/json/jsonVisitor.h \
     src/Model/data_persistancy/xml/xmlReader.h \
     src/GUI/MainWindow.h \
     src/GUI/ToolBar.h \
@@ -26,6 +27,7 @@ HEADERS += \
 SOURCES += \
     src/Model/TaskFactory.cpp \
     src/Model/data_persistancy/json/jsonReader.cpp \
+    src/Model/data_persistancy/json/jsonVisitor.cpp \
     src/Model/data_persistancy/xml/xmlReader.cpp \
     src/Model/Calendar.cpp \
     src/Model/AbstractTask.cpp \

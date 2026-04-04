@@ -34,6 +34,9 @@ public:
     TaskListManager(const TaskListManager&) = delete;
     TaskListManager& operator=(const TaskListManager&) = delete;
 
+    //Redefine destructor
+    ~TaskListManager();
+
 private:
     std::vector<AbstractTask*> taskList;
     unsigned int ID;
