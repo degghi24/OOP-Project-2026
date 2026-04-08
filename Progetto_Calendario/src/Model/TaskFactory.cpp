@@ -31,9 +31,9 @@ AbstractTask* TaskFactory::createReminder(
 AbstractTask* TaskFactory::createWork(
     string id, string title, string description,
     string assignee, string creationDate,
-    vector<int> weekDays, int intervalDays,
+    QBitArray weekDays, int intervalDays,
     string repeatEndDate, bool active,
-    vector<string> subTasks, int progress,
+    QStringList subTasks, int progress,
     string client, string category, string notes)
 {
     return new Work(
@@ -61,8 +61,8 @@ AbstractTask* TaskFactory::createProject(
     string assignee, string creationDate,
     string dueDate, Deadline::Priority priority,
     bool completed, bool skipped,
-    string milestone, vector<string> team,
-    double budget, string status, vector<string> tags)
+    string milestone, QStringList team,
+    double budget, string status, QStringList tags)
 {
     return new Project(
         id, title, description, assignee, creationDate,

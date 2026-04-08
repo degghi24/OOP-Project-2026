@@ -25,7 +25,7 @@ private:
     };
 
     struct RepeatableTaskData {
-        QList<int> weekDays;
+        QBitArray weekDays;
         int intervalDays;
         QString repeatEndDate;
         bool active;

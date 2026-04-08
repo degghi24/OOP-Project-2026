@@ -33,8 +33,10 @@ XmlReader::RepeatableTaskData XmlReader::readRepeatableTaskData(QXmlStreamReader
     d.active        = (attr.value("active").toString() == "true" || attr.value("active").toInt() == 1);
 
     QStringList split = attr.value("weekDays").toString().split(",", Qt::SkipEmptyParts);
-    for(const QString& day : std::as_const(split))
-        d.weekDays.append(day.toInt());
+
+    for(int i = 0; i < split.size(); ++i){
+        d.weekDays.setBit(i, split[i].toInt());
+    }
 
     return d;
 }
@@ -97,20 +99,15 @@ Work* XmlReader::readWork(QXmlStreamReader& xml) {
     RepeatableTaskData r = readRepeatableTaskData(xml);
     auto attr = xml.attributes();
 
-    std::vector<int> weekDaysVec(r.weekDays.begin(), r.weekDays.end());
-    std::vector<std::string> subTasks;
     QStringList subList = attr.value("subTasks").toString().split("|", Qt::SkipEmptyParts);
-
-    for(const QString& s : std::as_const(subList))
-        subTasks.push_back(s.toStdString());
 
     Work* res = new Work(
         a.id.toStdString(), a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        weekDaysVec, r.intervalDays,
+        r.weekDays, r.intervalDays,
         r.repeatEndDate.toStdString(), r.active,
-        subTasks, attr.value("progress").toInt(),
+        subList, attr.value("progress").toInt(),
         attr.value("client").toString().toStdString(),
         attr.value("category").toString().toStdString(),
         attr.value("notes").toString().toStdString()
@@ -149,11 +146,8 @@ Project* XmlReader::readProject(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     auto toStdVec = [](const QString& input) {
-        std::vector<std::string> res;
         QStringList list = input.split("|", Qt::SkipEmptyParts);
-        for(const QString& s : std::as_const(list))
-            res.push_back(s.toStdString());
-        return res;
+        return list;
     };
 
     Project* res = new Project(
