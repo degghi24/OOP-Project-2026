@@ -3,6 +3,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 HEADERS += \
+    src/GUI/TaskBlock.h \
+    src/GUI/TasksList.h \
+    src/GUI/TasksListWindow.h \
     src/Model/Headers/TaskFactory.h \
     src/Model/Headers/AbstractTask.h \
     src/Model/Headers/Calendar.h \
@@ -22,9 +25,11 @@ HEADERS += \
     src/Model/data_persistancy/xml/xmlReader.h \
     src/GUI/MainWindow.h \
     src/GUI/ToolBar.h \
-    src/GUI/TaskListWindow.h \
 
 SOURCES += \
+    src/GUI/TaskBlock.cpp \
+    src/GUI/TasksList.cpp \
+    src/GUI/TasksListWindow.cpp \
     src/Model/TaskFactory.cpp \
     src/Model/data_persistancy/json/jsonReader.cpp \
     src/Model/data_persistancy/json/jsonVisitor.cpp \
@@ -42,7 +47,6 @@ SOURCES += \
     src/Model/TaskListManager.cpp\
     src/GUI/MainWindow.cpp\
     src/GUI/ToolBar.cpp\
-    src/GUI/TaskListWindow.cpp\
     src/GUI/main.cpp\
 
 INCLUDEPATH += src \

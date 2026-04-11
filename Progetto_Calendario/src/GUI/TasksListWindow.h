@@ -1,5 +1,5 @@
-#ifndef TASKLISTWINDOW_H
-#define TASKLISTWINDOW_H
+#ifndef TASKSLISTWINDOW_H
+#define TASKSLISTWINDOW_H
 
 #include <QWidget>
 #include <QLineEdit>
@@ -7,7 +7,9 @@
 #include <QGridLayout>
 #include <QPushButton>
 
-class TaskListWindow: public QWidget{
+#include "TasksList.h"
+
+class TasksListWindow: public QWidget{
     Q_OBJECT
 
 signals:
@@ -15,8 +17,8 @@ signals:
     //filterEdit
 
 public:
-    TaskListWindow(QWidget *parent = nullptr);
-    ~TaskListWindow();
+    TasksListWindow(QWidget *parent = nullptr);
+    ~TasksListWindow();
 
 private:
 
@@ -29,7 +31,7 @@ private:
     QPushButton *filterButton = nullptr;
 
     //vertical box with tasks
-    QVBoxLayout *taskListContainer = nullptr;
+    TasksList *taskListContainer = nullptr;
 
     void setupUI();
 };

@@ -5,8 +5,8 @@
 #include <QCalendarWidget>
 #include <QSplitter>
 #include "ToolBar.h"
-#include "TaskListWindow.h"
-#include "src/Model/Headers/Calendar.h"
+#include "TasksListWindow.h"
+
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -16,7 +16,7 @@ public:
     ~MainWindow();
 
 private:
-    TaskListWindow  *taskListWindow = nullptr;
+    TasksListWindow *taskListWindow = nullptr;
     QCalendarWidget *calendar       = nullptr;
     ToolBar         *toolBar        = nullptr;
     QSplitter       *splitter       = nullptr;

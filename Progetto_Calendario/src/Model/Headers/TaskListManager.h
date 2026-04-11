@@ -22,8 +22,10 @@ public:
 
     const std::vector<AbstractTask*>& getTaskList() const; //return TaskList as const
 
-    static TaskListManager& getInstance(){
-        static TaskListManager instance;
+    static TaskListManager* getInstance(){
+        if(instance == nullptr){
+            instance = new TaskListManager();
+        }
         return instance;
     }
 
@@ -39,6 +41,7 @@ public:
 
 private:
     std::vector<AbstractTask*> taskList;
+    static TaskListManager *instance;
     unsigned int ID;
 };
 

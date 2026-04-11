@@ -1,9 +1,9 @@
 #include "MainWindow.h"
+#include "../Model/Headers/TaskListManager.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent) {
-
-    Calendar::getInstance();
 
     toolBar = new ToolBar(this);
     addToolBar(toolBar);
@@ -11,12 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
     splitter = new QSplitter(Qt::Horizontal);
     setCentralWidget(splitter);
 
-    taskListWindow = new TaskListWindow();
+
+    //////////Left: LIST
+    taskListWindow = new TasksListWindow();
     splitter->addWidget(taskListWindow);
 
+
+    /////////Right: CALENDAR/DETAIL_WINDOW
     splitter->addWidget(calendar = new QCalendarWidget());
 }
 
 MainWindow::~MainWindow() {
-    delete Calendar::getInstance();
+    //delete TaskListManager::getInstance();
 }
