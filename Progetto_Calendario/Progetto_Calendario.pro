@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui xml
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
@@ -23,6 +23,7 @@ HEADERS += \
     src/Model/data_persistancy/json/jsonReader.h \
     src/Model/data_persistancy/json/jsonVisitor.h \
     src/Model/data_persistancy/xml/xmlReader.h \
+    src/Model/data_persistancy/xml/xmlVisitor.h \
     src/GUI/MainWindow.h \
     src/GUI/ToolBar.h \
 
@@ -34,6 +35,7 @@ SOURCES += \
     src/Model/data_persistancy/json/jsonReader.cpp \
     src/Model/data_persistancy/json/jsonVisitor.cpp \
     src/Model/data_persistancy/xml/xmlReader.cpp \
+    src/Model/data_persistancy/xml/xmlVisitor.cpp \
     src/Model/Calendar.cpp \
     src/Model/AbstractTask.cpp \
     src/Model/TimedTask.cpp \
