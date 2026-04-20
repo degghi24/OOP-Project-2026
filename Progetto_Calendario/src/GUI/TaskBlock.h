@@ -10,19 +10,27 @@ class TaskBlock:public QWidget{
     Q_OBJECT
 
 private:
-    QLabel *startDate;
+
+    QFrame *block = nullptr;
+    QLabel *startDate = nullptr;
     QLabel *endDate = nullptr;
-    QLabel *title;
-    QLabel *type;
+    QLabel *title = nullptr;
+    QLabel *type = nullptr;
 
 
 public:
 
-    QString getStartDate();
-    QString getEndDate();
-    QString getTitle();
-    QString getType();
-    TaskBlock();
+    QString getStartDate() const;
+    QString getEndDate() const;
+    QString getTitle() const;
+    QString getType() const;
+
+    void setStartDate(QString sDate);
+    void setEndDate(QString eDate);
+    void setTitle(QString titleS);
+    void setType(QString typeS);
+
+    TaskBlock(QWidget *parent = nullptr);
     TaskBlock(QString sDate, QString t, QString tp, QString eDate = nullptr);
 };
 

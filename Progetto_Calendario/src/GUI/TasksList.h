@@ -13,7 +13,7 @@ class TasksList: public QWidget{
 private:
 
     QList<TaskBlock*> list; //per ordinare
-    QVBoxLayout *container;
+    QVBoxLayout *container = nullptr;
 
 public:
 
@@ -24,7 +24,7 @@ public:
 
     //void filter(); implementare il filter
 
-    TasksList();
+    TasksList(QWidget *parent = nullptr);
 };
 
 #endif // TASKSLIST_H

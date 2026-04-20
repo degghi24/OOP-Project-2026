@@ -18,6 +18,7 @@ public:
 private:
     TasksListWindow *taskListWindow = nullptr;
     QCalendarWidget *calendar       = nullptr;
+    //QStackedWidget
     ToolBar         *toolBar        = nullptr;
     QSplitter       *splitter       = nullptr;
 };

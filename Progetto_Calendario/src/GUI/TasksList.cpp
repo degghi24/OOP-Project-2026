@@ -1,10 +1,19 @@
 #include "TasksList.h"
 
-TasksList::TasksList(): container(new QVBoxLayout(this)){
-    container->insertWidget(0,new TaskBlock("Inizio", "1", "Tipo", "Fine"));
-    container->insertWidget(1,new TaskBlock("Inizio", "2", "Tipo"));
-    container->insertWidget(1,new TaskBlock("Inizio", "3", "Tipo", "Fine"));
-    container->insertWidget(2,new TaskBlock("Inizio", "4", "Tipo"));
+TasksList::TasksList(QWidget *parent): QWidget(parent), container(new QVBoxLayout(this)){
+    TaskBlock *one = new TaskBlock("Inizio", "1", "Tipo", "Fine");
+    TaskBlock *two = new TaskBlock("Inizio", "2", "Tipo");
+    TaskBlock *three = new TaskBlock("Inizio", "3", "Tipo", "Fine");
+    TaskBlock *four = new TaskBlock("Inizio", "4", "Tipo");
+
+
+    container->insertWidget(0,one);
+    container->insertWidget(1,two);
+    container->insertWidget(2,three);
+    container->insertWidget(3,four);
+
+    //container->setContentsMargins(10,5,10,5);
+    container->setSpacing(5);
 
 }
 

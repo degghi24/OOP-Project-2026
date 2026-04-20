@@ -3,6 +3,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 HEADERS += \
+    src/GUI/FilterWindow.h \
     src/GUI/TaskBlock.h \
     src/GUI/TasksList.h \
     src/GUI/TasksListWindow.h \
@@ -27,6 +28,7 @@ HEADERS += \
     src/GUI/ToolBar.h \
 
 SOURCES += \
+    src/GUI/FilterWindow.cpp \
     src/GUI/TaskBlock.cpp \
     src/GUI/TasksList.cpp \
     src/GUI/TasksListWindow.cpp \
