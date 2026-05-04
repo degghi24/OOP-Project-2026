@@ -1,5 +1,7 @@
-QT       += core gui xml
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = app
+TARGET = CalendarApp
+
+QT += core gui widgets xml
 CONFIG += c++17
 
 HEADERS += \
@@ -54,6 +56,8 @@ SOURCES += \
     src/GUI/main.cpp\
 
 INCLUDEPATH += src \
+
+RESOURCES += resources.qrc
 
 
 qnx: target.path = /tmp/$${TARGET}/bin
