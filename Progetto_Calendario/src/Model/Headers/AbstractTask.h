@@ -24,6 +24,7 @@ public:
     string getAssignee()     const;
     string getCreationDate() const;
 
+    void setId         (const std::string& newId);
     void setTitle      (const string& newTitle);
     void setDescription(const string& newDesc);
     void setAssignee   (const string& newAssignee);
@@ -31,6 +32,7 @@ public:
     virtual void display()          = 0;
     virtual bool remove()           = 0;
     virtual void accept(Visitor& v) = 0;
+
 };
 
 #endif // ABSTRACTTASK_H

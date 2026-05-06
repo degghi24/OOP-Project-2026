@@ -12,6 +12,7 @@ string AbstractTask::getDescription()  const { return description;  }
 string AbstractTask::getAssignee()     const { return assignee;     }
 string AbstractTask::getCreationDate() const { return creationDate; }
 
+void AbstractTask::setId         (const string& newId)       { id          = newId;       }
 void AbstractTask::setTitle      (const string& newTitle)    { title       = newTitle;    }
 void AbstractTask::setDescription(const string& newDesc)     { description = newDesc;     }
 void AbstractTask::setAssignee   (const string& newAssignee) { assignee    = newAssignee; }

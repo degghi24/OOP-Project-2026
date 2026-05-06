@@ -1,49 +1,34 @@
 #ifndef TASKLISTMANAGER_H
 #define TASKLISTMANAGER_H
 
-#include <Vector>
-
+#include <vector>
+#include <string>
 #include "AbstractTask.h"
 
-class TaskListManager{ //is the complete list of task
-
-protected: //Singleton
-    TaskListManager();
+class TaskListManager {
+private:
+    std::vector<AbstractTask*> taskList;
+    unsigned int ID;
 
 public:
+    TaskListManager();
+    ~TaskListManager();
 
-    void addTask(AbstractTask *task);
-    void removeTask(const AbstractTask *task);
+    std::string generateId();
+
+    void addTask(AbstractTask* task);
+
+    bool removeTask(const std::string& id);
+
+    AbstractTask* getTaskById(const std::string& id) const;
+
+    const std::vector<AbstractTask*>& getTaskList() const;
 
     void clearList();
 
-    void incrementID(); //initialized at 0 by default
     unsigned int getID() const;
 
-    const std::vector<AbstractTask*>& getTaskList() const; //return TaskList as const
-
-    static TaskListManager* getInstance(){
-        if(instance == nullptr){
-            instance = new TaskListManager();
-        }
-        return instance;
-    }
-
-    bool saveToFile(const string& filepath)const; //Saves the library to a file
-    bool loadFromFile(const string& filepath); //Loads the library from a file
-
-    // Delete so it is impossible to copy the singleton
-    TaskListManager(const TaskListManager&) = delete;
-    TaskListManager& operator=(const TaskListManager&) = delete;
-
-    //Redefine destructor
-    ~TaskListManager();
-
-private:
-    std::vector<AbstractTask*> taskList;
-    static TaskListManager *instance;
-    unsigned int ID;
+    std::vector<AbstractTask*> findByTitle(const std::string& text) const;
 };
-
 
 #endif
