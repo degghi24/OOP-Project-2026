@@ -3,7 +3,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 HEADERS += \
+    src/GUI/AddTask/TaskCreationWindow.h \
+    src/GUI/AddTask/TypeSelectionPopup.h \
     src/GUI/FilterWindow.h \
+    src/GUI/Pages/BlankPage.h \
+    src/GUI/Pages/DetailPage.h \
+    src/GUI/Pages/EditPage.h \
+    src/GUI/StackedWindow.h \
     src/GUI/TaskBlock.h \
     src/GUI/TasksList.h \
     src/GUI/TasksListWindow.h \
@@ -29,7 +35,13 @@ HEADERS += \
     src/GUI/ToolBar.h \
 
 SOURCES += \
+    src/GUI/Pages/BlankPage.cpp \
+    src/GUI/Pages/DetailPage.cpp \
+    src/GUI/Pages/EditPage.cpp \
+    src/GUI/AddTask/TaskCreationWindow.cpp \
+    src/GUI/AddTask/TypeSelectionPopup.cpp \
     src/GUI/FilterWindow.cpp \
+    src/GUI/StackedWindow.cpp \
     src/GUI/TaskBlock.cpp \
     src/GUI/TasksList.cpp \
     src/GUI/TasksListWindow.cpp \

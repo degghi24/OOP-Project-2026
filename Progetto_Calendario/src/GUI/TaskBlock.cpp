@@ -61,18 +61,18 @@ QString TaskBlock::getType() const{
     return type->text();
 }
 
-void TaskBlock::setStartDate(QString sDate){
+void TaskBlock::setStartDate(QString &sDate){
     startDate->setText(sDate);
 }
 
-void TaskBlock::setEndDate(QString eDate){
+void TaskBlock::setEndDate(QString &eDate){
     endDate->setText(eDate);
 }
 
-void TaskBlock::setTitle(QString titleS){
+void TaskBlock::setTitle(QString &titleS){
     title->setText(titleS);
 }
 
-void TaskBlock::setType(QString typeS){
+void TaskBlock::setType(QString &typeS){
     type->setText(typeS);
 }

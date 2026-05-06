@@ -1,6 +1,7 @@
 #ifndef TASKBLOCK_H
 #define TASKBLOCK_H
 
+#include "Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QLabel>
 
@@ -25,13 +26,14 @@ public:
     QString getTitle() const;
     QString getType() const;
 
-    void setStartDate(QString sDate);
-    void setEndDate(QString eDate);
-    void setTitle(QString titleS);
-    void setType(QString typeS);
+    void setStartDate(QString &sDate);
+    void setEndDate(QString &eDate);
+    void setTitle(QString &titleS);
+    void setType(QString &typeS);
 
     TaskBlock(QWidget *parent = nullptr);
     TaskBlock(QString sDate, QString t, QString tp, QString eDate = nullptr);
+    TaskBlock(AbstractTask &task);
 };
 
 #endif // TASKBLOCK_H

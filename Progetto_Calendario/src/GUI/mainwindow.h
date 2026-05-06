@@ -2,10 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QCalendarWidget>
 #include <QSplitter>
 #include "ToolBar.h"
 #include "TasksListWindow.h"
+#include "StackedWindow.h"
 
 
 class MainWindow : public QMainWindow {
@@ -16,11 +16,14 @@ public:
     ~MainWindow();
 
 private:
-    TasksListWindow *taskListWindow = nullptr;
-    QCalendarWidget *calendar       = nullptr;
-    //QStackedWidget
-    ToolBar         *toolBar        = nullptr;
     QSplitter       *splitter       = nullptr;
+    ToolBar         *toolBar        = nullptr;
+
+    //Leftside
+    TasksListWindow *taskListWindow = nullptr;
+
+    //Rightside
+    StackedWindow *stackWindow = nullptr;
 };
 
 #endif // MAINWINDOW_H

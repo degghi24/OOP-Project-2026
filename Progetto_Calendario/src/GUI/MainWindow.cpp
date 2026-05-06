@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     /////////Right: CALENDAR/DETAIL_WINDOW
-    splitter->addWidget(calendar = new QCalendarWidget());
+    stackWindow = new StackedWindow();
+    splitter->addWidget(stackWindow);
 }
 
 MainWindow::~MainWindow() {
