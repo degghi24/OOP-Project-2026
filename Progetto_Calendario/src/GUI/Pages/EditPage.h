@@ -1,14 +1,14 @@
 #ifndef EDITPAGE_H
 #define EDITPAGE_H
 
-#include "../../Model/Headers/Activity.h"
-#include "../../Model/Headers/Reminder.h"
-#include "../../Model/Headers/Work.h"
-#include "../../Model/Headers/Bill.h"
-#include "../../Model/Headers/Project.h"
+#include "EditPages/ActivityEdit.h"
+#include "EditPages/ReminderEdit.h"
+#include "EditPages/WorkEdit.h"
+#include "EditPages/BillEdit.h"
+#include "EditPages/ProjectEdit.h"
 
 #include <QWidget>
-#include <QVBoxLayout>
+#include <QStackedLayout>
 
 class EditPage:public QWidget{
     Q_OBJECT
@@ -16,18 +16,16 @@ class EditPage:public QWidget{
 private:
     QStringList list{"Activity","Reminder","Bill","Project","Work"};
 
-    void setUp(QString type);
+    QStackedLayout *layout = nullptr;
 
-    void abstractBase(AbstractTask *task = nullptr);
-    void timedBase(TimedTask *task = nullptr);
-    void repeatableBase(RepeatableTask *task = nullptr);
-    void deadlineBase(Deadline *task = nullptr);
-
-    QVBoxLayout *page = nullptr;
-
-
+    void setUpActivityEdit();
+    void setUpReminderEdit();
+    void setUpBillEdit();
+    void setUpProjectEdit();
+    void setUpWorkEdit();
 public:
     EditPage(QString type, QWidget *parent = nullptr);
+
     EditPage(Activity *Activity, QWidget *parent = nullptr);
     EditPage(Reminder *Reminder, QWidget *parent = nullptr);
     EditPage(Work *Work, QWidget *parent = nullptr);

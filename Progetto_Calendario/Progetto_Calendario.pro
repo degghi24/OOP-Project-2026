@@ -11,6 +11,15 @@ HEADERS += \
     src/GUI/Pages/BlankPage.h \
     src/GUI/Pages/DetailPage.h \
     src/GUI/Pages/EditPage.h \
+    src/GUI/Pages/EditPages/AbstractEditPage.h \
+    src/GUI/Pages/EditPages/ActivityEdit.h \
+    src/GUI/Pages/EditPages/BillEdit.h \
+    src/GUI/Pages/EditPages/DeadlineEditPage.h \
+    src/GUI/Pages/EditPages/ProjectEdit.h \
+    src/GUI/Pages/EditPages/ReminderEdit.h \
+    src/GUI/Pages/EditPages/RepeatableEditPage.h \
+    src/GUI/Pages/EditPages/TimedEditPage.h \
+    src/GUI/Pages/EditPages/WorkEdit.h \
     src/GUI/StackedWindow.h \
     src/GUI/TaskBlock.h \
     src/GUI/TasksList.h \
@@ -37,12 +46,21 @@ HEADERS += \
     src/GUI/ToolBar.h \
 
 SOURCES += \
+    src/GUI/Pages/EditPages/AbstractEditPage.cpp \
+    src/GUI/Pages/EditPages/ActivityEdit.cpp \
+    src/GUI/Pages/EditPages/BillEdit.cpp \
+    src/GUI/Pages/EditPages/DeadlineEditPage.cpp \
+    src/GUI/Pages/EditPages/ProjectEdit.cpp \
+    src/GUI/Pages/EditPages/ReminderEdit.cpp \
+    src/GUI/Pages/EditPages/RepeatableEditPage.cpp \
+    src/GUI/Pages/EditPages/TimedEditPage.cpp \
     src/GUI/Pages/BlankPage.cpp \
     src/GUI/Pages/DetailPage.cpp \
     src/GUI/Pages/EditPage.cpp \
     src/GUI/AddTask/TaskCreationWindow.cpp \
     src/GUI/AddTask/TypeSelectionPopup.cpp \
     src/GUI/FilterWindow.cpp \
+    src/GUI/Pages/EditPages/WorkEdit.cpp \
     src/GUI/StackedWindow.cpp \
     src/GUI/TaskBlock.cpp \
     src/GUI/TasksList.cpp \

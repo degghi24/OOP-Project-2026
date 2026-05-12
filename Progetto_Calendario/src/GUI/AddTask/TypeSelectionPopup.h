@@ -12,7 +12,7 @@ private:
     QButtonGroup *typeSelectButtonGroup = nullptr;
 
 private slots:
-    void accettato();
+    void typeSelected();
 
 signals:
     void sendType(QString type);

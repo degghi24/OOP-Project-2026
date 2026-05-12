@@ -28,7 +28,7 @@ TypeSelectionPopup::TypeSelectionPopup(QWidget *parent): QDialog(parent) {
 
     QDialogButtonBox *dialogButton = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     dialogButton->setCenterButtons(true);
-    connect(dialogButton, &QDialogButtonBox::accepted, this, &TypeSelectionPopup::accettato);
+    connect(dialogButton, &QDialogButtonBox::accepted, this, &TypeSelectionPopup::typeSelected);
     connect(dialogButton, &QDialogButtonBox::accepted, this, &TypeSelectionPopup::accept);
     connect(dialogButton, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
@@ -76,7 +76,7 @@ TypeSelectionPopup::TypeSelectionPopup(QWidget *parent): QDialog(parent) {
     typeSelectButtonList->setAlignment(Qt::AlignCenter);
 }
 
-void TypeSelectionPopup::accettato(){
+void TypeSelectionPopup::typeSelected(){
     emit sendType(typeSelectButtonGroup->checkedButton()->text());
     delete this;
 }
