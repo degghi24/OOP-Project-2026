@@ -4,14 +4,14 @@
 using std::cout;
 using std::endl;
 
-Activity::Activity(string id, string title, string description,
+Activity::Activity(string title, string description,
                    string assignee, string creationDate,
                    string startDate, string endDate,
                    string startTime, int totalDuration,
                    string location, int participantCount,
                    string eventType, bool online, string meetingLink)
-    : AbstractTask(id, title, description, assignee, creationDate),
-    TimedTask(id, title, description, assignee, creationDate,
+    : AbstractTask(title, description, assignee, creationDate),
+    TimedTask(title, description, assignee, creationDate,
               startDate, endDate, startTime, totalDuration),
     location(location), participantCount(participantCount),
     eventType(eventType), online(online), meetingLink(meetingLink)

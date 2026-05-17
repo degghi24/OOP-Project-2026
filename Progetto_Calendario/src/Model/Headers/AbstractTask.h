@@ -14,7 +14,7 @@ private:
     string creationDate;
 
 public:
-    AbstractTask(string id, string title, string description,
+    AbstractTask(string title, string description,
                  string assignee, string creationDate);
     virtual ~AbstractTask() = default;
 

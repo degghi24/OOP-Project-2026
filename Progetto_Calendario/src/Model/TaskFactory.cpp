@@ -1,5 +1,5 @@
 #include "Headers/TaskFactory.h"
-
+/*
 AbstractTask* TaskFactory::createActivity(
     string id, string title, string description,
     string assignee, string creationDate,
@@ -69,3 +69,4 @@ AbstractTask* TaskFactory::createProject(
         dueDate, priority, completed, skipped,
         milestone, team, budget, status, tags);
 }
+*/

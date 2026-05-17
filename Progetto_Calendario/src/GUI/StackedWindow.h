@@ -1,6 +1,7 @@
 #ifndef STACKEDWINDOW_H
 #define STACKEDWINDOW_H
 
+#include "Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QStackedLayout>
 #include <QCalendarWidget>
@@ -23,6 +24,8 @@ private:
 private slots:
     void showTypeSelect();
     void showTaskCreation(QString type);
+
+    void addTask(AbstractTask* task);
 
 public:
     StackedWindow(QWidget *parent = nullptr);

@@ -15,6 +15,7 @@ HEADERS += \
     src/GUI/Pages/EditPages/ActivityEdit.h \
     src/GUI/Pages/EditPages/BillEdit.h \
     src/GUI/Pages/EditPages/DeadlineEditPage.h \
+    src/GUI/Pages/EditPages/LabelBlock.h \
     src/GUI/Pages/EditPages/ProjectEdit.h \
     src/GUI/Pages/EditPages/ReminderEdit.h \
     src/GUI/Pages/EditPages/RepeatableEditPage.h \
@@ -50,6 +51,7 @@ SOURCES += \
     src/GUI/Pages/EditPages/ActivityEdit.cpp \
     src/GUI/Pages/EditPages/BillEdit.cpp \
     src/GUI/Pages/EditPages/DeadlineEditPage.cpp \
+    src/GUI/Pages/EditPages/LabelBlock.cpp \
     src/GUI/Pages/EditPages/ProjectEdit.cpp \
     src/GUI/Pages/EditPages/ReminderEdit.cpp \
     src/GUI/Pages/EditPages/RepeatableEditPage.cpp \

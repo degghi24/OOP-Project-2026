@@ -1,4 +1,5 @@
 #include "DeadlineEditPage.h"
+#include <QButtonGroup>
 
 DeadlineEditPage::DeadlineEditPage(Deadline *task, QWidget *parent): AbstractEditPage(task, parent) {
     setUp();
@@ -25,12 +26,45 @@ void DeadlineEditPage::setUp(){
     completed = new QRadioButton();
     skipped = new QRadioButton();
 
-    page->addWidget(new QLabel("Due Date:"));
-    page->addWidget(dueDate);
-    page->addWidget(new QLabel("Priotity:"));
-    page->addWidget(prio);
-    page->addWidget(new QLabel("Is Completed:"));
-    page->addWidget(completed);
-    page->addWidget(new QLabel("Is Skipped:"));
-    page->addWidget(skipped);
+    QHBoxLayout *lineDueDate = new QHBoxLayout();
+    lineDueDate->setAlignment(Qt::AlignLeft | Qt::AlignJustify);
+    lineDueDate->addWidget(new QLabel("Due Date:"));
+    lineDueDate->addWidget(dueDate);
+    page->addLayout(lineDueDate);
+
+    QHBoxLayout *linePrio = new QHBoxLayout();
+    linePrio->setAlignment(Qt::AlignLeft | Qt::AlignJustify);
+    linePrio->addWidget(new QLabel("Priotity:"));
+    linePrio->addWidget(prio);
+    page->addLayout(linePrio);
+
+    QHBoxLayout *lineCompleted = new QHBoxLayout();
+    lineCompleted->setAlignment(Qt::AlignLeft);
+    lineCompleted->addWidget(new QLabel("Is Completed:"));
+    lineCompleted->addWidget(completed);
+    page->addLayout(lineCompleted);
+
+    QHBoxLayout *lineSkipped = new QHBoxLayout();
+    lineSkipped->setAlignment(Qt::AlignLeft);
+    lineSkipped->addWidget(new QLabel("Is Skipped:"));
+    lineSkipped->addWidget(skipped);
+    page->addLayout(lineSkipped);
+
+    QButtonGroup *completedOrSkipped = new QButtonGroup(this);
+    completedOrSkipped->addButton(completed);
+    completedOrSkipped->addButton(skipped);
+
+}
+
+std::string DeadlineEditPage::getDueDate() const{
+    return dueDate->date().toString("yyyy-MM-d").toStdString();
+}
+int DeadlineEditPage::getPriority() const{
+    return prio->currentIndex();
+}
+bool DeadlineEditPage::isCompleted() const{
+    return completed->isChecked();
+}
+bool DeadlineEditPage::isSkipped() const{
+    return skipped->isChecked();
 }

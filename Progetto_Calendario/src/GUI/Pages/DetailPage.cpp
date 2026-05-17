@@ -65,20 +65,20 @@ DetailPage::DetailPage(Work *Work, QWidget *parent): QWidget(parent), page(new Q
 
     repeatableBase(Work);
 
-    QLineEdit *subTaskToAdd = new QLineEdit(); //need add button
+    //QLineEdit *subTask = new QLineEdit(); //need add button
     QSpinBox *progress = new QSpinBox();
     QLineEdit *client = new QLineEdit();
     QLineEdit *category = new QLineEdit();
     QLineEdit *notes = new QLineEdit();
 
-    subTaskToAdd->setText(Work->getSubTasks().join(" "));
+    //subTask->setText(Work->getSubTasks().join(" "));
     progress->setValue(Work->getProgress());
     client->setText(Work->getClient().c_str());
     category->setText(Work->getCategory().c_str());
     notes->setText(Work->getNotes().c_str());
 
-    page->addWidget(new QLabel("Subtasks:"));
-    page->addWidget(subTaskToAdd);
+    /*page->addWidget(new QLabel("Subtasks:"));
+    page->addWidget(subTaskToAdd);*/
     page->addWidget(new QLabel("Progress:"));
     page->addWidget(progress);
     page->addWidget(new QLabel("Client:"));

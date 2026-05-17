@@ -1,10 +1,10 @@
 #include "Headers/Deadline.h"
 
-Deadline::Deadline(string id, string title, string description,
+Deadline::Deadline(string title, string description,
                    string assignee, string creationDate,
                    string dueDate, Priority priority,
                    bool completed, bool skipped)
-    : AbstractTask(id, title, description, assignee, creationDate),
+    : AbstractTask(title, description, assignee, creationDate),
     dueDate(dueDate), priority(priority),
     completed(completed), skipped(skipped)
 {}

@@ -21,6 +21,11 @@ private:
     void setUp();
 
 public:
+    std::string getDueDate() const;
+    int getPriority() const;
+    bool isCompleted() const;
+    bool isSkipped() const;
+
     DeadlineEditPage(Deadline *task, QWidget *parent = nullptr);
     DeadlineEditPage(QWidget *parent = nullptr);
 

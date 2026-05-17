@@ -5,14 +5,14 @@
 using std::cout;
 using std::endl;
 
-Work::Work(string id, string title, string description,
+Work::Work(string title, string description,
            string assignee, string creationDate,
            QBitArray weekDays, int intervalDays,
            string repeatEndDate, bool active,
            QStringList subTasks, int progress,
            string client, string category, string notes)
-    : AbstractTask(id, title, description, assignee, creationDate),
-    RepeatableTask(id, title, description, assignee, creationDate,
+    : AbstractTask(title, description, assignee, creationDate),
+    RepeatableTask(title, description, assignee, creationDate,
                    weekDays, intervalDays, repeatEndDate, active),
     subTasks(subTasks), progress(progress),
     client(client), category(category), notes(notes)

@@ -77,6 +77,6 @@ TypeSelectionPopup::TypeSelectionPopup(QWidget *parent): QDialog(parent) {
 }
 
 void TypeSelectionPopup::typeSelected(){
-    emit sendType(typeSelectButtonGroup->checkedButton()->text());
+    if(typeSelectButtonGroup->checkedButton()) emit sendType(typeSelectButtonGroup->checkedButton()->text());
     delete this;
 }

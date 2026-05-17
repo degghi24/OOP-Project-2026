@@ -6,14 +6,22 @@
 TaskBlock::TaskBlock(QWidget *parent): QWidget(parent) {}
 
 
-TaskBlock::TaskBlock(QString sDate, QString t, QString tp, QString eDate):
-    startDate(new QLabel(sDate)),
-    title(new QLabel(t)),
-    type(new QLabel(tp))
+TaskBlock::TaskBlock(QString *title_, QDate *startDate_, int *type_, QDate *endDate_):
+    title(new QLabel(*title_)),
+    startDate(startDate_),
+    endDate(endDate_),
+    type(new QComboBox())
 {
-    startDate->setAlignment(Qt::AlignCenter);
     title->setAlignment(Qt::AlignCenter);
-    type->setAlignment(Qt::AlignCenter);
+
+    type->addItem("Activity");
+    type->addItem("Work");
+    type->addItem("Bill");
+    type->addItem("Project");
+    type->addItem("Reminder");
+    type->setEditable(false);
+
+    QLabel *startDateLabel = new QLabel(startDate->toString("yyyy-MM-d"));
 
     QVBoxLayout *outerBox = new QVBoxLayout(this);
 
@@ -23,21 +31,25 @@ TaskBlock::TaskBlock(QString sDate, QString t, QString tp, QString eDate):
     block->setFrameShadow(QFrame::Plain);
     block->setStyleSheet("QFrame#TaskBlock { border: 1px solid #000000; border-radius: 3px; }");
     block->setMinimumWidth(270);
+    block->setMaximumWidth(470);
+    block->setMinimumHeight(75);
+    block->setMaximumHeight(75);
+
 
     QGridLayout *box = new QGridLayout(block);
     box->setAlignment(Qt::AlignTop | Qt::AlignCenter);
 
-    if(eDate != nullptr){
-        endDate = new QLabel(eDate);
-        endDate->setAlignment(Qt::AlignCenter);
+    if(endDate != nullptr){
+        QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+        endDateLabel->setAlignment(Qt::AlignCenter);
 
         box->addWidget(title, 1, 1, 1, 2);
-        box->addWidget(startDate,2,1);
+        box->addWidget(startDateLabel,2,1);
 
-        box->addWidget(endDate,2,2);
+        box->addWidget(endDateLabel,2,2);
     }else{
         box->addWidget(title, 1, 1);
-        box->addWidget(startDate,2,1);
+        box->addWidget(startDateLabel,2,1);
     }
     box->addWidget(type,3,1,1,2);
 
@@ -48,31 +60,15 @@ TaskBlock::TaskBlock(QString sDate, QString t, QString tp, QString eDate):
 
 }
 
-QString TaskBlock::getStartDate() const {
-    return startDate->text();
+QDate TaskBlock::getStartDate() const {
+    return *startDate;
 }
-QString TaskBlock::getEndDate() const{
-    return endDate->text();
+QDate TaskBlock::getEndDate() const{
+    return *endDate;
 }
 QString TaskBlock::getTitle() const{
     return title->text();
 }
-QString TaskBlock::getType() const{
-    return type->text();
-}
-
-void TaskBlock::setStartDate(QString &sDate){
-    startDate->setText(sDate);
-}
-
-void TaskBlock::setEndDate(QString &eDate){
-    endDate->setText(eDate);
-}
-
-void TaskBlock::setTitle(QString &titleS){
-    title->setText(titleS);
-}
-
-void TaskBlock::setType(QString &typeS){
-    type->setText(typeS);
+int TaskBlock::getType() const{
+    return type->currentIndex();
 }

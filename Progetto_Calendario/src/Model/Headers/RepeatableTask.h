@@ -19,7 +19,7 @@ private:
     bool active;
 
 public:
-    RepeatableTask(string id, string title, string description,
+    RepeatableTask(string title, string description,
                    string assignee, string creationDate,
                    QBitArray weekDays, int intervalDays,
                    string repeatEndDate, bool active);

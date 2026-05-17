@@ -1,6 +1,7 @@
 #include "TasksListWindow.h"
 
 #include <QStyle>
+#include <QSizePolicy>
 
 TasksListWindow::TasksListWindow(QWidget *parent): QWidget(parent){
     setupUI();
@@ -13,6 +14,24 @@ void TasksListWindow::setupUI(){
 
     //Search Bar
     searchBar = new QLineEdit();
+
+    //TaskList
+    taskListContainer = new TasksList();
+    //scrollArea
+    scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(taskListContainer);
+
+    //Search Button
+    searchButton = new QPushButton();
+    searchButton->setCursor(Qt::PointingHandCursor);
+    searchButton->setMaximumSize(50,searchButton->height());
+    searchButton->setMinimumWidth(50);
+    searchButton->setText("Search");
+    connect(searchButton, &QPushButton::clicked, this, &TasksListWindow::search);
+    connect(this, &TasksListWindow::sendFilterValues, taskListContainer, &TasksList::filter);
+
+
     //Filter Button
     filterButton = new QPushButton();
     filterButton->setCursor(Qt::PointingHandCursor);
@@ -22,20 +41,20 @@ void TasksListWindow::setupUI(){
     connect(filterButton, &QPushButton::clicked, this, &TasksListWindow::toggleFilter);
 
 
-    //TaskList
-    taskListContainer = new TasksList();
+
+
     //FilterWindow
     filterWindow = new FilterWindow();
     filterWindow->setVisible(false);
 
-    mainFrame->addWidget(searchBar,1,1,1,2);
-    mainFrame->addWidget(filterButton,1,3,1,1);
-    mainFrame->addWidget(filterWindow,2,1,1,3);
-    mainFrame->addWidget(taskListContainer,3,1,1,3);
+    mainFrame->addWidget(searchBar,0,0,1,2);
+    mainFrame->addWidget(searchButton,0,1,1,1);
+    mainFrame->addWidget(filterButton,0,2,1,1);
+    mainFrame->addWidget(filterWindow,1,0,1,3);
+    mainFrame->addWidget(scrollArea,2,0,1,3);
 
-    setMinimumWidth(310);
+    setMinimumWidth(330);
     setMaximumWidth(500);
-
 
 }
 
@@ -45,6 +64,19 @@ void TasksListWindow::toggleFilter(){
     }else{
         filterWindow->setVisible(true);
     }
+}
+
+void TasksListWindow::search(){
+    emit sendFilterValues(getFilterValues());
+}
+
+Filter TasksListWindow::getFilterValues(){
+    Filter filterValues = {
+        searchBar->text(),
+        filterWindow->getStartDate(),
+        filterWindow->getEndDate(),
+        filterWindow->getType()};
+    return filterValues;
 }
 
 

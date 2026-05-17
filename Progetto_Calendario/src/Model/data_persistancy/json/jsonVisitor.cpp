@@ -76,7 +76,7 @@ void jsonVisitor::visit(const Work& w){
     QJsonObject workObj;
     workObj.insert("type", QJsonValue::fromVariant("Work"));
     insertRepeat(w, workObj);
-    workObj.insert("subTasks", QJsonValue::fromVariant(w.getSubTasks()));
+    //workObj.insert("subTasks", QJsonValue::fromVariant(w.getSubTasks()));
     workObj.insert("progress", QJsonValue::fromVariant(w.getProgress()));
     workObj.insert("client", QJsonValue::fromVariant(w.getClient().c_str()));
     workObj.insert("category", QJsonValue::fromVariant(w.getCategory().c_str()));

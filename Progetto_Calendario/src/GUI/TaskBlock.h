@@ -4,6 +4,8 @@
 #include "Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QLabel>
+#include <QDate>
+#include <QComboBox>
 
 using namespace std;
 
@@ -13,18 +15,18 @@ class TaskBlock:public QWidget{
 private:
 
     QFrame *block = nullptr;
-    QLabel *startDate = nullptr;
-    QLabel *endDate = nullptr;
     QLabel *title = nullptr;
-    QLabel *type = nullptr;
+    QDate *startDate = nullptr;
+    QDate *endDate = nullptr;
+    QComboBox *type = nullptr;
 
 
 public:
 
-    QString getStartDate() const;
-    QString getEndDate() const;
+    QDate getStartDate() const;
+    QDate getEndDate() const;
     QString getTitle() const;
-    QString getType() const;
+    int getType() const;
 
     void setStartDate(QString &sDate);
     void setEndDate(QString &eDate);
@@ -32,7 +34,7 @@ public:
     void setType(QString &typeS);
 
     TaskBlock(QWidget *parent = nullptr);
-    TaskBlock(QString sDate, QString t, QString tp, QString eDate = nullptr);
+    TaskBlock(QString *title_, QDate *startDate_, int *type_, QDate *eDate = nullptr);
     TaskBlock(AbstractTask &task);
 };
 

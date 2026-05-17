@@ -17,7 +17,7 @@ private:
     string notes;
 
 public:
-    Work(string id, string title, string description,
+    Work(string title, string description,
          string assignee, string creationDate,
          QBitArray weekDays, int intervalDays,
          string repeatEndDate, bool active,

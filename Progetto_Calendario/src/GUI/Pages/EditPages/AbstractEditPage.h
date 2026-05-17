@@ -25,6 +25,11 @@ protected:
     //QDateEdit *creationDate = new QDateEdit();
 
 public:
+
+    std::string getTitle() const;
+    std::string getDescription() const;
+    std::string getAssignee() const;
+
     AbstractEditPage(AbstractTask *task, QWidget *parent = nullptr);
     AbstractEditPage(QWidget *parent = nullptr);
 };

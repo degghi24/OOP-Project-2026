@@ -1,8 +1,8 @@
 #include "Headers/AbstractTask.h"
 
-AbstractTask::AbstractTask(string id, string title, string description,
+AbstractTask::AbstractTask(string title, string description,
                            string assignee, string creationDate)
-    : id(id), title(title), description(description),
+    :title(title), description(description),
     assignee(assignee), creationDate(creationDate)
 {}
 

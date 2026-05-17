@@ -31,6 +31,11 @@ private:
 
 
 public:
+    QBitArray getWorkDays() const;
+    int getIntervalDays() const;
+    std::string getEndDate() const;
+    bool isActive() const;
+
     RepeatableEditPage(RepeatableTask *task, QWidget *parent = nullptr);
     RepeatableEditPage(QWidget *parent = nullptr);
 };

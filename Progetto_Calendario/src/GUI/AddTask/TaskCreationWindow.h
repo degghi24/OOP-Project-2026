@@ -12,6 +12,11 @@ private:
 
     EditPage *form = nullptr;
 
+public slots:
+
+signals:
+    void sendTask(AbstractTask *task);
+
 public:
     TaskCreationWindow(QWidget *parent = nullptr);
     TaskCreationWindow(QString type, QWidget *parent = nullptr);

@@ -23,6 +23,15 @@ private:
     void setUpBillEdit();
     void setUpProjectEdit();
     void setUpWorkEdit();
+
+public slots:
+    void confirmCreation();
+    //void receiveTask(AbstractTask *task);
+
+signals:
+    void createTask();
+    void sendTask(AbstractTask *task);
+
 public:
     EditPage(QString type, QWidget *parent = nullptr);
 

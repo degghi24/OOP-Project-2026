@@ -44,3 +44,16 @@ void TimedEditPage::setUp(){
     page->addLayout(line2);
 
 }
+
+std::string TimedEditPage::getStartDate() const{
+    return startDate->date().toString("yyyy-MM-d").toStdString();
+}
+std::string TimedEditPage::getEndDate() const{
+    return endDate->date().toString("yyyy-MM-d").toStdString();
+}
+std::string TimedEditPage::getStartTime() const{
+    return starTime->time().toString("H-m-s").toStdString();
+}
+int TimedEditPage::getDuration() const{
+    return duration->value();
+}

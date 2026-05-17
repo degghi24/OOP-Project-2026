@@ -21,6 +21,10 @@ private slots:
 
 public:
     FilterWindow(QWidget *parent = nullptr);
+
+    QDate* getStartDate();
+    QDate* getEndDate();
+    int getType();
 };
 
 #endif // FILTERWINDOW_H

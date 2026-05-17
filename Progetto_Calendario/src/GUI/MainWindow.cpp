@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     /////////Right: CALENDAR/DETAIL_WINDOW
     stackWindow = new StackedWindow();
     splitter->addWidget(stackWindow);
+
+    setMinimumSize(920,600);
 }
 
 MainWindow::~MainWindow() {

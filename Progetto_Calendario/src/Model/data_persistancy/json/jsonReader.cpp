@@ -47,7 +47,7 @@ Activity* JsonReader::readActivity(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     TimedTaskData    t = readTimedTaskData(obj);
     return new Activity(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         t.startDate.toStdString(), t.endDate.toStdString(),
@@ -64,7 +64,7 @@ Reminder* JsonReader::readReminder(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     TimedTaskData    t = readTimedTaskData(obj);
     return new Reminder(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         t.startDate.toStdString(), t.endDate.toStdString(),
@@ -85,7 +85,7 @@ Work* JsonReader::readWork(const QJsonObject& obj) {
         subTasks.push_back(v.toString());
 
     return new Work(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         r.weekDays, r.intervalDays,
@@ -101,7 +101,7 @@ Bill* JsonReader::readBill(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     DeadlineData     d = readDeadlineData(obj);
     return new Bill(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         d.dueDate.toStdString(),
@@ -126,7 +126,7 @@ Project* JsonReader::readProject(const QJsonObject& obj) {
         tags.push_back(v.toString());
 
     return new Project(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         d.dueDate.toStdString(),

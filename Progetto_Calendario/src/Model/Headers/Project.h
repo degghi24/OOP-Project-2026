@@ -17,7 +17,7 @@ private:
     QStringList tags;
 
 public:
-    Project(string id, string title, string description,
+    Project(string title, string description,
             string assignee, string creationDate,
             string dueDate, Priority priority,
             bool completed, bool skipped,

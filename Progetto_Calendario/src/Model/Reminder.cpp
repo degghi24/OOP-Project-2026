@@ -4,14 +4,14 @@
 using std::cout;
 using std::endl;
 
-Reminder::Reminder(string id, string title, string description,
+Reminder::Reminder(string title, string description,
                    string assignee, string creationDate,
                    string startDate, string endDate,
                    string startTime, int totalDuration,
                    string notifyTime, string alertMessage,
                    bool snoozed, int snoozeMinutes)
-    : AbstractTask(id, title, description, assignee, creationDate),
-    TimedTask(id, title, description, assignee, creationDate,
+    : AbstractTask(title, description, assignee, creationDate),
+    TimedTask(title, description, assignee, creationDate,
               startDate, endDate, startTime, totalDuration),
     notifyTime(notifyTime), alertMessage(alertMessage),
     snoozed(snoozed), snoozeMinutes(snoozeMinutes)

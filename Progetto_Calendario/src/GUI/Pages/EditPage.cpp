@@ -12,10 +12,14 @@
 
 EditPage::EditPage(Activity *Activity, QWidget *parent): QWidget(parent), layout(new QStackedLayout(this)){
 
-
     ActivityEdit *activityPage = new ActivityEdit(Activity);
     layout->addWidget(activityPage);
 
+    //SAVE EDIT
+    //connect(this, &EditPage::confirmSave, activityPage, &ActivityEdit::saveEdit)
+
+    /*connect(this, &EditPage::createTask, activityPage, &ActivityEdit::createTask); WRONG
+    connect(activityPage, &ActivityEdit::returnTask, this, &EditPage::sendTask);*/
 }
 
 EditPage::EditPage(Reminder *Reminder, QWidget *parent): QWidget(parent), layout(new QStackedLayout(this)){
@@ -74,20 +78,39 @@ EditPage::EditPage(QString type, QWidget *parent): QWidget(parent), layout(new Q
 void EditPage::setUpActivityEdit(){
     ActivityEdit *activityPage = new ActivityEdit();
     layout->addWidget(activityPage);
+
+    connect(this, &EditPage::createTask, activityPage, &ActivityEdit::createTask);
+    connect(activityPage, &ActivityEdit::returnTask, this, &EditPage::sendTask);
 }
 void EditPage::setUpReminderEdit(){
     ReminderEdit *reminderPage = new ReminderEdit();
     layout->addWidget(reminderPage);
+
+    connect(this, &EditPage::createTask, reminderPage, &ReminderEdit::createTask);
+    connect(reminderPage, &ReminderEdit::returnTask, this, &EditPage::sendTask);
 }
 void EditPage::setUpBillEdit(){
     BillEdit *billPage = new BillEdit();
     layout->addWidget(billPage);
+
+    connect(this, &EditPage::createTask, billPage, &BillEdit::createTask);
+    connect(billPage, &BillEdit::returnTask, this, &EditPage::sendTask);
 }
 void EditPage::setUpProjectEdit(){
     ProjectEdit *projectPage = new ProjectEdit();
     layout->addWidget(projectPage);
+
+    connect(this, &EditPage::createTask, projectPage, &ProjectEdit::createTask);
+    connect(projectPage, &ProjectEdit::returnTask, this, &EditPage::sendTask);
 }
 void EditPage::setUpWorkEdit(){
     WorkEdit *workPage = new WorkEdit();
     layout->addWidget(workPage);
+
+    connect(this, &EditPage::createTask, workPage, &WorkEdit::createTask);
+    connect(workPage, &WorkEdit::returnTask, this, &EditPage::sendTask);
+}
+
+void EditPage::confirmCreation(){
+    emit createTask();
 }

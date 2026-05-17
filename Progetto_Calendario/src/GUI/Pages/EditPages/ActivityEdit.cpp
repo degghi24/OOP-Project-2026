@@ -8,7 +8,7 @@ ActivityEdit::ActivityEdit(Activity *task, QWidget *parent): TimedEditPage(task,
         location->setText(task->getLocation().c_str());
         partecipationCount->setValue(task->getParticipantCount());
         eventType->setText(task->getEventType().c_str());
-        isOnline->setChecked(task->isOnline());
+        online->setChecked(task->isOnline());
         meetingLink->setText(task->getMeetingLink().c_str());
     }
 }
@@ -22,7 +22,7 @@ void ActivityEdit::setUp(){
     location = new QLineEdit();
     partecipationCount = new QSpinBox();
     eventType = new QLineEdit();
-    isOnline = new QCheckBox();
+    online = new QCheckBox();
     meetingLink = new QLineEdit();
 
     page->addWidget(new QLabel("Location:"));
@@ -31,9 +31,35 @@ void ActivityEdit::setUp(){
     page->addWidget(partecipationCount);
     page->addWidget(new QLabel("Type of Event:"));
     page->addWidget(eventType);
-    page->addWidget(new QLabel("Is Online:"));
-    page->addWidget(isOnline);
+    QHBoxLayout *line = new QHBoxLayout();
+    line->setAlignment(Qt::AlignLeft);
+    line->addWidget(new QLabel("Is Online:"));
+    line->addWidget(online);
+    page->addLayout(line);
     page->addWidget(new QLabel("Meeting Link:"));
     page->addWidget(meetingLink);
 
+}
+
+std::string ActivityEdit::getLocation() const{
+    return location->text().toStdString();
+}
+int ActivityEdit::getPartecipationCount() const{
+    return partecipationCount->value();
+}
+std::string ActivityEdit::getEventType() const{
+    return eventType->text().toStdString();
+}
+bool ActivityEdit::isOnline() const{
+    return online->isChecked();
+}
+std::string ActivityEdit::getMeetingLink() const{
+    return meetingLink->text().toStdString();
+}
+
+void ActivityEdit::createTask(){
+    Activity *newActivity = new Activity(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString() ,
+                                         getStartDate(),getEndDate(),getStartTime(),getDuration(),
+                                         getLocation(),getPartecipationCount(),getEventType(),isOnline(),getMeetingLink());
+    emit returnTask(newActivity);
 }

@@ -1,4 +1,5 @@
 #include "StackedWindow.h"
+#include "../Model/Headers/TaskListManager.h"
 #include "AddTask/TypeSelectionPopup.h"
 #include "AddTask/TaskCreationWindow.h"
 
@@ -38,8 +39,18 @@ void StackedWindow::showTypeSelect(){
 
 void StackedWindow::showTaskCreation(QString type){
     TaskCreationWindow *creationWindow = new TaskCreationWindow(type, this);
+    creationWindow->setAttribute(Qt::WA_DeleteOnClose, true);
+    connect(creationWindow, &TaskCreationWindow::sendTask, this, &StackedWindow::addTask);
     creationWindow->exec();
 }
 
 //TaskDetailWindow *detail = nullptr
 //TaskEditWindow *edit = nullptr
+
+void StackedWindow::addTask(AbstractTask* task){
+    TaskListManager::getInstance().addTask(task);
+    for(auto it : TaskListManager::getInstance().getTaskList()){
+        qDebug()<<it->getTitle()<<it->getId();
+    }
+
+}

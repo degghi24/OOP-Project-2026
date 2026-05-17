@@ -18,21 +18,50 @@ BillEdit::BillEdit(QWidget *parent): DeadlineEditPage(parent) {
 
 void BillEdit::setUp(){
 
-    QSpinBox *amount = new QSpinBox();
-    QRadioButton *paid = new QRadioButton();
-    QLineEdit *provider = new QLineEdit();
-    QLineEdit *iban = new QLineEdit();
-    QRadioButton *recurring = new QRadioButton();
+    amount = new QSpinBox();
+    paid = new QRadioButton();
+    provider = new QLineEdit();
+    iban = new QLineEdit();
+    recurring = new QRadioButton();
 
     page->addWidget(new QLabel("Amount:"));
     page->addWidget(amount);
-    page->addWidget(new QLabel("Is Paid:"));
-    page->addWidget(paid);
+    QHBoxLayout *linePaid = new QHBoxLayout();
+    linePaid->setAlignment(Qt::AlignLeft);
+    linePaid->addWidget(new QLabel("Is Paid:"));
+    linePaid->addWidget(paid);
+    page->addLayout(linePaid);
     page->addWidget(new QLabel("Provider:"));
     page->addWidget(provider);
     page->addWidget(new QLabel("Iban:"));
     page->addWidget(iban);
-    page->addWidget(new QLabel("Is Recurring:"));
-    page->addWidget(recurring);
+    QHBoxLayout *lineRec = new QHBoxLayout();
+    lineRec->setAlignment(Qt::AlignLeft);
+    lineRec->addWidget(new QLabel("Is Recurring:"));
+    lineRec->addWidget(recurring);
+    page->addLayout(lineRec);
 
+}
+
+int BillEdit::getAmount() const{
+    return amount->value();
+}
+bool BillEdit::isPaid() const{
+    return paid->isChecked();
+}
+std::string BillEdit::getProvider() const{
+    return provider->text().toStdString();
+}
+std::string BillEdit::getIban() const{
+    return iban->text().toStdString();
+}
+bool BillEdit::isRecurring() const{
+    return recurring->isChecked();
+}
+
+void BillEdit::createTask(){
+    Bill *newBill = new Bill(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString() ,
+                             getDueDate(),static_cast<Deadline::Priority>(getPriority()),isCompleted(),isSkipped(),
+                             getAmount(),isPaid(),getProvider(),getIban(),isRecurring());
+    emit returnTask(newBill);
 }

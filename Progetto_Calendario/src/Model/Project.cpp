@@ -6,14 +6,14 @@
 using std::cout;
 using std::endl;
 
-Project::Project(string id, string title, string description,
+Project::Project(string title, string description,
                  string assignee, string creationDate,
                  string dueDate, Priority priority,
                  bool completed, bool skipped,
                  string milestone, QStringList team,
                  double budget, string status, QStringList tags)
-    : AbstractTask(id, title, description, assignee, creationDate),
-    Deadline(id, title, description, assignee, creationDate,
+    : AbstractTask(title, description, assignee, creationDate),
+    Deadline(title, description, assignee, creationDate,
              dueDate, priority, completed, skipped),
     milestone(milestone), team(team),
     budget(budget), status(status), tags(tags)

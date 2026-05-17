@@ -13,7 +13,7 @@ private:
     int totalDuration;
 
 public:
-    TimedTask(string id, string title, string description,
+    TimedTask(string title, string description,
               string assignee, string creationDate,
               string startDate, string endDate,
               string startTime, int totalDuration);

@@ -1,10 +1,10 @@
 #include "Headers/RepeatableTask.h"
 
-RepeatableTask::RepeatableTask(string id, string title, string description,
+RepeatableTask::RepeatableTask(string title, string description,
                                string assignee, string creationDate,
                                QBitArray weekDays, int intervalDays,
                                string repeatEndDate, bool active)
-    : AbstractTask(id, title, description, assignee, creationDate),
+    : AbstractTask(title, description, assignee, creationDate),
     weekDays(weekDays), intervalDays(intervalDays),
     repeatEndDate(repeatEndDate), active(active)
 {}

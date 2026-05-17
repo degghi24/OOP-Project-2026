@@ -55,7 +55,7 @@ Activity* XmlReader::readActivity(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Activity* res = new Activity(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         t.startDate.toStdString(), t.endDate.toStdString(),
@@ -77,7 +77,7 @@ Reminder* XmlReader::readReminder(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Reminder* res = new Reminder(
-        a.id.toStdString(), a.title.toStdString(),
+       a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         t.startDate.toStdString(), t.endDate.toStdString(),
@@ -100,7 +100,7 @@ Work* XmlReader::readWork(QXmlStreamReader& xml) {
     QStringList subList = attr.value("subTasks").toString().split("|", Qt::SkipEmptyParts);
 
     Work* res = new Work(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         r.weekDays, r.intervalDays,
@@ -121,7 +121,7 @@ Bill* XmlReader::readBill(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Bill* res = new Bill(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         d.dueDate.toStdString(),
@@ -149,7 +149,7 @@ Project* XmlReader::readProject(QXmlStreamReader& xml) {
     };
 
     Project* res = new Project(
-        a.id.toStdString(), a.title.toStdString(),
+        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         d.dueDate.toStdString(),

@@ -15,7 +15,10 @@ TaskCreationWindow::TaskCreationWindow(QString type, QWidget *parent): QDialog(p
 
     QDialogButtonBox *dialogButton = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,this);
     dialogButton->setCenterButtons(true);
+
     connect(dialogButton, &QDialogButtonBox::accepted, this, &TaskCreationWindow::accept);
+    connect(dialogButton, &QDialogButtonBox::accepted, form, &EditPage::confirmCreation);
+    connect(form, &EditPage::sendTask, this, &TaskCreationWindow::sendTask);
     connect(dialogButton, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     grid->addWidget(dialogButton);

@@ -14,7 +14,7 @@ private:
     bool recurring;
 
 public:
-    Bill(string id, string title, string description,
+    Bill(string title, string description,
          string assignee, string creationDate,
          string dueDate, Priority priority,
          bool completed, bool skipped,

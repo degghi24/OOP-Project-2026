@@ -14,6 +14,7 @@ FilterWindow::FilterWindow(QWidget *parent): QWidget(parent) {
 
     stardDateSelect->setCalendarPopup(true);
     endDateSelect->setCalendarPopup(true);
+
     typeSelect->addItem("All");
     typeSelect->addItem("Activity");
     typeSelect->addItem("Work");
@@ -47,7 +48,7 @@ FilterWindow::FilterWindow(QWidget *parent): QWidget(parent) {
     merge->addWidget(end_check);
     merge->addWidget(endDateLabel);
     //connect checkBox with endDateSelect
-    connect(end_check, &QCheckBox::checkStateChanged,this,&FilterWindow::toggleEndDateEdit);
+    connect(end_check, &QCheckBox::checkStateChanged, this, &FilterWindow::toggleEndDateEdit);
 
 
     col1->addWidget(startDateLabel);
@@ -66,11 +67,13 @@ FilterWindow::FilterWindow(QWidget *parent): QWidget(parent) {
     hGrid->setSpacing(0);
 
     setMinimumWidth(290);
+
+    toggleEndDateEdit(false);
 }
 
 void FilterWindow::toggleEndDateEdit(bool state){
-    endDateSelect->setReadOnly(state);
-    if(state){
+    endDateSelect->setReadOnly(!state);
+    if(!state){
         QPalette pal = endDateSelect->palette();
         pal.setColor(QPalette::Base, QColor(225, 225, 225));
         endDateSelect->setPalette(pal);
@@ -79,4 +82,14 @@ void FilterWindow::toggleEndDateEdit(bool state){
         pal.setColor(QPalette::Base, QColor(255, 255, 255));
         endDateSelect->setPalette(pal);
     }
+}
+
+QDate* FilterWindow::getStartDate(){
+    return new QDate(stardDateSelect->date());
+}
+QDate* FilterWindow::getEndDate(){
+    return new QDate(endDateSelect->date());
+}
+int FilterWindow::getType(){
+    return typeSelect->currentIndex();
 }

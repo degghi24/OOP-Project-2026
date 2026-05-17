@@ -20,7 +20,19 @@ private:
 
     void setUp();
 
+public slots:
+    void createTask();
+
+signals:
+    void returnTask(Bill *task);
+
 public:
+    int getAmount() const;
+    bool isPaid() const;
+    std::string getProvider() const;
+    std::string getIban() const;
+    bool isRecurring() const;
+
     BillEdit(Bill *task, QWidget *parent = nullptr);
     BillEdit(QWidget *parent = nullptr);
 };

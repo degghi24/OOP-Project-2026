@@ -1,10 +1,10 @@
 #include "Headers/TimedTask.h"
 
-TimedTask::TimedTask(string id, string title, string description,
+TimedTask::TimedTask(string title, string description,
                      string assignee, string creationDate,
                      string startDate, string endDate,
                      string startTime, int totalDuration)
-    : AbstractTask(id, title, description, assignee, creationDate),
+    : AbstractTask(title, description, assignee, creationDate),
     startDate(startDate), endDate(endDate),
     startTime(startTime), totalDuration(totalDuration)
 {}

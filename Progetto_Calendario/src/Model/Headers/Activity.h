@@ -14,7 +14,7 @@ private:
     string meetingLink;
 
 public:
-    Activity(string id, string title, string description,
+    Activity(string title, string description,
              string assignee, string creationDate,
              string startDate, string endDate,
              string startTime, int totalDuration,

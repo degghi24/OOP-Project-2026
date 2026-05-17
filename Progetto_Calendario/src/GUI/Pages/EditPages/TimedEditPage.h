@@ -24,6 +24,12 @@ private:
 protected:
 
 public:
+
+    std::string getStartDate() const;
+    std::string getEndDate() const;
+    std::string getStartTime() const;
+    int getDuration() const;
+
     TimedEditPage(TimedTask *task, QWidget *parent = nullptr);
     TimedEditPage(QWidget *parent = nullptr);
 };

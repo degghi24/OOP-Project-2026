@@ -4,14 +4,14 @@
 using std::cout;
 using std::endl;
 
-Bill::Bill(string id, string title, string description,
+Bill::Bill(string title, string description,
            string assignee, string creationDate,
            string dueDate, Priority priority,
            bool completed, bool skipped,
            double amount, bool paid,
            string provider, string IBAN, bool recurring)
-    : AbstractTask(id, title, description, assignee, creationDate),
-    Deadline(id, title, description, assignee, creationDate,
+    : AbstractTask(title, description, assignee, creationDate),
+    Deadline(title, description, assignee, creationDate,
              dueDate, priority, completed, skipped),
     amount(amount), paid(paid),
     provider(provider), IBAN(IBAN), recurring(recurring)

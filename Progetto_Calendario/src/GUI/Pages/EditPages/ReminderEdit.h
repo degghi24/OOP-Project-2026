@@ -18,7 +18,18 @@ private:
 
     void setUp();
 
+public slots:
+    void createTask();
+
+signals:
+    void returnTask(Reminder *task);
+
 public:
+    std::string getNotifyTime() const;
+    std::string getalertMessage() const;
+    bool isSnoozed() const;
+    int getSnoozeMinute() const;
+
     ReminderEdit(Reminder *task, QWidget *parent = nullptr);
     ReminderEdit(QWidget *parent = nullptr);
 };
