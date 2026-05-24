@@ -1,5 +1,7 @@
 #include "TasksList.h"
 
+#include <QErrorMessage>
+
 TasksList::TasksList(QWidget *parent): QWidget(parent), containerLayout(new QVBoxLayout(this)){
 
     /*TaskBlock *one = new TaskBlock("Inizio", "1", "Tipo", "Fine");
@@ -30,172 +32,127 @@ void TasksList::addTask(TaskBlock* task){
 
 bool TasksList::filter(Filter filterValues){
 
-    bool titleChangeFlag = true;
-    bool startDateChangeFlag = true;
-    bool endDateChangeFlag = true;
-    bool typeChangeFlag = true;
+    filterValues.title;
+    filterValues.startDate;
+    filterValues.endDate;
+    filterValues.type;
 
-    if(storedFilterValues.title == filterValues.title) titleChangeFlag = false;
-    if(storedFilterValues.startDate == filterValues.startDate) titleChangeFlag = false;
-    if(storedFilterValues.endDate == filterValues.endDate) titleChangeFlag = false;
-    if(storedFilterValues.type == filterValues.type) titleChangeFlag = false;
+    indexesShowed.clear();
 
-    storedFilterValues.title = filterValues.title;
-    storedFilterValues.startDate = filterValues.startDate;
-    storedFilterValues.endDate = filterValues.endDate;
-    storedFilterValues.type = filterValues.type;
+    //se l'input è errato non fa nulla
+    if(*filterValues.startDate > *filterValues.endDate){
+        QErrorMessage errorMessage;
+        errorMessage.showMessage("Data Inizio maggiore della Data Fine");
+        return false;
+    }
+
+    if(filterValues.type < 0 || filterValues.type > 5){
+        QErrorMessage errorMessage;
+        errorMessage.showMessage("Tipo Inesistente");
+        return false;
+    }
 
     //se non è impostato nulla nel filter allora mostra tutto
-    if(storedFilterValues.startDate == nullptr && storedFilterValues.endDate == nullptr &&
-       storedFilterValues.type == 0 && (storedFilterValues.title.isEmpty() || storedFilterValues.title.isNull()))
+    if(filterValues.startDate == nullptr && filterValues.endDate == nullptr &&
+        filterValues.type == 0 && (filterValues.title.isEmpty() || filterValues.title.isNull()))
     {
         show();
         for(int i = 0; i < containerLayout->count(); ++i){
             containerLayout->itemAt(i)->widget()->show(); // mostra tutto
-            indexesShowed.clear();
         }
         return true;
     }
 
-
-    if(startDateChangeFlag){ //cambiato data inizio
-        if(storedFilterValues.startDate == nullptr){ //cambiato data inizio in nullo
-            if(endDateChangeFlag){ //cambiato data fine
-                if(storedFilterValues.endDate == nullptr){ //cambiato data fine in nullo
-                    if(typeChangeFlag){ //cambiato tipo
-                        if(storedFilterValues.type == 0){ //cambiato tipo in tutto
-                            if(titleChangeFlag){ //cambiato titolo
-                                if(storedFilterValues.title.isEmpty() || storedFilterValues.title.isNull()){ //cambiato titolo in nullo
-                                    for(int i = 0; i < containerLayout->count(); ++i){
-                                        containerLayout->itemAt(i)->widget()->show(); // mostra tutto
-                                        indexesShowed.clear();
-                                    }
-                                }else{
-                                    for(int i = 0; i < containerLayout->count(); ++i){
-                                        if(list[i]->getTitle().contains(storedFilterValues.title)){
-                                            containerLayout->itemAt(i)->widget()->show();
-                                            indexesShowed.append(i);
-                                        }{
-                                            containerLayout->itemAt(i)->widget()->hide();
-                                            indexesShowed.removeOne(i);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+    //se ogni campo è compilato basta controllare uan volta la lista
+    if(filterValues.startDate != nullptr && filterValues.endDate != nullptr &&
+        filterValues.type != 0 && !filterValues.title.isEmpty() && !filterValues.title.isNull()){
+        for(int i = 0; i < containerLayout->count(); ++i){
+            if(*filterValues.startDate > list[i]->getStartDate() || *filterValues.endDate < list[i]->getEndDate()
+                || filterValues.type != list[i]->getType()+1 || !list[i]->getTitle().contains(filterValues.title)){
+                containerLayout->itemAt(i)->widget()->hide();
             }
-        }else{ //cambiato data inizio in valore
-            if(*storedFilterValues.startDate > list.last()->getStartDate()){ //se data inizio è maggiore dell'ultimo data inizio allora nascondo tutto
-                hide();
-            }else if(storedFilterValues.endDate != nullptr && *storedFilterValues.endDate < *storedFilterValues.startDate){ //se data inizio dato è maggiore del data fine dato, nascondo tutto
-                hide();
+        }
+        return true;
+    }
+
+    //altrimenti di controlla uno a uno i campi
+
+    if(filterValues.startDate != nullptr){
+        bool isSmaller = true;
+        for(int i = containerLayout->count(); i> 0; --i){
+            if(isSmaller){
+                if(*filterValues.startDate <= list[i]->getStartDate()){
+                    indexesShowed.append(i);
+                }else{
+                    isSmaller = false;
+                    containerLayout->itemAt(i)->widget()->hide();
+                }
             }else{
-                bool isBefore = true;
-                for(int i = containerLayout->count(); i> 0; --i){
-                    if(isBefore){
-                        if(*storedFilterValues.startDate <= list[i]->getStartDate()){
-                            indexesShowed.append(i);
-                        }else{
-                            isBefore = false;
-                            containerLayout->itemAt(i)->widget()->hide();
-                        }
-                    }else{
-                        containerLayout->itemAt(i)->widget()->hide();
-                    }
-                }
+                containerLayout->itemAt(i)->widget()->hide();
             }
         }
     }
-
-    if(endDateChangeFlag){
-        if(storedFilterValues.endDate != nullptr){
-
-        }
-    }
-
-
-
 
     if(filterValues.endDate != nullptr){
-        if(*filterValues.endDate < list.first()->getEndDate() || *filterValues.startDate > list.last()->getStartDate() || *filterValues.endDate < *filterValues.startDate ){
-            hide();
-        }else if(filterValues.type == 0){ //tutti i tipi
-
-            if((filterValues.title.isEmpty() || filterValues.title.isNull())){ //senza titolo
-
-                int start = 0;
-                int end = containerLayout->count();
-                while(start < containerLayout->count() && end > 0){
-                    //forward (endDate)
-                    if(*filterValues.endDate < list[start]->getEndDate() && !containerLayout->itemAt(start)->widget()->isHidden()){
-                        containerLayout->itemAt(start)->widget()->hide();
-                    }
-                    //backward (startDate)
-                    if(*filterValues.startDate < list[end]->getStartDate() && !containerLayout->itemAt(end)->widget()->isHidden()){
-                        containerLayout->itemAt(end)->widget()->hide();
-                    }
-
-                    ++start;
-                    --end;
-                }
-
-            }else{ // con titolo
-
-                int start = 0;
-                int end = containerLayout->count();
-                while(start < containerLayout->count() && end > 0){
-                    //forward (endDate)
-                    if(*filterValues.endDate < list[start]->getEndDate() && !containerLayout->itemAt(start)->widget()->isHidden() && !list[start]->getTitle().contains(filterValues.title)){
-                        containerLayout->itemAt(start)->widget()->hide();
-                    }
-                    //backward (startDate)
-                    if(*filterValues.startDate < list[end]->getStartDate() && !containerLayout->itemAt(end)->widget()->isHidden() && !list[end]->getTitle().contains(filterValues.title)){
-                        containerLayout->itemAt(end)->widget()->hide();
-                    }
-
-                    ++start;
-                    --end;
-                }
-
-            }
-
-        }else{ // con tipo
-            int start = 0;
-            int end = containerLayout->count();
-            while(start < containerLayout->count() && end > 0){
-                //forward (endDate)
-                if(*filterValues.endDate < list[start]->getEndDate() && !containerLayout->itemAt(start)->widget()->isHidden() && !list[start]->getTitle().contains(filterValues.title) && (filterValues.type - 1) == list[start]->getType()){
-                    containerLayout->itemAt(start)->widget()->hide();
-                }
-                //backward (startDate)
-                if(*filterValues.startDate < list[end]->getStartDate() && !containerLayout->itemAt(end)->widget()->isHidden() && !list[end]->getTitle().contains(filterValues.title) && (filterValues.type - 1) == list[end]->getType()){
-                    containerLayout->itemAt(end)->widget()->hide();
-                }
-
-                ++start;
-                --end;
-            }
-        }
-
-    }else{
-        if(*filterValues.startDate > list.last()->getStartDate()){
-            hide();
-        }else{
-            int end = containerLayout->count();
-            bool flag = true;
-            while(end > 0){
-                if(flag && *filterValues.startDate > list[end]->getStartDate()){
-                    flag = false;
+        if(indexesShowed.empty()){
+            for(int i = 0; i < containerLayout->count(); ++i){
+                if(*filterValues.endDate < list[i]->getEndDate()){
+                    containerLayout->itemAt(i)->widget()->hide();
                 }else{
-                    containerLayout->itemAt(end)->widget()->hide();
+                    indexesShowed.append(i);
                 }
-                --end;
+            }
+        }else{
+            for(auto it : std::as_const(indexesShowed)){
+                if(*filterValues.endDate < list[it]->getEndDate()){
+                    containerLayout->itemAt(it)->widget()->hide();
+                    indexesShowed.removeOne(it);
+                    indexesShowed.squeeze();
+                }
             }
         }
     }
 
-    return false; //?
+    if(filterValues.type != 0){
+        if(indexesShowed.empty()){
+            for(int i = 0; i < containerLayout->count(); ++i){
+                if(filterValues.type != list[i]->getType()+1){
+                    containerLayout->itemAt(i)->widget()->hide();
+                }else{
+                    indexesShowed.append(i);
+                }
+            }
+        }else{
+            for(auto it : std::as_const(indexesShowed)){
+                if(filterValues.type != list[it]->getType()+1){
+                    containerLayout->itemAt(it)->widget()->hide();
+                    indexesShowed.removeOne(it);
+                    indexesShowed.squeeze();
+                }
+            }
+        }
+    }
+
+    if(!filterValues.title.isEmpty() && !filterValues.title.isNull()){
+        if(indexesShowed.empty()){
+            for(int i = 0; i < containerLayout->count(); ++i){
+                if(!list[i]->getTitle().contains(filterValues.title)){
+                    containerLayout->itemAt(i)->widget()->hide();
+                }else{
+                    indexesShowed.append(i);
+                }
+            }
+        }else{
+            for(auto it : std::as_const(indexesShowed)){
+                if(!list[it]->getTitle().contains(filterValues.title)){
+                    containerLayout->itemAt(it)->widget()->hide();
+                    indexesShowed.removeOne(it);
+                    indexesShowed.squeeze();
+                }
+            }
+        }
+    }
+
+    return true;
 }
 

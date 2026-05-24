@@ -23,12 +23,15 @@ public slots:
     bool filter(Filter filterValues);
 
 private:
-
-    Filter storedFilterValues;
     QList<int> indexesShowed;
 
     QVBoxLayout *containerLayout = nullptr;
     QList<TaskBlock*> list; //per ordinare
+
+    void searchTitle();
+    void searchType();
+    void searchEndDate();
+    void searchStartDate();
 
 public:
 
