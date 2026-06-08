@@ -12,9 +12,8 @@ RepeatableEditPage::RepeatableEditPage(RepeatableTask *task, QWidget *parent): A
         saturday->setChecked(task->getWeekDays()[5]);
         sunday->setChecked(task->getWeekDays()[6]);
 
-        QString eDate = task->getRepeatEndDate().c_str();
         intervalDays->setValue(task->getIntervalDays());
-        endDate->setDate(QDate(eDate.section("-",0,0).toInt(), eDate.section("-",1,1).toInt(),eDate.section("-",2,2).toInt()));
+        endDate->setDate(task->getRepeatEndDate());
         active->setChecked(task->isActive());
     }
 
@@ -91,8 +90,8 @@ QBitArray RepeatableEditPage::getWorkDays() const{
 int RepeatableEditPage::getIntervalDays() const{
     return intervalDays->value();
 }
-std::string RepeatableEditPage::getEndDate() const{
-    return endDate->date().toString("yyyy-MM-d").toStdString();
+QDate RepeatableEditPage::getEndDate() const{
+    return endDate->date();
 }
 bool RepeatableEditPage::isActive() const{
     return active->isChecked();

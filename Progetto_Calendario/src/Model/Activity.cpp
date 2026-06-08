@@ -6,7 +6,7 @@ using std::endl;
 
 Activity::Activity(string title, string description,
                    string assignee, string creationDate,
-                   string startDate, string endDate,
+                   QDate startDate, QDate endDate,
                    string startTime, int totalDuration,
                    string location, int participantCount,
                    string eventType, bool online, string meetingLink)
@@ -28,14 +28,6 @@ void Activity::setParticipantCount(const int& newParticipantCount)     { partici
 void Activity::setEventType       (const string& newEventType)         { eventType        = newEventType;        }
 void Activity::setOnline          (const bool& newOnline)              { online           = newOnline;           }
 void Activity::setMeetingLink     (const string& newMeetingLink)       { meetingLink      = newMeetingLink;      }
-
-void Activity::display() {
-    cout << "Activity: " << getTitle() << endl;
-    cout << "Date: " << getStartDate() << " - " << getEndDate() << endl;
-    cout << "Location: " << location << endl;
-    cout << "Participants: " << participantCount << endl;
-    cout << "Online: " << (online ? "Yes" : "No") << endl;
-}
 
 bool Activity::remove() {
     return true; // placeholder

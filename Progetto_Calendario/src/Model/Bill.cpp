@@ -6,7 +6,7 @@ using std::endl;
 
 Bill::Bill(string title, string description,
            string assignee, string creationDate,
-           string dueDate, Priority priority,
+           QDate dueDate, Priority priority,
            bool completed, bool skipped,
            double amount, bool paid,
            string provider, string IBAN, bool recurring)
@@ -32,14 +32,6 @@ void Bill::setRecurring(const bool& newRecurring)   { recurring = newRecurring; 
 bool Bill::pay() {
     paid = true;
     return true;
-}
-
-void Bill::display() {
-    cout << "Bill: "     << getTitle() << endl;
-    cout << "Amount: "   << amount << endl;
-    cout << "Provider: " << provider << endl;
-    cout << "Due: "      << getDueDate() << endl;
-    cout << "Paid: "     << (paid ? "Yes" : "No") << endl;
 }
 
 bool Bill::remove() {

@@ -15,7 +15,7 @@ private:
 public:
     Reminder(string title, string description,
              string assignee, string creationDate,
-             string startDate, string endDate,
+             QDate startDate, QDate endDate,
              string startTime, int totalDuration,
              string notifyTime, string alertMessage,
              bool snoozed, int snoozeMinutes);

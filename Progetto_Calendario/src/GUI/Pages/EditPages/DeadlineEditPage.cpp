@@ -5,8 +5,7 @@ DeadlineEditPage::DeadlineEditPage(Deadline *task, QWidget *parent): AbstractEdi
     setUp();
 
     if(task){
-        QString dDate = task->getDueDate().c_str();
-        dueDate->setDate(QDate(dDate.section("-",0,0).toInt(), dDate.section("-",1,1).toInt(),dDate.section("-",2,2).toInt()));
+        dueDate->setDate(task->getDueDate());
         prio->setCurrentIndex(task->getPriority());
         completed->setChecked(task->isCompleted());
         skipped->setChecked(task->isSkipped());
@@ -56,8 +55,8 @@ void DeadlineEditPage::setUp(){
 
 }
 
-std::string DeadlineEditPage::getDueDate() const{
-    return dueDate->date().toString("yyyy-MM-d").toStdString();
+QDate DeadlineEditPage::getDueDate() const{
+    return dueDate->date();
 }
 int DeadlineEditPage::getPriority() const{
     return prio->currentIndex();

@@ -21,7 +21,7 @@ private:
     void setUp();
 
 public:
-    std::string getDueDate() const;
+    QDate getDueDate() const;
     int getPriority() const;
     bool isCompleted() const;
     bool isSkipped() const;

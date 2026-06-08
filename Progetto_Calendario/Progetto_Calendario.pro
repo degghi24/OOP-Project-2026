@@ -25,9 +25,7 @@ HEADERS += \
     src/GUI/TaskBlock.h \
     src/GUI/TasksList.h \
     src/GUI/TasksListWindow.h \
-    src/Model/Headers/TaskFactory.h \
     src/Model/Headers/AbstractTask.h \
-    src/Model/Headers/Calendar.h \
     src/Model/Headers/TimedTask.h \
     src/Model/Headers/RepeatableTask.h \
     src/Model/Headers/Deadline.h \
@@ -67,12 +65,10 @@ SOURCES += \
     src/GUI/TaskBlock.cpp \
     src/GUI/TasksList.cpp \
     src/GUI/TasksListWindow.cpp \
-    src/Model/TaskFactory.cpp \
     src/Model/data_persistancy/json/jsonReader.cpp \
     src/Model/data_persistancy/json/jsonVisitor.cpp \
     src/Model/data_persistancy/xml/xmlReader.cpp \
     src/Model/data_persistancy/xml/xmlVisitor.cpp \
-    src/Model/Calendar.cpp \
     src/Model/AbstractTask.cpp \
     src/Model/TimedTask.cpp \
     src/Model/RepeatableTask.cpp \

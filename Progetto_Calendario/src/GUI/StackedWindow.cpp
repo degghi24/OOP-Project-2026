@@ -1,7 +1,5 @@
 #include "StackedWindow.h"
 #include "../Model/Headers/TaskListManager.h"
-#include "AddTask/TypeSelectionPopup.h"
-#include "AddTask/TaskCreationWindow.h"
 
 //#include "../Model/Headers/TaskListManager.h"
 
@@ -16,41 +14,9 @@ StackedWindow::StackedWindow(QWidget *parent): QWidget(parent) {
 
     auto *half = new QHBoxLayout(first);
 
-    QPushButton *add = new QPushButton("Add");
-    connect(add, &QPushButton::clicked, this, &StackedWindow::showTypeSelect);
-
 
     half->addWidget(calendar = new QCalendarWidget());
-    half->addWidget(add);
 
 
     stack->addWidget(first);
-}
-
-void StackedWindow::showTypeSelect(){
-    TypeSelectionPopup *typePopup = new TypeSelectionPopup(this);
-    typePopup->setAttribute(Qt::WA_DeleteOnClose, true);
-    connect(typePopup, &TypeSelectionPopup::sendType, this, &StackedWindow::showTaskCreation); //showTaskCreation(QString type)
-    if (typePopup->exec() == QDialog::Accepted){
-        qDebug()<<"Accepted";
-        //connect(typePopup, &TypeSelectionPopup::createTaskSignal, TaskCreationWindowObject, &TaskCreationWindow::createTask);
-    }
-}
-
-void StackedWindow::showTaskCreation(QString type){
-    TaskCreationWindow *creationWindow = new TaskCreationWindow(type, this);
-    creationWindow->setAttribute(Qt::WA_DeleteOnClose, true);
-    connect(creationWindow, &TaskCreationWindow::sendTask, this, &StackedWindow::addTask);
-    creationWindow->exec();
-}
-
-//TaskDetailWindow *detail = nullptr
-//TaskEditWindow *edit = nullptr
-
-void StackedWindow::addTask(AbstractTask* task){
-    TaskListManager::getInstance().addTask(task);
-    for(auto it : TaskListManager::getInstance().getTaskList()){
-        qDebug()<<it->getTitle()<<it->getId();
-    }
-
 }

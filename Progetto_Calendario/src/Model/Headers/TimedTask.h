@@ -5,27 +5,29 @@
 using std::string;
 #include "AbstractTask.h"
 
+#include <QDate>
+
 class TimedTask : virtual public AbstractTask {
 private:
-    string startDate;
-    string endDate;
+    QDate startDate;
+    QDate endDate;
     string startTime;
     int totalDuration;
 
 public:
     TimedTask(string title, string description,
               string assignee, string creationDate,
-              string startDate, string endDate,
+              QDate startDate, QDate endDate,
               string startTime, int totalDuration);
     virtual ~TimedTask() = default;
 
-    string getStartDate()      const;
-    string getEndDate()        const;
+    QDate getStartDate()      const;
+    QDate getEndDate()        const;
     string getStartTime()      const;
     int    getTotalDuration()  const;
 
-    void setStartDate (const string& newStartDate);
-    void setEndDate   (const string& newEndDate);
+    void setStartDate (const QDate& newStartDate);
+    void setEndDate   (const QDate& newEndDate);
     void setStartTime (const string& newStartTime);
     void setDuration  (const int& newDuration);
 

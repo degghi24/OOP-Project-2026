@@ -19,17 +19,18 @@ private:
         QString id, title, description, assignee, creationDate;
     };
     struct TimedTaskData {
-        QString startDate, endDate, startTime;
+        QDate startDate, endDate;
+        QString startTime;
         int     totalDuration;
     };
     struct RepeatableTaskData {
         QBitArray  weekDays;
         int        intervalDays;
-        QString    repeatEndDate;
+        QDate    repeatEndDate;
         bool       active;
     };
     struct DeadlineData {
-        QString dueDate;
+        QDate dueDate;
         int     priority;
         bool    completed, skipped;
     };

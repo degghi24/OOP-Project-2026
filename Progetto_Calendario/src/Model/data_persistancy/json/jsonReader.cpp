@@ -15,8 +15,8 @@ JsonReader::AbstractTaskData JsonReader::readAbstractTaskData(const QJsonObject&
 
 JsonReader::TimedTaskData JsonReader::readTimedTaskData(const QJsonObject& obj) {
     TimedTaskData d;
-    d.startDate     = obj["startDate"].toString();
-    d.endDate       = obj["endDate"].toString();
+    d.startDate     = QDate::fromString(obj["startDate"].toString());
+    d.endDate       = QDate::fromString(obj["endDate"].toString());
     d.startTime     = obj["startTime"].toString();
     d.totalDuration = obj["totalDuration"].toInt();
     return d;
@@ -25,7 +25,7 @@ JsonReader::TimedTaskData JsonReader::readTimedTaskData(const QJsonObject& obj) 
 JsonReader::RepeatableTaskData JsonReader::readRepeatableTaskData(const QJsonObject& obj) {
     RepeatableTaskData d;
     d.intervalDays  = obj["intervalDays"].toInt();
-    d.repeatEndDate = obj["repeatEndDate"].toString();
+    d.repeatEndDate = QDate::fromString(obj["repeatEndDate"].toString());
     d.active        = obj["active"].toBool();
     for (int i = 0; i < obj["weekDays"].toArray().size(); ++i)
         d.weekDays.setBit(i, obj["weekDays"].toArray()[i].toBool());
@@ -34,7 +34,7 @@ JsonReader::RepeatableTaskData JsonReader::readRepeatableTaskData(const QJsonObj
 
 JsonReader::DeadlineData JsonReader::readDeadlineData(const QJsonObject& obj) {
     DeadlineData d;
-    d.dueDate   = obj["dueDate"].toString();
+    d.dueDate   = QDate::fromString(obj["dueDate"].toString());
     d.priority  = obj["priority"].toInt();
     d.completed = obj["completed"].toBool();
     d.skipped   = obj["skipped"].toBool();
@@ -50,7 +50,7 @@ Activity* JsonReader::readActivity(const QJsonObject& obj) {
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        t.startDate.toStdString(), t.endDate.toStdString(),
+        t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         obj["location"].toString().toStdString(),
         obj["participantCount"].toInt(),
@@ -67,7 +67,7 @@ Reminder* JsonReader::readReminder(const QJsonObject& obj) {
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        t.startDate.toStdString(), t.endDate.toStdString(),
+        t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         obj["notifyTime"].toString().toStdString(),
         obj["alertMessage"].toString().toStdString(),
@@ -89,7 +89,7 @@ Work* JsonReader::readWork(const QJsonObject& obj) {
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
         r.weekDays, r.intervalDays,
-        r.repeatEndDate.toStdString(), r.active,
+        r.repeatEndDate, r.active,
         subTasks, obj["progress"].toInt(),
         obj["client"].toString().toStdString(),
         obj["category"].toString().toStdString(),
@@ -104,7 +104,7 @@ Bill* JsonReader::readBill(const QJsonObject& obj) {
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        d.dueDate.toStdString(),
+        d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         obj["amount"].toDouble(),
@@ -129,7 +129,7 @@ Project* JsonReader::readProject(const QJsonObject& obj) {
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
         a.creationDate.toStdString(),
-        d.dueDate.toStdString(),
+        d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         obj["milestone"].toString().toStdString(),

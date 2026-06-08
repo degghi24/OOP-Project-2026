@@ -19,8 +19,8 @@ void jsonVisitor::insertAbstract(const AbstractTask& A, QJsonObject& obj){
 
 void jsonVisitor::insertTimed(const TimedTask& T, QJsonObject& obj){
     insertAbstract(T, obj);
-    obj.insert("startDate", QJsonValue::fromVariant(T.getStartDate().c_str()));
-    obj.insert("endDate", QJsonValue::fromVariant(T.getEndDate().c_str()));
+    obj.insert("startDate", QJsonValue::fromVariant(T.getStartDate()));
+    obj.insert("endDate", QJsonValue::fromVariant(T.getEndDate()));
     obj.insert("startTime", QJsonValue::fromVariant(T.getStartTime().c_str()));
     obj.insert("totalDuration", QJsonValue::fromVariant(T.getTotalDuration()));
 }
@@ -33,13 +33,13 @@ void jsonVisitor::insertRepeat(const RepeatableTask& R, QJsonObject& obj){
     }
     obj.insert("weekDays", workDays);
     obj.insert("intervalDays", QJsonValue::fromVariant(R.getIntervalDays()));
-    obj.insert("repeatEndDate", QJsonValue::fromVariant(R.getRepeatEndDate().c_str()));
+    obj.insert("repeatEndDate", QJsonValue::fromVariant(R.getRepeatEndDate()));
     obj.insert("active", QJsonValue::fromVariant(R.isActive()));
 }
 
 void jsonVisitor::insertDeadline(const Deadline& D, QJsonObject& obj){
     insertAbstract(D, obj);
-    obj.insert("dueDate", QJsonValue::fromVariant(D.getDueDate().c_str()));
+    obj.insert("dueDate", QJsonValue::fromVariant(D.getDueDate()));
     obj.insert("priority", QJsonValue::fromVariant(D.getPriority()));
     obj.insert("completed", QJsonValue::fromVariant(D.isCompleted()));
     obj.insert("skipped", QJsonValue::fromVariant(D.isSkipped()));

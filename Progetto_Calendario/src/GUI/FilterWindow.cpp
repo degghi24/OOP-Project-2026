@@ -88,6 +88,9 @@ QDate* FilterWindow::getStartDate(){
     return new QDate(stardDateSelect->date());
 }
 QDate* FilterWindow::getEndDate(){
+    if(endDateSelect->isReadOnly()){
+        return nullptr;
+    }
     return new QDate(endDateSelect->date());
 }
 int FilterWindow::getType(){

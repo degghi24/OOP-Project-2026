@@ -8,7 +8,7 @@ using std::endl;
 
 Project::Project(string title, string description,
                  string assignee, string creationDate,
-                 string dueDate, Priority priority,
+                 QDate dueDate, Priority priority,
                  bool completed, bool skipped,
                  string milestone, QStringList team,
                  double budget, string status, QStringList tags)
@@ -44,14 +44,6 @@ bool Project::removeMember(const string& member) {
 
 void Project::addTag(const QString& tag) {
     tags.push_back(tag);
-}
-
-void Project::display() {
-    cout << "Project: "   << getTitle() << endl;
-    cout << "Milestone: " << milestone << endl;
-    cout << "Budget: "    << budget << endl;
-    cout << "Status: "    << status << endl;
-    cout << "Team: "      << team.size() << " members" << endl;
 }
 
 bool Project::remove() {

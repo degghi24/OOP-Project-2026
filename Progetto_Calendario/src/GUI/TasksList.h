@@ -19,14 +19,18 @@ struct Filter{
 class TasksList: public QWidget{
     Q_OBJECT
 
+private slots:
+    void selected(TaskBlock* task);
+
 public slots:
     bool filter(Filter filterValues);
 
 private:
-    QList<int> indexesShowed;
 
     QVBoxLayout *containerLayout = nullptr;
     QList<TaskBlock*> list; //per ordinare
+
+    TaskBlock *selectedTask = nullptr;
 
     void searchTitle();
     void searchType();
@@ -36,7 +40,7 @@ private:
 public:
 
     void addTask(TaskBlock* task);
-    //void addTask(AbstractTask* task);
+    void addTask(AbstractTask* task);
 
     void fillContainer(QList<TaskBlock*> list);
 

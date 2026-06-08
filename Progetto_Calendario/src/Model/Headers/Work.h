@@ -20,7 +20,7 @@ public:
     Work(string title, string description,
          string assignee, string creationDate,
          QBitArray weekDays, int intervalDays,
-         string repeatEndDate, bool active,
+         QDate repeatEndDate, bool active,
          QStringList subTasks, int progress,
          string client, string category, string notes);
     virtual ~Work() = default;

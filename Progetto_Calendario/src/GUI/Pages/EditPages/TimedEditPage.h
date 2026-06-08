@@ -25,8 +25,8 @@ protected:
 
 public:
 
-    std::string getStartDate() const;
-    std::string getEndDate() const;
+    QDate getStartDate() const;
+    QDate getEndDate() const;
     std::string getStartTime() const;
     int getDuration() const;
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <QBitArray>
+#include <QDate>
 using std::string;
 using std::vector;
 #include "AbstractTask.h"
@@ -15,24 +16,24 @@ private:
 
     QBitArray weekDays;
     int intervalDays;
-    string repeatEndDate;
+    QDate repeatEndDate;
     bool active;
 
 public:
     RepeatableTask(string title, string description,
                    string assignee, string creationDate,
                    QBitArray weekDays, int intervalDays,
-                   string repeatEndDate, bool active);
+                   QDate repeatEndDate, bool active);
     virtual ~RepeatableTask() = default;
 
     QBitArray    getWeekDays()      const;
     int         getIntervalDays()  const;
-    string      getRepeatEndDate() const;
+    QDate      getRepeatEndDate() const;
     bool        isActive()         const;
 
     void setWeekDays     (const QBitArray& newWeekDays);
     void setIntervalDays (const int& newIntervalDays);
-    void setRepeatEndDate(const string& newRepeatEndDate);
+    void setRepeatEndDate(const QDate& newRepeatEndDate);
     void setActive       (const bool& newActive);
 
     virtual void display()          = 0;

@@ -8,8 +8,8 @@ class ToolBar: public QToolBar{
     Q_OBJECT
 
 signals:
-    //save
-    //import
+    void saveSignal();
+    void importSignal();
 
 public:
     ToolBar(QWidget *Parent = nullptr);

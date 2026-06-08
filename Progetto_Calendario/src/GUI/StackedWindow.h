@@ -22,10 +22,6 @@ private:
     //TaskEditWindow *edit = nullptr
 
 private slots:
-    void showTypeSelect();
-    void showTaskCreation(QString type);
-
-    void addTask(AbstractTask* task);
 
 public:
     StackedWindow(QWidget *parent = nullptr);

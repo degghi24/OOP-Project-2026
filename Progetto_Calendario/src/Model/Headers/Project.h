@@ -19,9 +19,9 @@ private:
 public:
     Project(string title, string description,
             string assignee, string creationDate,
-            string dueDate, Priority priority,
+            QDate dueDate, Priority priority,
             bool completed, bool skipped,
-            string milestone,QStringList team,
+            string milestone, QStringList team,
             double budget, string status, QStringList tags);
     virtual ~Project() = default;
 

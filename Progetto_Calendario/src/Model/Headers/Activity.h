@@ -16,7 +16,7 @@ private:
 public:
     Activity(string title, string description,
              string assignee, string creationDate,
-             string startDate, string endDate,
+             QDate startDate, QDate endDate,
              string startTime, int totalDuration,
              string location, int participantCount,
              string eventType, bool online, string meetingLink);

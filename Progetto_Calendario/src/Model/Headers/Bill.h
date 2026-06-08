@@ -16,7 +16,7 @@ private:
 public:
     Bill(string title, string description,
          string assignee, string creationDate,
-         string dueDate, Priority priority,
+         QDate dueDate, Priority priority,
          bool completed, bool skipped,
          double amount, bool paid,
          string provider, string IBAN, bool recurring);

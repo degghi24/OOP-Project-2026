@@ -6,7 +6,7 @@ using std::endl;
 
 Reminder::Reminder(string title, string description,
                    string assignee, string creationDate,
-                   string startDate, string endDate,
+                   QDate startDate, QDate endDate,
                    string startTime, int totalDuration,
                    string notifyTime, string alertMessage,
                    bool snoozed, int snoozeMinutes)
@@ -34,13 +34,6 @@ void Reminder::notify() {
 void Reminder::snooze(int min) {
     snoozed       = true;
     snoozeMinutes = min;
-}
-
-void Reminder::display() {
-    cout << "Reminder: "  << getTitle() << endl;
-    cout << "Notify at: " << notifyTime << endl;
-    cout << "Message: "   << alertMessage << endl;
-    cout << "Snoozed: "   << (snoozed ? "Yes" : "No") << endl;
 }
 
 bool Reminder::remove() {

@@ -8,7 +8,7 @@ using std::endl;
 Work::Work(string title, string description,
            string assignee, string creationDate,
            QBitArray weekDays, int intervalDays,
-           string repeatEndDate, bool active,
+           QDate repeatEndDate, bool active,
            QStringList subTasks, int progress,
            string client, string category, string notes)
     : AbstractTask(title, description, assignee, creationDate),
@@ -42,15 +42,6 @@ bool Work::removeSubTask(const QString& task) {
     }
     return false;
 }
-
-void Work::display() {
-    cout << "Work: "      << getTitle() << endl;
-    cout << "Client: "    << client << endl;
-    cout << "Category: "  << category << endl;
-    cout << "Progress: "  << progress << "%" << endl;
-    cout << "Subtasks: "  << subTasks.size() << endl;
-}
-
 bool Work::remove() {
     return true; // placeholder
 }

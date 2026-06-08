@@ -169,8 +169,8 @@ void DetailPage::abstractBase(AbstractTask *task){
 void DetailPage::timedBase(TimedTask *task){
     abstractBase(task);
 
-    QLabel *startDate = new QLabel(task->getStartDate().c_str());
-    QLabel *endDate = new QLabel(task->getEndDate().c_str());
+    QLabel *startDate = new QLabel(task->getStartDate().toString());
+    QLabel *endDate = new QLabel(task->getEndDate().toString());
     QLabel *starTime = new QLabel(task->getStartTime().c_str());
     QLabel *duration = new QLabel(QString::number(task->getTotalDuration()));
 
@@ -198,7 +198,7 @@ void DetailPage::repeatableBase(RepeatableTask *task){
     QStringList daysNames{"Monday", "Tuesday", "Wednesday", "Thurday", "Friday", "Saturday", "Sunday"};
 
     QLabel *intervalDays = new QLabel(QString::number(task->getIntervalDays()));
-    QLabel *endDate = new QLabel(task->getRepeatEndDate().c_str());
+    QLabel *endDate = new QLabel(task->getRepeatEndDate().toString());
     QLabel *active = new QLabel(task->isActive() ? "True" : "False" );
 
     page->addWidget(new QLabel("Work Days:"));
@@ -221,7 +221,7 @@ void DetailPage::repeatableBase(RepeatableTask *task){
 void DetailPage::deadlineBase(Deadline *task){
     abstractBase(task);
 
-    QLabel *dueDate = new QLabel(task->getDueDate().c_str());
+    QLabel *dueDate = new QLabel(task->getDueDate().toString());
     QLabel *completed = new QLabel(task->isCompleted() ? "True" : "False" );
     QLabel *skipped = new QLabel(task->isSkipped() ? "True" : "False" );
 

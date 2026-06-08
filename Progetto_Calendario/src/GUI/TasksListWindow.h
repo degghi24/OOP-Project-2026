@@ -18,6 +18,9 @@ signals:
     void sendFilterValues(Filter filterValues);
     //filterEdit
 
+    //add request
+    void addRequest();
+
 private slots:
     //show/hide filter
     void toggleFilter();
@@ -27,6 +30,7 @@ private slots:
 
 public:
     TasksListWindow(QWidget *parent = nullptr);
+    void addTask(AbstractTask* task);
     ~TasksListWindow();
 
 private:

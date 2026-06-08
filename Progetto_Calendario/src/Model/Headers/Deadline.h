@@ -1,6 +1,7 @@
 #ifndef DEADLINE_H
 #define DEADLINE_H
 
+#include <QDate>
 #include <string>
 using std::string;
 #include "AbstractTask.h"
@@ -10,7 +11,7 @@ public:
     enum Priority { LOW, MEDIUM, HIGH };
 
 private:
-    string dueDate;
+    QDate dueDate;
     Priority priority;
     bool completed;
     bool skipped;
@@ -18,16 +19,16 @@ private:
 public:
     Deadline(string title, string description,
              string assignee, string creationDate,
-             string dueDate, Priority priority,
+             QDate dueDate, Priority priority,
              bool completed, bool skipped);
     virtual ~Deadline() = default;
 
-    string   getDueDate()  const;
+    QDate   getDueDate()  const;
     Priority getPriority() const;
     bool     isCompleted() const;
     bool     isSkipped()   const;
 
-    void setDueDate  (const string& newDueDate);
+    void setDueDate  (const QDate& newDueDate);
     void setPriority (const Priority& newPriority);
     void setCompleted(const bool& newCompleted);
     void setSkipped  (const bool& newSkipped);

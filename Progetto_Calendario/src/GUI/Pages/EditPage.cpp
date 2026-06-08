@@ -112,5 +112,6 @@ void EditPage::setUpWorkEdit(){
 }
 
 void EditPage::confirmCreation(){
+    //! controllo correzione sei dati inseriti
     emit createTask();
 }
