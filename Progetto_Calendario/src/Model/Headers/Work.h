@@ -18,7 +18,7 @@ private:
 
 public:
     Work(string title, string description,
-         string assignee, string creationDate,
+         string assignee, QDate creationDate,
          QBitArray weekDays, int intervalDays,
          QDate repeatEndDate, bool active,
          QStringList subTasks, int progress,
@@ -40,8 +40,8 @@ public:
     void addSubTask   (const QString& task);
     bool removeSubTask(const QString& task);
 
-    void display()          override;
     bool remove()           override;
+    void accept(ConstVisitor& v) override;
     void accept(Visitor& v) override;
 };
 

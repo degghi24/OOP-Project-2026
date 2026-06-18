@@ -44,18 +44,18 @@ FilterWindow::FilterWindow(QWidget *parent): QWidget(parent) {
     QVBoxLayout *col3 = new QVBoxLayout();
 
     QHBoxLayout *merge = new QHBoxLayout();
-    QCheckBox *end_check = new QCheckBox();
-    merge->addWidget(end_check);
-    merge->addWidget(endDateLabel);
+    QCheckBox *start_check = new QCheckBox();
+    merge->addWidget(start_check);
+    merge->addWidget(startDateLabel);
     //connect checkBox with endDateSelect
-    connect(end_check, &QCheckBox::checkStateChanged, this, &FilterWindow::toggleEndDateEdit);
+    connect(start_check, &QCheckBox::checkStateChanged, this, &FilterWindow::toggleEndDateEdit);
 
 
-    col1->addWidget(startDateLabel);
-    col1->addWidget(stardDateSelect);
+    col1->addWidget(endDateLabel);
+    col1->addWidget(endDateSelect);
 
     col2->addLayout(merge);
-    col2->addWidget(endDateSelect);
+    col2->addWidget(stardDateSelect);
 
     col3->addWidget(typeLabel);
     col3->addWidget(typeSelect);
@@ -72,27 +72,29 @@ FilterWindow::FilterWindow(QWidget *parent): QWidget(parent) {
 }
 
 void FilterWindow::toggleEndDateEdit(bool state){
-    endDateSelect->setReadOnly(!state);
+    stardDateSelect->setReadOnly(!state);
     if(!state){
-        QPalette pal = endDateSelect->palette();
+        QPalette pal = stardDateSelect->palette();
         pal.setColor(QPalette::Base, QColor(225, 225, 225));
-        endDateSelect->setPalette(pal);
+        stardDateSelect->setPalette(pal);
     }else{
-        QPalette pal = endDateSelect->palette();
+        QPalette pal = stardDateSelect->palette();
         pal.setColor(QPalette::Base, QColor(255, 255, 255));
-        endDateSelect->setPalette(pal);
+        stardDateSelect->setPalette(pal);
     }
 }
 
 QDate* FilterWindow::getStartDate(){
-    return new QDate(stardDateSelect->date());
-}
-QDate* FilterWindow::getEndDate(){
-    if(endDateSelect->isReadOnly()){
+    if(stardDateSelect->isReadOnly()){
         return nullptr;
     }
+    return new QDate(stardDateSelect->date());
+}
+
+QDate* FilterWindow::getEndDate(){
     return new QDate(endDateSelect->date());
 }
+
 int FilterWindow::getType(){
     return typeSelect->currentIndex();
 }

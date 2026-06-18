@@ -5,14 +5,14 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 
-#include "../Visitor.h"
+#include "../ConstVisitor.h"
 
 class AbstractTask;
 class TimedTask;
 class RepeatableTask;
 class Deadline;
 
-class jsonVisitor: public Visitor{
+class jsonVisitor: public ConstVisitor{
 
 private:
 

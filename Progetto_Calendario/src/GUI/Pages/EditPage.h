@@ -14,7 +14,6 @@ class EditPage:public QWidget{
     Q_OBJECT
 
 private:
-    QStringList list{"Activity","Reminder","Bill","Project","Work"};
 
     QStackedLayout *layout = nullptr;
 

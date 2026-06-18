@@ -1,6 +1,8 @@
 #ifndef STACKEDWINDOW_H
 #define STACKEDWINDOW_H
 
+#include "GUI/GuiVisitors/DetailVisitor.h"
+#include "GUI/GuiVisitors/EditVisitor.h"
 #include "Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QStackedLayout>
@@ -18,10 +20,13 @@ private:
     QStackedLayout *stack = nullptr;
     QCalendarWidget *calendar = nullptr;
 
+    DetailVisitor detailVisitor;
+    EditVisitor editVisitor;
     //TaskDetailWindow *detail = nullptr
     //TaskEditWindow *edit = nullptr
 
-private slots:
+public slots:
+    void showDetailWindow(AbstractTask *task);
 
 public:
     StackedWindow(QWidget *parent = nullptr);

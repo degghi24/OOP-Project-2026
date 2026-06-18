@@ -28,13 +28,13 @@ void XmlVisitor::insertAbstract(const AbstractTask& A, QDomElement& el) {
     el.setAttribute("title", QString::fromStdString(A.getTitle()));
     el.setAttribute("description", QString::fromStdString(A.getDescription()));
     el.setAttribute("assignee", QString::fromStdString(A.getAssignee()));
-    el.setAttribute("creationDate", QString::fromStdString(A.getCreationDate()));
+    el.setAttribute("creationDate", A.getCreationDate().toString("yyyy-MM-d"));
 }
 
 void XmlVisitor::insertTimed(const TimedTask& T, QDomElement& el) {
 
-    el.setAttribute("startDate", QString::fromStdString(T.getStartDate()));
-    el.setAttribute("endDate", QString::fromStdString(T.getEndDate()));
+    el.setAttribute("startDate", T.getStartDate().toString("yyyy-MM-d"));
+    el.setAttribute("endDate", T.getEndDate().toString("yyyy-MM-d"));
     el.setAttribute("startTime", QString::fromStdString(T.getStartTime()));
     el.setAttribute("totalDuration", T.getTotalDuration());
 }
@@ -51,13 +51,13 @@ void XmlVisitor::insertRepeat(const RepeatableTask& R, QDomElement& el) {
 
     el.setAttribute("weekDays", days);
     el.setAttribute("intervalDays", R.getIntervalDays());
-    el.setAttribute("repeatEndDate", QString::fromStdString(R.getRepeatEndDate()));
+    el.setAttribute("repeatEndDate", R.getRepeatEndDate().toString("yyyy-MM-d"));
     el.setAttribute("active", R.isActive());
 }
 
 void XmlVisitor::insertDeadline(const Deadline& D, QDomElement& el) {
 
-    el.setAttribute("dueDate", QString::fromStdString(D.getDueDate()));
+    el.setAttribute("dueDate", D.getDueDate().toString("yyyy-MM-d"));
     el.setAttribute("priority", D.getPriority());
     el.setAttribute("completed", D.isCompleted());
     el.setAttribute("skipped", D.isSkipped());

@@ -14,7 +14,7 @@ void jsonVisitor::insertAbstract(const AbstractTask& A, QJsonObject& obj){
     obj.insert("title", QJsonValue::fromVariant(A.getTitle().c_str()));
     obj.insert("description", QJsonValue::fromVariant(A.getDescription().c_str()));
     obj.insert("assignee", QJsonValue::fromVariant(A.getAssignee().c_str()));
-    obj.insert("creationDate", QJsonValue::fromVariant(A.getCreationDate().c_str()));
+    obj.insert("creationDate", QJsonValue::fromVariant(A.getCreationDate()));
 }
 
 void jsonVisitor::insertTimed(const TimedTask& T, QJsonObject& obj){

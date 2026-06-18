@@ -1,11 +1,11 @@
-#include "data_persistancy/Visitor.h"
+#include "data_persistancy/ConstVisitor.h"
 #include "Headers/Bill.h"
 #include <iostream>
 using std::cout;
 using std::endl;
 
 Bill::Bill(string title, string description,
-           string assignee, string creationDate,
+           string assignee, QDate creationDate,
            QDate dueDate, Priority priority,
            bool completed, bool skipped,
            double amount, bool paid,
@@ -38,6 +38,10 @@ bool Bill::remove() {
     return true; // placeholder
 }
 
-void Bill::accept(Visitor& v) {
+void Bill::accept(ConstVisitor& v) {
     v.visit(*this);
+}
+
+void Bill::accept(Visitor &v) {
+    v.visit(this);
 }

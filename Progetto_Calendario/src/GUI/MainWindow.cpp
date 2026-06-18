@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     /////////Right: CALENDAR/DETAIL_WINDOW
     stackWindow = new StackedWindow();
     splitter->addWidget(stackWindow);
+    connect(taskListWindow, &TasksListWindow::taskToShow, stackWindow, &StackedWindow::showDetailWindow);
 
     setMinimumSize(920,600);
 }
@@ -51,9 +52,9 @@ void MainWindow::showTaskCreation(QString type){
 
 void MainWindow::addTask(AbstractTask* task){
     TaskListManager::getInstance().addTask(task);
-    for(auto it : TaskListManager::getInstance().getTaskList()){
+    /*for(auto it : TaskListManager::getInstance().getTaskList()){
         qDebug()<<it->getTitle()<<it->getId();
-    }
+    }*/
     taskListWindow->addTask(task);
 }
 

@@ -14,7 +14,7 @@ private:
 
 public:
     Reminder(string title, string description,
-             string assignee, string creationDate,
+             string assignee, QDate creationDate,
              QDate startDate, QDate endDate,
              string startTime, int totalDuration,
              string notifyTime, string alertMessage,
@@ -34,8 +34,8 @@ public:
     void notify();
     void snooze(int min);
 
-    void display()          override;
     bool remove()           override;
+    void accept(ConstVisitor& v) override;
     void accept(Visitor& v) override;
 };
 

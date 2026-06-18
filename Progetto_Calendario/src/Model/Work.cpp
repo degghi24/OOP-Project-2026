@@ -1,4 +1,4 @@
-#include "data_persistancy/Visitor.h"
+#include "data_persistancy/ConstVisitor.h"
 #include "Headers/Work.h"
 #include <iostream>
 #include <algorithm>
@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 Work::Work(string title, string description,
-           string assignee, string creationDate,
+           string assignee, QDate creationDate,
            QBitArray weekDays, int intervalDays,
            QDate repeatEndDate, bool active,
            QStringList subTasks, int progress,
@@ -46,6 +46,10 @@ bool Work::remove() {
     return true; // placeholder
 }
 
-void Work::accept(Visitor& v) {
+void Work::accept(ConstVisitor &v) {
     v.visit(*this);
+}
+
+void Work::accept(Visitor &v) {
+    v.visit(this);
 }

@@ -16,7 +16,7 @@ private:
 
 public:
     TimedTask(string title, string description,
-              string assignee, string creationDate,
+              string assignee, QDate creationDate,
               QDate startDate, QDate endDate,
               string startTime, int totalDuration);
     virtual ~TimedTask() = default;
@@ -34,8 +34,8 @@ public:
     bool isOngoing()                    const;
     bool overlapsWith(TimedTask& other)  const;
 
-    virtual void display()          = 0;
     virtual bool remove()           = 0;
+    virtual void accept(ConstVisitor& v) = 0;
     virtual void accept(Visitor& v) = 0;
 };
 

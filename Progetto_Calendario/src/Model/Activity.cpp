@@ -1,11 +1,11 @@
-#include "data_persistancy/Visitor.h"
+#include "data_persistancy/ConstVisitor.h"
 #include "Headers/Activity.h"
 #include <iostream>
 using std::cout;
 using std::endl;
 
 Activity::Activity(string title, string description,
-                   string assignee, string creationDate,
+                   string assignee, QDate creationDate,
                    QDate startDate, QDate endDate,
                    string startTime, int totalDuration,
                    string location, int participantCount,
@@ -33,6 +33,11 @@ bool Activity::remove() {
     return true; // placeholder
 }
 
-void Activity::accept(Visitor& v) {
+void Activity::accept(ConstVisitor& v) {
     v.visit(*this);
 }
+
+void Activity::accept(Visitor &v) {
+    v.visit(this);
+}
+

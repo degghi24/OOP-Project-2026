@@ -16,25 +16,24 @@ class XmlReader {
 private:
 
     struct AbstractTaskData {
-        QString id, title, description, assignee, creationDate;
+        QString id, title, description, assignee;
+        QDate creationDate;
     };
-
     struct TimedTaskData {
-        QString startDate, endDate, startTime;
-        int totalDuration;
+        QDate startDate, endDate;
+        QString startTime;
+        int     totalDuration;
     };
-
     struct RepeatableTaskData {
-        QBitArray weekDays;
-        int intervalDays;
-        QString repeatEndDate;
-        bool active;
+        QBitArray  weekDays;
+        int        intervalDays;
+        QDate    repeatEndDate;
+        bool       active;
     };
-
     struct DeadlineData {
-        QString dueDate;
-        int priority;
-        bool completed, skipped;
+        QDate dueDate;
+        int     priority;
+        bool    completed, skipped;
     };
 
     AbstractTaskData readAbstractTaskData(QXmlStreamReader& xml);

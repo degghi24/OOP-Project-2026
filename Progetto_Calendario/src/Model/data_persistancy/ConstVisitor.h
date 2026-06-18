@@ -1,5 +1,5 @@
-#ifndef VISITOR_H
-#define VISITOR_H
+#ifndef CONST_VISITOR_H
+#define CONST_VISITOR_H
 
 class Activity;
 class Reminder;
@@ -7,9 +7,9 @@ class Work;
 class Bill;
 class Project;
 
-class Visitor {
+class ConstVisitor {
 public:
-    virtual ~Visitor() = default;
+    virtual ~ConstVisitor() = default;
 
     virtual void visit(const Activity& a) = 0;
     virtual void visit(const Reminder& r) = 0;

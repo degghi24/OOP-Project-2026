@@ -51,7 +51,7 @@ int ReminderEdit::getSnoozeMinute() const{
 }
 
 void ReminderEdit::createTask(){
-    Reminder *newReminder = new Reminder(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString(),
+    Reminder *newReminder = new Reminder(getTitle(),getDescription(),getAssignee(), QDate::currentDate(),
                                          getStartDate(),getEndDate(),getStartTime(),getDuration(),
                                          getNotifyTime(),getalertMessage(),isSnoozed(),getSnoozeMinute());
     emit returnTask(newReminder);

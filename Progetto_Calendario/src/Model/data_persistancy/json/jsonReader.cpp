@@ -9,14 +9,14 @@ JsonReader::AbstractTaskData JsonReader::readAbstractTaskData(const QJsonObject&
     d.title        = obj["title"].toString();
     d.description  = obj["description"].toString();
     d.assignee     = obj["assignee"].toString();
-    d.creationDate = obj["creationDate"].toString();
+    d.creationDate = QDate::fromString(obj["startDate"].toString(),"yyyy-MM-d");
     return d;
 }
 
 JsonReader::TimedTaskData JsonReader::readTimedTaskData(const QJsonObject& obj) {
     TimedTaskData d;
-    d.startDate     = QDate::fromString(obj["startDate"].toString());
-    d.endDate       = QDate::fromString(obj["endDate"].toString());
+    d.startDate     = QDate::fromString(obj["startDate"].toString(),"yyyy-MM-d");
+    d.endDate       = QDate::fromString(obj["endDate"].toString(),"yyyy-MM-d");
     d.startTime     = obj["startTime"].toString();
     d.totalDuration = obj["totalDuration"].toInt();
     return d;
@@ -25,7 +25,7 @@ JsonReader::TimedTaskData JsonReader::readTimedTaskData(const QJsonObject& obj) 
 JsonReader::RepeatableTaskData JsonReader::readRepeatableTaskData(const QJsonObject& obj) {
     RepeatableTaskData d;
     d.intervalDays  = obj["intervalDays"].toInt();
-    d.repeatEndDate = QDate::fromString(obj["repeatEndDate"].toString());
+    d.repeatEndDate = QDate::fromString(obj["repeatEndDate"].toString(),"yyyy-MM-d");
     d.active        = obj["active"].toBool();
     for (int i = 0; i < obj["weekDays"].toArray().size(); ++i)
         d.weekDays.setBit(i, obj["weekDays"].toArray()[i].toBool());
@@ -34,7 +34,7 @@ JsonReader::RepeatableTaskData JsonReader::readRepeatableTaskData(const QJsonObj
 
 JsonReader::DeadlineData JsonReader::readDeadlineData(const QJsonObject& obj) {
     DeadlineData d;
-    d.dueDate   = QDate::fromString(obj["dueDate"].toString());
+    d.dueDate   = QDate::fromString(obj["dueDate"].toString(),"yyyy-MM-d");
     d.priority  = obj["priority"].toInt();
     d.completed = obj["completed"].toBool();
     d.skipped   = obj["skipped"].toBool();
@@ -49,7 +49,7 @@ Activity* JsonReader::readActivity(const QJsonObject& obj) {
     return new Activity(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         obj["location"].toString().toStdString(),
@@ -66,7 +66,7 @@ Reminder* JsonReader::readReminder(const QJsonObject& obj) {
     return new Reminder(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         obj["notifyTime"].toString().toStdString(),
@@ -87,7 +87,7 @@ Work* JsonReader::readWork(const QJsonObject& obj) {
     return new Work(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         r.weekDays, r.intervalDays,
         r.repeatEndDate, r.active,
         subTasks, obj["progress"].toInt(),
@@ -103,7 +103,7 @@ Bill* JsonReader::readBill(const QJsonObject& obj) {
     return new Bill(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
@@ -128,7 +128,7 @@ Project* JsonReader::readProject(const QJsonObject& obj) {
     return new Project(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,

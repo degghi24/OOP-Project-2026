@@ -21,7 +21,7 @@ private:
 
 public:
     RepeatableTask(string title, string description,
-                   string assignee, string creationDate,
+                   string assignee, QDate creationDate,
                    QBitArray weekDays, int intervalDays,
                    QDate repeatEndDate, bool active);
     virtual ~RepeatableTask() = default;
@@ -36,8 +36,8 @@ public:
     void setRepeatEndDate(const QDate& newRepeatEndDate);
     void setActive       (const bool& newActive);
 
-    virtual void display()          = 0;
     virtual bool remove()           = 0;
+    virtual void accept(ConstVisitor& v) = 0;
     virtual void accept(Visitor& v) = 0;
 };
 

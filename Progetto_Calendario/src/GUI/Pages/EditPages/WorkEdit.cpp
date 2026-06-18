@@ -95,7 +95,7 @@ std::string WorkEdit::getNotes() const{
 }
 
 void WorkEdit::createTask(){
-    Work *newWork = new Work(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString(),
+    Work *newWork = new Work(getTitle(),getDescription(),getAssignee(), QDate::currentDate(),
                              getWorkDays(),getIntervalDays(),getEndDate(),isActive(),
                              getSubTasks(), getProgress(),getClient(),getCategory(),getNotes());
     emit returnTask(newWork);

@@ -4,7 +4,7 @@
 #include <Qtxml\QDomDocument>
 #include <Qtxml\QDomElement>
 
-#include "../Visitor.h"
+#include "../ConstVisitor.h"
 
 class AbstractTask;
 class TimedTask;
@@ -17,7 +17,7 @@ class Work;
 class Bill;
 class Project;
 
-class XmlVisitor : public Visitor {
+class XmlVisitor : public ConstVisitor {
 
 private:
     QDomDocument doc;

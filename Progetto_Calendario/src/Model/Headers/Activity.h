@@ -15,7 +15,7 @@ private:
 
 public:
     Activity(string title, string description,
-             string assignee, string creationDate,
+             string assignee, QDate creationDate,
              QDate startDate, QDate endDate,
              string startTime, int totalDuration,
              string location, int participantCount,
@@ -34,8 +34,8 @@ public:
     void setOnline          (const bool& newOnline);
     void setMeetingLink     (const string& newMeetingLink);
 
-    void display()          override;
     bool remove()           override;
+    void accept(ConstVisitor& v) override;
     void accept(Visitor& v) override;
 };
 

@@ -7,24 +7,183 @@
 
 QStringList types{"Activity", "Work", "Bill", "Project", "Reminder"};
 
-TaskBlock::TaskBlock(QWidget *parent): QWidget(parent) {}
+//TaskBlock::TaskBlock(QWidget *parent): QWidget(parent) {}
 
-TaskBlock::TaskBlock(Activity &task):
-    title(new QLabel(task.getTitle().c_str())),
-    endDateLabel(new QLabel(task.getEndDate().toString())),
-    type(new QLabel(typeid(task).name()))
+TaskBlock::TaskBlock(Activity *task):
+    title(new QLabel(task->getTitle().c_str())),
+    startDate(new QDate(task->getStartDate())),
+    endDate(new QDate(task->getEndDate())),
+    type(new QLabel("Activity"))
 {
+    taskStored = task;
+    setUp();
 
-    QVBoxLayout *outerBox = new QVBoxLayout(this);
+    QGridLayout *innerBox = new QGridLayout(block);
+    innerBox->setAlignment(Qt::AlignHCenter);
 
+    QLabel *startDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    startDateLabel->setAlignment(Qt::AlignCenter);
+
+    QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    endDateLabel->setAlignment(Qt::AlignCenter);
+
+    innerBox->addWidget(title, 0, 0, 1, 2);
+
+    QLabel *data_i = new QLabel("Start Date: ");
+    innerBox->addWidget(data_i,1,0);
+    innerBox->addWidget(startDateLabel,1,1);
+
+    QLabel *data_f = new QLabel("End Date: ");
+    innerBox->addWidget(data_f,2,0);
+    innerBox->addWidget(endDateLabel,2,1);
+
+    QLabel *tipo = new QLabel("Type: ");
+    innerBox->addWidget(tipo,3,0);
+    innerBox->addWidget(type,3,1);
+
+    outerBox->addWidget(block);
+
+    outerBox->setContentsMargins(1,1,1,1);
+    outerBox->setSpacing(0);
+}
+
+TaskBlock::TaskBlock(Reminder *task):
+    title(new QLabel(task->getTitle().c_str())),
+    startDate(new QDate(task->getStartDate())),
+    endDate(new QDate(task->getEndDate())),
+    type(new QLabel("Reminder"))
+{
+    taskStored = task;
+    setUp();
+
+    QGridLayout *innerBox = new QGridLayout(block);
+    innerBox->setAlignment(Qt::AlignHCenter);
+
+    QLabel *startDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    startDateLabel->setAlignment(Qt::AlignCenter);
+
+    QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    endDateLabel->setAlignment(Qt::AlignCenter);
+
+    innerBox->addWidget(title, 0, 0, 1, 2);
+
+    QLabel *data_i = new QLabel("Start Date: ");
+    innerBox->addWidget(data_i,1,0);
+    innerBox->addWidget(startDateLabel,1,1);
+
+    QLabel *data_f = new QLabel("End Date: ");
+    innerBox->addWidget(data_f,2,0);
+    innerBox->addWidget(endDateLabel,2,1);
+
+    QLabel *tipo = new QLabel("Type: ");
+    innerBox->addWidget(tipo,3,0);
+    innerBox->addWidget(type,3,1);
+
+    outerBox->addWidget(block);
+
+    outerBox->setContentsMargins(1,1,1,1);
+    outerBox->setSpacing(0);
+}
+
+TaskBlock::TaskBlock(Work *task):
+    title(new QLabel(task->getTitle().c_str())),
+    endDate(new QDate(task->getRepeatEndDate())),
+    type(new QLabel("Work"))
+{
+    taskStored = task;
+    setUp();
+
+    QGridLayout *innerBox = new QGridLayout(block);
+    innerBox->setAlignment(Qt::AlignHCenter);
+
+    QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    endDateLabel->setAlignment(Qt::AlignCenter);
+
+    innerBox->addWidget(title, 0, 0, 1, 2);
+
+    QLabel *data_f = new QLabel("End Date: ");
+    innerBox->addWidget(data_f,1,0);
+    innerBox->addWidget(endDateLabel,1,1);
+
+    QLabel *tipo = new QLabel("Type: ");
+    innerBox->addWidget(tipo,2,0);
+    innerBox->addWidget(type,2,1,1,2);
+
+    outerBox->addWidget(block);
+
+    outerBox->setContentsMargins(1,1,1,1);
+    outerBox->setSpacing(0);
+}
+
+TaskBlock::TaskBlock(Bill *task):
+    title(new QLabel(task->getTitle().c_str())),
+    endDate(new QDate(task->getDueDate())),
+    type(new QLabel("Bill"))
+{
+    taskStored = task;
+    setUp();
+
+    QGridLayout *innerBox = new QGridLayout(block);
+    innerBox->setAlignment(Qt::AlignHCenter);
+
+    QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    endDateLabel->setAlignment(Qt::AlignCenter);
+
+    innerBox->addWidget(title, 0, 0, 1, 2);
+
+    QLabel *data_f = new QLabel("Due Date: ");
+    innerBox->addWidget(data_f,1,0);
+    innerBox->addWidget(endDateLabel,1,1);
+
+    QLabel *tipo = new QLabel("Type: ");
+    innerBox->addWidget(tipo,2,0);
+    innerBox->addWidget(type,2,1,1,2);
+
+    outerBox->addWidget(block);
+
+    outerBox->setContentsMargins(1,1,1,1);
+    outerBox->setSpacing(0);
+
+}
+
+TaskBlock::TaskBlock(Project *task):
+    title(new QLabel(task->getTitle().c_str())),
+    endDate(new QDate(task->getDueDate())),
+    type(new QLabel("Project"))
+{
+    taskStored = task;
+    setUp();
+
+    QGridLayout *innerBox = new QGridLayout(block);
+    innerBox->setAlignment(Qt::AlignHCenter);
+
+    QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
+    endDateLabel->setAlignment(Qt::AlignCenter);
+
+    innerBox->addWidget(title, 0, 0, 1, 2);
+
+    QLabel *data_f = new QLabel("Due Date: ");
+    innerBox->addWidget(data_f,1,0);
+    innerBox->addWidget(endDateLabel,1,1);
+
+    QLabel *tipo = new QLabel("Type: ");
+    innerBox->addWidget(tipo,2,0);
+    innerBox->addWidget(type,2,1,1,2);
+
+    outerBox->addWidget(block);
+
+    outerBox->setContentsMargins(1,1,1,1);
+    outerBox->setSpacing(0);
+}
+
+void TaskBlock::setUp(){
+    outerBox = new QVBoxLayout(this);
 
     title->setAlignment(Qt::AlignCenter);
     title->setObjectName("Title");
     title->setStyleSheet("QLabel#Title {font-weight: bold; font-size: 16px;}");
 
     type->setAlignment(Qt::AlignCenter);
-
-    QLabel *endDateLabel = new QLabel(task.getEndDate().toString());
 
     block = new QFrame();
     block->setObjectName("TaskBlock");
@@ -37,62 +196,14 @@ TaskBlock::TaskBlock(Activity &task):
     block->setMinimumHeight(100);
     block->setMaximumHeight(105);
 
-
-    QGridLayout *innerBox = new QGridLayout(block);
-    innerBox->setAlignment(Qt::AlignHCenter);
-/*
-    if(endDate != nullptr){
-        QLabel *endDateLabel = new QLabel(endDate->toString("yyyy-MM-d"));
-        endDateLabel->setAlignment(Qt::AlignCenter);
-
-        innerBox->addWidget(title, 0, 0, 1, 2);
-
-        QLabel *data_i = new QLabel("Start Date: ");
-        innerBox->addWidget(data_i,1,0);
-        innerBox->addWidget(startDateLabel,1,1);
-
-        QLabel *data_f = new QLabel("End Date: ");
-        innerBox->addWidget(data_f,2,0);
-        innerBox->addWidget(endDateLabel,2,1);
-
-        QLabel *tipo = new QLabel("Type: ");
-        innerBox->addWidget(tipo,3,0);
-        innerBox->addWidget(type,3,1);
-    }else{
-        innerBox->addWidget(title, 0, 0, 1, 2);
-
-        QLabel *data_i = new QLabel("Start Date: ");
-        innerBox->addWidget(data_i,1,0);
-        innerBox->addWidget(startDateLabel,1,1);
-
-        QLabel *tipo = new QLabel("Type: ");
-        innerBox->addWidget(tipo,2,0);
-        innerBox->addWidget(type,2,1);
-    }
-
-    outerBox->addWidget(block);
-
-    outerBox->setContentsMargins(1,1,1,1);
-    outerBox->setSpacing(0);*/
 }
-TaskBlock::TaskBlock(Reminder &task){
-}
-TaskBlock::TaskBlock(Work &task){
-}
-TaskBlock::TaskBlock(Bill &task){
-}
-TaskBlock::TaskBlock(Project &task){
-}
-
-
-
 
 void TaskBlock::mouseReleaseEvent(QMouseEvent *event){
     emit clicked(this);
 }
 
 void TaskBlock::mouseDoubleClickEvent(QMouseEvent *event){
-    //emit doubleClicked()
+    emit doubleClicked(taskStored);
 }
 
 void TaskBlock::selected(){
@@ -117,13 +228,15 @@ void TaskBlock::unselected(){
     block->setMinimumHeight(100);
     block->setMaximumHeight(105);
 }
-/*
+
 QDate* TaskBlock::getStartDate() const {
     return startDate;
 }
+
 QDate* TaskBlock::getEndDate() const{
     return endDate;
-}*/
+}
+
 QString TaskBlock::getTitle() const{
     return title->text();
 }

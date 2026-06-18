@@ -134,7 +134,7 @@ QStringList ProjectEdit::getTags() const{
 }
 
 void ProjectEdit::createTask(){
-    Project *newProject = new Project(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString() ,
+    Project *newProject = new Project(getTitle(),getDescription(),getAssignee(), QDate::currentDate(),
                              getDueDate(),static_cast<Deadline::Priority>(getPriority()),isCompleted(),isSkipped(),
                              getMilestone(),getTeam(),getBudget(),getStatus(),getTags());
     emit returnTask(newProject);

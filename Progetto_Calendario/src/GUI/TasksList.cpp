@@ -1,9 +1,10 @@
 #include "TasksList.h"
+#include "GuiVisitors/BlockVisitor.h"
 
 #include <QErrorMessage>
 
 TasksList::TasksList(QWidget *parent): QWidget(parent), containerLayout(new QVBoxLayout(this)){
-
+/*
     TaskBlock *one = new TaskBlock("Attività", new QDate(2026,01,01), 0, new QDate(2026,01,01));
     TaskBlock *two = new TaskBlock("Work", new QDate(2026,01,02), 1);
     TaskBlock *three = new TaskBlock("Project", new QDate(2026,01,03), 3, new QDate(2026,01,04));
@@ -13,28 +14,34 @@ TasksList::TasksList(QWidget *parent): QWidget(parent), containerLayout(new QVBo
     addTask(two);
     addTask(three);
     addTask(four);
+*/
+
+    addTask(new Activity("Titolo Attività", "Desrizione", "IO", QDate::currentDate(), QDate::currentDate(), QDate::currentDate().addDays(1),
+                         "15.00", 60, "Casa Mia", 1, "Lavoro", false, "Tua Madre"));
+
 
     containerLayout->setSpacing(5);
     containerLayout->setAlignment(Qt::AlignTop);
 
 }
 
-void TasksList::addTask(TaskBlock* task){
-    connect(task, &TaskBlock::clicked, this, &TasksList::selected);
+void TasksList::addTask(TaskBlock* taskBlock){
+    connect(taskBlock, &TaskBlock::clicked, this, &TasksList::selected);
+    connect(taskBlock, &TaskBlock::doubleClicked, this, &TasksList::taskToShow);
 
     if(list.isEmpty()){
-        list.append(task);
-        containerLayout->addWidget(task);
-    }else if(*list.last()->getStartDate() <= *task->getStartDate()){
-        list.append(task);
-        containerLayout->addWidget(task);
+        list.append(taskBlock);
+        containerLayout->addWidget(taskBlock);
+    }else if(*list.last()->getEndDate() <= *taskBlock->getEndDate()){
+        list.append(taskBlock);
+        containerLayout->addWidget(taskBlock);
     }else{
         for(int i = 0; i < list.size(); ++i){
-            qDebug()<<*list[i]->getStartDate()<<*task->getStartDate();
-            qDebug()<<(*list[i]->getStartDate() >= *task->getStartDate());
-            if(*task->getStartDate() <= *list[i]->getStartDate()){
-                list.insert(i, task);
-                containerLayout->insertWidget(i,task);
+            qDebug()<<*list[i]->getEndDate()<<*taskBlock->getEndDate();
+            qDebug()<<(*list[i]->getEndDate() >= *taskBlock->getEndDate());
+            if(*taskBlock->getEndDate() <= *list[i]->getEndDate()){
+                list.insert(i, taskBlock);
+                containerLayout->insertWidget(i,taskBlock);
                 break;
             }
         }
@@ -42,8 +49,9 @@ void TasksList::addTask(TaskBlock* task){
 }
 
 void TasksList::addTask(AbstractTask* task){
-    //TaskBlock* newBlock = new TaskBlock(task);
-    //addTask(newBlock);
+    BlockVisitor blockVisitor;
+    task->accept(blockVisitor);
+    addTask(blockVisitor.getTaskBlock());
 }
 
 
@@ -63,8 +71,13 @@ void TasksList::selected(TaskBlock* task){
 bool TasksList::filter(Filter filterValues){
 
     QList<int> indexesShowed;
+    bool isEmptiedLater = false;
 
-    qDebug()<<*filterValues.startDate;
+    if(filterValues.startDate){
+        qDebug()<<*filterValues.startDate;
+    }else{
+        qDebug()<<"nullptr";
+    }
     if(filterValues.endDate){
         qDebug()<<*filterValues.endDate;
     }else{
@@ -76,7 +89,7 @@ bool TasksList::filter(Filter filterValues){
 
 
     //se l'input è errato non fa nulla
-    if(filterValues.endDate && *filterValues.startDate > *filterValues.endDate){
+    if(filterValues.endDate && filterValues.startDate && *filterValues.startDate > *filterValues.endDate){
         QErrorMessage errorMessage;
         errorMessage.showMessage("Data Inizio maggiore della Data Fine");
         return false;
@@ -99,7 +112,7 @@ bool TasksList::filter(Filter filterValues){
         return true;
     }
 
-    //se ogni campo è compilato basta controllare uan volta la lista
+    //se ogni campo è compilato basta controllare una volta la lista
     if(filterValues.startDate != nullptr && filterValues.endDate != nullptr &&
         filterValues.type != 0 && !filterValues.title.isEmpty() && !filterValues.title.isNull()){
         for(int i = 0; i < containerLayout->count(); ++i){
@@ -113,6 +126,23 @@ bool TasksList::filter(Filter filterValues){
 
     //altrimenti di controlla uno a uno i campi
 
+    if(filterValues.endDate != nullptr){
+        bool skipFlag = false;
+        for(int i = 0; i < containerLayout->count(); ++i){
+            if(!skipFlag){
+                if(*filterValues.endDate <= *list[i]->getEndDate()){
+                    skipFlag = true;
+                    list[i]->hide();
+                }else{
+                    list[i]->show();
+                    indexesShowed.prepend(i);
+                }
+            }else{
+                list[i]->hide();
+            }
+        }
+    }
+/*
     if(filterValues.startDate != nullptr){
         bool isSmaller = true;
         for(int i = containerLayout->count()-1; i >= 0; --i){
@@ -128,33 +158,36 @@ bool TasksList::filter(Filter filterValues){
                 list[i]->hide();
             }
         }
-    }
+    }*/
 
-    if(filterValues.endDate != nullptr){
+    if(filterValues.startDate != nullptr){
         if(indexesShowed.empty()){
             for(int i = 0; i < containerLayout->count(); ++i){
-                if(list[i]->getEndDate() && *filterValues.endDate < *list[i]->getEndDate()){
-                    list[i]->hide();
-                }else{
+                if(list[i]->getStartDate() && *filterValues.startDate < *list[i]->getStartDate()){
                     list[i]->show();
                     indexesShowed.append(i);
+                }else{
+                    list[i]->hide();
                 }
             }
         }else{
             int indexCount = indexesShowed.count();
             for(int it = 0; it < indexCount; ++it){
-                if(list[it]->getEndDate() && *filterValues.endDate < *list[it]->getEndDate()){
+                if(list[it]->getStartDate() && *filterValues.startDate < *list[it]->getStartDate()){
+                    list[it]->show();
+                }else{
                     list[it]->hide();
                     indexesShowed.removeAll(it);
-                }else{
-                    list[it]->show();
+                    if(indexesShowed.isEmpty()){
+                        isEmptiedLater = true;
+                    }
                 }
             }
         }
     }
 
     if(filterValues.type != 0){
-        if(indexesShowed.empty()){
+        if(indexesShowed.empty() && !isEmptiedLater){
             for(int i = 0; i < containerLayout->count(); ++i){
                 if(filterValues.type-1 != list[i]->getType()){
                     list[i]->hide();
@@ -185,7 +218,7 @@ bool TasksList::filter(Filter filterValues){
     qDebug()<<indexesShowed.toList();
 
     if(!filterValues.title.isEmpty() && !filterValues.title.isNull()){
-        if(indexesShowed.empty()){
+        if(indexesShowed.empty() &&  !isEmptiedLater){
             for(int i = 0; i < containerLayout->count(); ++i){
                 if(!list[i]->getTitle().contains(filterValues.title)){
                     list[i]->hide();

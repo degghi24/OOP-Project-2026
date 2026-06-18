@@ -1,7 +1,7 @@
 #include "Headers/TimedTask.h"
 
 TimedTask::TimedTask(string title, string description,
-                     string assignee, string creationDate,
+                     string assignee, QDate creationDate,
                      QDate startDate, QDate endDate,
                      string startTime, int totalDuration)
     : AbstractTask(title, description, assignee, creationDate),

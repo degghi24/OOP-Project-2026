@@ -16,7 +16,8 @@
 class JsonReader {
 private:
     struct AbstractTaskData {
-        QString id, title, description, assignee, creationDate;
+        QString id, title, description, assignee;
+        QDate creationDate;
     };
     struct TimedTaskData {
         QDate startDate, endDate;

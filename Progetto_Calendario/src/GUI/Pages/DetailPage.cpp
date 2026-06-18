@@ -9,7 +9,7 @@
 #include <QRadioButton>
 #include <QComboBox>
 
-DetailPage::DetailPage(Activity *Activity, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
+DetailPage::DetailPage(const Activity *Activity, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
 
     timedBase(Activity);
 
@@ -37,7 +37,7 @@ DetailPage::DetailPage(Activity *Activity, QWidget *parent): QWidget(parent), pa
     page->addWidget(meetingLink);
 }
 
-DetailPage::DetailPage(Reminder *Reminder, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
+DetailPage::DetailPage(const Reminder *Reminder, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
 
     timedBase(Reminder);
 
@@ -61,7 +61,7 @@ DetailPage::DetailPage(Reminder *Reminder, QWidget *parent): QWidget(parent), pa
     page->addWidget(snoozeMinute);
 }
 
-DetailPage::DetailPage(Work *Work, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
+DetailPage::DetailPage(const Work *Work, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
 
     repeatableBase(Work);
 
@@ -89,7 +89,7 @@ DetailPage::DetailPage(Work *Work, QWidget *parent): QWidget(parent), page(new Q
     page->addWidget(notes);
 }
 
-DetailPage::DetailPage(Bill *Bill, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
+DetailPage::DetailPage(const Bill *Bill, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
 
     deadlineBase(Bill);
 
@@ -117,7 +117,7 @@ DetailPage::DetailPage(Bill *Bill, QWidget *parent): QWidget(parent), page(new Q
     page->addWidget(recurring);
 }
 
-DetailPage::DetailPage(Project *Project, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
+DetailPage::DetailPage(const Project *Project, QWidget *parent): QWidget(parent), page(new QVBoxLayout(this)){
 
     deadlineBase(Project);
 
@@ -146,13 +146,13 @@ DetailPage::DetailPage(Project *Project, QWidget *parent): QWidget(parent), page
 }
 
 
-void DetailPage::abstractBase(AbstractTask *task){
+void DetailPage::abstractBase(const AbstractTask *task){
 
     //ID is auto assigned by the listManager
     QLabel *title = new QLabel(task->getTitle().c_str());
     QLabel *description = new QLabel(task->getDescription().c_str());
     QLabel *assignee = new QLabel(task->getAssignee().c_str());
-    QLabel *creationDate = new QLabel(task->getCreationDate().c_str());
+    QLabel *creationDate = new QLabel(task->getCreationDate().toString("yyyy-MM-d"));
 
     page->addWidget(title);
     page->addWidget(new QLabel("Description"));
@@ -166,7 +166,7 @@ void DetailPage::abstractBase(AbstractTask *task){
 
 }
 
-void DetailPage::timedBase(TimedTask *task){
+void DetailPage::timedBase(const TimedTask *task){
     abstractBase(task);
 
     QLabel *startDate = new QLabel(task->getStartDate().toString());
@@ -191,7 +191,7 @@ void DetailPage::timedBase(TimedTask *task){
 
 }
 
-void DetailPage::repeatableBase(RepeatableTask *task){
+void DetailPage::repeatableBase(const RepeatableTask *task){
     abstractBase(task);
 
     QHBoxLayout *weekDays = new QHBoxLayout();
@@ -218,7 +218,7 @@ void DetailPage::repeatableBase(RepeatableTask *task){
 
 }
 
-void DetailPage::deadlineBase(Deadline *task){
+void DetailPage::deadlineBase(const Deadline *task){
     abstractBase(task);
 
     QLabel *dueDate = new QLabel(task->getDueDate().toString());

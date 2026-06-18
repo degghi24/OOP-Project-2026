@@ -62,8 +62,9 @@ bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the libr
         QDomDocument doc = visitor.getDocument();
 
         QFile file(filepath.c_str());
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
             return false;
+        }
 
         QTextStream stream(&file);
         stream << doc.toString();

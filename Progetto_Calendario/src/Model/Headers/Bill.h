@@ -15,7 +15,7 @@ private:
 
 public:
     Bill(string title, string description,
-         string assignee, string creationDate,
+         string assignee, QDate creationDate,
          QDate dueDate, Priority priority,
          bool completed, bool skipped,
          double amount, bool paid,
@@ -36,8 +36,8 @@ public:
 
     bool pay();
 
-    void display()          override;
     bool remove()           override;
+    void accept(ConstVisitor& v) override;
     void accept(Visitor& v) override;
 };
 

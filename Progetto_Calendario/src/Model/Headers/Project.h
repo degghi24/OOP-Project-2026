@@ -18,7 +18,7 @@ private:
 
 public:
     Project(string title, string description,
-            string assignee, string creationDate,
+            string assignee, QDate creationDate,
             QDate dueDate, Priority priority,
             bool completed, bool skipped,
             string milestone, QStringList team,
@@ -39,8 +39,8 @@ public:
     bool removeMember(const string& member);
     void addTag      (const QString& tag);
 
-    void display()          override;
     bool remove()           override;
+    void accept(ConstVisitor& v) override;
     void accept(Visitor& v) override;
 };
 

@@ -16,20 +16,20 @@ class DetailPage: public QWidget{
 private:
     QStringList list{"Activity","Reminder","Bill","Project","Work"};
 
-    void abstractBase(AbstractTask *task = nullptr);
-    void timedBase(TimedTask *task = nullptr);
-    void repeatableBase(RepeatableTask *task = nullptr);
-    void deadlineBase(Deadline *task = nullptr);
+    void abstractBase(const AbstractTask *task = nullptr);
+    void timedBase(const  TimedTask *task = nullptr);
+    void repeatableBase(const RepeatableTask *task = nullptr);
+    void deadlineBase(const Deadline *task = nullptr);
 
     QVBoxLayout *page = nullptr;
 
 
 public:
-    DetailPage(Activity *Activity, QWidget *parent = nullptr);
-    DetailPage(Reminder *Reminder, QWidget *parent = nullptr);
-    DetailPage(Work *Work, QWidget *parent = nullptr);
-    DetailPage(Bill *Bill, QWidget *parent = nullptr);
-    DetailPage(Project *Project, QWidget *parent = nullptr);
+    DetailPage(const Activity *Activity, QWidget *parent = nullptr);
+    DetailPage(const Reminder *Reminder, QWidget *parent = nullptr);
+    DetailPage(const Work *Work, QWidget *parent = nullptr);
+    DetailPage(const Bill *Bill, QWidget *parent = nullptr);
+    DetailPage(const Project *Project, QWidget *parent = nullptr);
 };
 
 #endif // DETAILPAGE_H

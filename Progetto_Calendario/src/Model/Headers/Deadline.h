@@ -18,7 +18,7 @@ private:
 
 public:
     Deadline(string title, string description,
-             string assignee, string creationDate,
+             string assignee, QDate creationDate,
              QDate dueDate, Priority priority,
              bool completed, bool skipped);
     virtual ~Deadline() = default;
@@ -36,8 +36,8 @@ public:
     bool isOverdue()      const;
     int  daysRemaining()  const;
 
-    virtual void display()          = 0;
     virtual bool remove()           = 0;
+    virtual void accept(ConstVisitor& v) = 0;
     virtual void accept(Visitor& v) = 0;
 };
 

@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QDate>
 #include <QComboBox>
+#include <QVBoxLayout>
 
 using namespace std;
 
@@ -19,14 +20,18 @@ class TaskBlock:public QWidget{
 
 private:
 
+    QVBoxLayout *outerBox = nullptr;
     QFrame *block = nullptr;
-
     //tutto da sostituire con AbstractTask* task;
-    QLabel *title = nullptr;
+    AbstractTask* taskStored;
 
-    QLabel *endDateLabel = nullptr;
+    QLabel *title = nullptr;
+    QDate *startDate = nullptr;
+    QDate *endDate = nullptr;
     //per type si userà typeId siccome è soltanto grafico e non logico
     QLabel *type = nullptr;
+
+    void setUp();
 
 protected:
     virtual void mouseReleaseEvent(QMouseEvent *event) override;
@@ -35,6 +40,7 @@ protected:
 
 signals:
     void clicked(TaskBlock* taskBlock);
+    void doubleClicked(AbstractTask* taskStored);
 
 public:
 
@@ -47,14 +53,11 @@ public:
     void selected();
     void unselected();
 
-    TaskBlock(QWidget *parent = nullptr);
-    TaskBlock(QString title_, QDate *startDate_, int type_, QDate *eDate = nullptr);
-
-    TaskBlock(Activity &task);
-    TaskBlock(Reminder &task);
-    TaskBlock(Work &task);
-    TaskBlock(Bill &task);
-    TaskBlock(Project &task);
+    TaskBlock(Activity *task);
+    TaskBlock(Reminder *task);
+    TaskBlock(Work *task);
+    TaskBlock(Bill *task);
+    TaskBlock(Project *task);
 };
 
 #endif // TASKBLOCK_H

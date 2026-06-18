@@ -7,7 +7,11 @@ CONFIG += c++17
 HEADERS += \
     src/GUI/AddTask/TaskCreationWindow.h \
     src/GUI/AddTask/TypeSelectionPopup.h \
+    src/GUI/GuiVisitors/BlockVisitor.h \
+    src/GUI/GuiVisitors/DetailVisitor.h \
+    src/GUI/GuiVisitors/EditVisitor.h \
     src/GUI/FilterWindow.h \
+    src/GUI/GuiVisitors/Visitor.h \
     src/GUI/Pages/BlankPage.h \
     src/GUI/Pages/DetailPage.h \
     src/GUI/Pages/EditPage.h \
@@ -35,7 +39,7 @@ HEADERS += \
     src/Model/Headers/Bill.h \
     src/Model/Headers/Project.h \
     src/Model/Headers/TaskListManager.h \
-    src/Model/data_persistancy/Visitor.h \
+    src/Model/data_persistancy/ConstVisitor.h \
     src/Model/data_persistancy/TaskReader.h \
     src/Model/data_persistancy/json/jsonReader.h \
     src/Model/data_persistancy/json/jsonVisitor.h \
@@ -45,6 +49,9 @@ HEADERS += \
     src/GUI/ToolBar.h \
 
 SOURCES += \
+    src/GUI/GuiVisitors/BlockVisitor.cpp \
+    src/GUI/GuiVisitors/DetailVisitor.cpp \
+    src/GUI/GuiVisitors/EditVisitor.cpp \
     src/GUI/Pages/EditPages/AbstractEditPage.cpp \
     src/GUI/Pages/EditPages/ActivityEdit.cpp \
     src/GUI/Pages/EditPages/BillEdit.cpp \

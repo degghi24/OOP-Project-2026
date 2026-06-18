@@ -16,10 +16,12 @@ class TasksListWindow: public QWidget{
 signals:
     //send filter to TaskList
     void sendFilterValues(Filter filterValues);
-    //filterEdit
 
     //add request
     void addRequest();
+
+    //send task to be shown on detail window
+    void taskToShow(AbstractTask* task);
 
 private slots:
     //show/hide filter

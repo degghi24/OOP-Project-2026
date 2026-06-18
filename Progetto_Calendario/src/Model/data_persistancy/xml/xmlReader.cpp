@@ -9,15 +9,15 @@ XmlReader::AbstractTaskData XmlReader::readAbstractTaskData(QXmlStreamReader& xm
     d.title        = attr.value("title").toString();
     d.description  = attr.value("description").toString();
     d.assignee     = attr.value("assignee").toString();
-    d.creationDate = attr.value("creationDate").toString();
+    d.creationDate = QDate::fromString(attr.value("creationDate").toString(),"yyyy-MM-d");
     return d;
 }
 
 XmlReader::TimedTaskData XmlReader::readTimedTaskData(QXmlStreamReader& xml) {
     TimedTaskData d;
     auto attr = xml.attributes();
-    d.startDate     = attr.value("startDate").toString();
-    d.endDate       = attr.value("endDate").toString();
+    d.startDate     = QDate::fromString(attr.value("startDate").toString(),"yyyy-MM-d");
+    d.endDate       = QDate::fromString(attr.value("endDate").toString(),"yyyy-MM-d");
     d.startTime     = attr.value("startTime").toString();
     d.totalDuration = attr.value("totalDuration").toInt();
     return d;
@@ -27,7 +27,7 @@ XmlReader::RepeatableTaskData XmlReader::readRepeatableTaskData(QXmlStreamReader
     RepeatableTaskData d;
     auto attr = xml.attributes();
     d.intervalDays  = attr.value("intervalDays").toInt();
-    d.repeatEndDate = attr.value("repeatEndDate").toString();
+    d.repeatEndDate = QDate::fromString(attr.value("repeatEndDate").toString(),"yyyy-MM-d");
     d.active        = (attr.value("active").toString() == "true" || attr.value("active").toInt() == 1);
 
     QStringList split = attr.value("weekDays").toString().split(",", Qt::SkipEmptyParts);
@@ -42,7 +42,7 @@ XmlReader::RepeatableTaskData XmlReader::readRepeatableTaskData(QXmlStreamReader
 XmlReader::DeadlineData XmlReader::readDeadlineData(QXmlStreamReader& xml) {
     DeadlineData d;
     auto attr = xml.attributes();
-    d.dueDate   = attr.value("dueDate").toString();
+    d.dueDate   = QDate::fromString(attr.value("dueDate").toString(),"yyyy-MM-d");
     d.priority  = attr.value("priority").toInt();
     d.completed = (attr.value("completed").toString() == "true" || attr.value("completed").toInt() == 1);
     d.skipped   = (attr.value("skipped").toString() == "true" || attr.value("skipped").toInt() == 1);
@@ -57,8 +57,8 @@ Activity* XmlReader::readActivity(QXmlStreamReader& xml) {
     Activity* res = new Activity(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
-        t.startDate.toStdString(), t.endDate.toStdString(),
+        a.creationDate,
+        t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         attr.value("location").toString().toStdString(),
         attr.value("participantCount").toInt(),
@@ -79,8 +79,8 @@ Reminder* XmlReader::readReminder(QXmlStreamReader& xml) {
     Reminder* res = new Reminder(
        a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
-        t.startDate.toStdString(), t.endDate.toStdString(),
+        a.creationDate,
+        t.startDate, t.endDate,
         t.startTime.toStdString(), t.totalDuration,
         attr.value("notifyTime").toString().toStdString(),
         attr.value("alertMessage").toString().toStdString(),
@@ -102,9 +102,9 @@ Work* XmlReader::readWork(QXmlStreamReader& xml) {
     Work* res = new Work(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
+        a.creationDate,
         r.weekDays, r.intervalDays,
-        r.repeatEndDate.toStdString(), r.active,
+        r.repeatEndDate, r.active,
         subList, attr.value("progress").toInt(),
         attr.value("client").toString().toStdString(),
         attr.value("category").toString().toStdString(),
@@ -123,8 +123,8 @@ Bill* XmlReader::readBill(QXmlStreamReader& xml) {
     Bill* res = new Bill(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
-        d.dueDate.toStdString(),
+        a.creationDate,
+        d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         attr.value("amount").toDouble(),
@@ -151,8 +151,8 @@ Project* XmlReader::readProject(QXmlStreamReader& xml) {
     Project* res = new Project(
         a.title.toStdString(),
         a.description.toStdString(), a.assignee.toStdString(),
-        a.creationDate.toStdString(),
-        d.dueDate.toStdString(),
+        a.creationDate,
+        d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         attr.value("milestone").toString().toStdString(),

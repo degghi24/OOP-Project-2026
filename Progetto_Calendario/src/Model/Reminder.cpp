@@ -1,11 +1,11 @@
-#include "data_persistancy/Visitor.h"
+#include "data_persistancy/ConstVisitor.h"
 #include "Headers/Reminder.h"
 #include <iostream>
 using std::cout;
 using std::endl;
 
 Reminder::Reminder(string title, string description,
-                   string assignee, string creationDate,
+                   string assignee, QDate creationDate,
                    QDate startDate, QDate endDate,
                    string startTime, int totalDuration,
                    string notifyTime, string alertMessage,
@@ -40,6 +40,10 @@ bool Reminder::remove() {
     return true; // placeholder
 }
 
-void Reminder::accept(Visitor& v) {
+void Reminder::accept(ConstVisitor& v) {
     v.visit(*this);
+}
+
+void Reminder::accept(Visitor &v) {
+    v.visit(this);
 }

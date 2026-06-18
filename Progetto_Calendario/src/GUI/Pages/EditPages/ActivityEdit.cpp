@@ -58,7 +58,7 @@ std::string ActivityEdit::getMeetingLink() const{
 }
 
 void ActivityEdit::createTask(){
-    Activity *newActivity = new Activity(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString() ,
+    Activity *newActivity = new Activity(getTitle(),getDescription(),getAssignee(), QDate::currentDate(),
                                          getStartDate(),getEndDate(),getStartTime(),getDuration(),
                                          getLocation(),getPartecipationCount(),getEventType(),isOnline(),getMeetingLink());
     emit returnTask(newActivity);

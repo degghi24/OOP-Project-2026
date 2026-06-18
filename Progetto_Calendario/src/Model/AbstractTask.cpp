@@ -1,7 +1,7 @@
 #include "Headers/AbstractTask.h"
 
 AbstractTask::AbstractTask(string title, string description,
-                           string assignee, string creationDate)
+                           string assignee, QDate creationDate)
     :title(title), description(description),
     assignee(assignee), creationDate(creationDate)
 {}
@@ -10,7 +10,7 @@ string AbstractTask::getId()           const { return id;           }
 string AbstractTask::getTitle()        const { return title;        }
 string AbstractTask::getDescription()  const { return description;  }
 string AbstractTask::getAssignee()     const { return assignee;     }
-string AbstractTask::getCreationDate() const { return creationDate; }
+QDate AbstractTask::getCreationDate() const { return creationDate; }
 
 void AbstractTask::setId         (const string& newId)       { id          = newId;       }
 void AbstractTask::setTitle      (const string& newTitle)    { title       = newTitle;    }

@@ -25,6 +25,9 @@ private slots:
 public slots:
     bool filter(Filter filterValues);
 
+signals:
+    void taskToShow(AbstractTask* task);
+
 private:
 
     QVBoxLayout *containerLayout = nullptr;

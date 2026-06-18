@@ -1,4 +1,4 @@
-#include "data_persistancy/Visitor.h"
+#include "data_persistancy/ConstVisitor.h"
 #include "qcontainerfwd.h"
 #include "Headers/Project.h"
 #include <iostream>
@@ -7,7 +7,7 @@ using std::cout;
 using std::endl;
 
 Project::Project(string title, string description,
-                 string assignee, string creationDate,
+                 string assignee, QDate creationDate,
                  QDate dueDate, Priority priority,
                  bool completed, bool skipped,
                  string milestone, QStringList team,
@@ -50,6 +50,10 @@ bool Project::remove() {
     return true; // placeholder
 }
 
-void Project::accept(Visitor& v) {
+void Project::accept(ConstVisitor& v) {
     v.visit(*this);
+}
+
+void Project::accept(Visitor &v) {
+    v.visit(this);
 }

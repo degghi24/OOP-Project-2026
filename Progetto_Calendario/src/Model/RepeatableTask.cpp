@@ -1,7 +1,7 @@
 #include "Headers/RepeatableTask.h"
 
 RepeatableTask::RepeatableTask(string title, string description,
-                               string assignee, string creationDate,
+                               string assignee, QDate creationDate,
                                QBitArray weekDays, int intervalDays,
                                QDate repeatEndDate, bool active)
     : AbstractTask(title, description, assignee, creationDate),

@@ -9,6 +9,7 @@
 #include <QRadioButton>
 #include <QComboBox>
 
+QStringList list{"Activity","Reminder","Bill","Project","Work"};
 
 EditPage::EditPage(Activity *Activity, QWidget *parent): QWidget(parent), layout(new QStackedLayout(this)){
 

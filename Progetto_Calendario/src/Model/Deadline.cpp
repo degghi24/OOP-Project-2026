@@ -1,7 +1,7 @@
 #include "Headers/Deadline.h"
 
 Deadline::Deadline(string title, string description,
-                   string assignee, string creationDate,
+                   string assignee, QDate creationDate,
                    QDate dueDate, Priority priority,
                    bool completed, bool skipped)
     : AbstractTask(title, description, assignee, creationDate),

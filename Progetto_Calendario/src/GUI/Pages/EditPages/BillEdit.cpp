@@ -60,7 +60,7 @@ bool BillEdit::isRecurring() const{
 }
 
 void BillEdit::createTask(){
-    Bill *newBill = new Bill(getTitle(),getDescription(),getAssignee(), QDate::currentDate().toString("yyyy-MM-d").toStdString() ,
+    Bill *newBill = new Bill(getTitle(),getDescription(),getAssignee(), QDate::currentDate(),
                              getDueDate(),static_cast<Deadline::Priority>(getPriority()),isCompleted(),isSkipped(),
                              getAmount(),isPaid(),getProvider(),getIban(),isRecurring());
     emit returnTask(newBill);
