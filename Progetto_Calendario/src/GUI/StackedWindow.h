@@ -7,6 +7,8 @@
 #include <QWidget>
 #include <QStackedLayout>
 #include <QCalendarWidget>
+#include <QPushButton>
+#include <QScrollArea>
 
 //#include "WeekScollMenuBar" //opzionale se troppo complicato
 //#include "TaskDetailWindow"
@@ -22,8 +24,21 @@ private:
 
     DetailVisitor detailVisitor;
     EditVisitor editVisitor;
+
+    QFrame *detailFrame = nullptr;
+    QScrollArea *detailScrollArea = nullptr;
+    QPushButton *editButton = nullptr;
+    QPushButton *removeButton = nullptr;
+
+    QFrame *editFrame = nullptr;
+    QScrollArea *editScrollArea = nullptr;
+    QPushButton *saveButton = nullptr;
+    QPushButton *discardButton = nullptr;
     //TaskDetailWindow *detail = nullptr
     //TaskEditWindow *edit = nullptr
+
+    void setUpDetailFrame();
+    void setUpEditFrame();
 
 public slots:
     void showDetailWindow(AbstractTask *task);

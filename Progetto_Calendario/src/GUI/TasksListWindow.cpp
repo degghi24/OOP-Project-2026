@@ -9,8 +9,9 @@ TasksListWindow::TasksListWindow(QWidget *parent): QWidget(parent){
 }
 
 void TasksListWindow::setupUI(){
-    mainFrame = new QGridLayout(this);
-    mainFrame->setAlignment(Qt::AlignTop);
+
+    mainGrid = new QGridLayout(this);
+    mainGrid->setAlignment(Qt::AlignTop);
 
     //Search Bar
     searchBar = new QLineEdit();
@@ -50,12 +51,12 @@ void TasksListWindow::setupUI(){
     QPushButton *addButton = new QPushButton("Add");
     connect(addButton, &QPushButton::clicked, this, &TasksListWindow::addRequest);
 
-    mainFrame->addWidget(searchBar,0,0,1,2);
-    mainFrame->addWidget(searchButton,0,1,1,1);
-    mainFrame->addWidget(filterButton,0,2,1,1);
-    mainFrame->addWidget(filterWindow,1,0,1,3);
-    mainFrame->addWidget(scrollArea,2,0,1,3);
-    mainFrame->addWidget(addButton,3,0,1,3);
+    mainGrid->addWidget(searchBar,0,0,1,2);
+    mainGrid->addWidget(searchButton,0,1,1,1);
+    mainGrid->addWidget(filterButton,0,2,1,1);
+    mainGrid->addWidget(filterWindow,1,0,1,3);
+    mainGrid->addWidget(scrollArea,2,0,1,3);
+    mainGrid->addWidget(addButton,3,0,1,3);
 
     setMinimumWidth(330);
     setMaximumWidth(500);

@@ -38,7 +38,7 @@ public:
 private:
 
     //main frame of the widget
-    QGridLayout *mainFrame = nullptr;
+    QGridLayout *mainGrid = nullptr;
 
     //search bar
     QLineEdit *searchBar = nullptr;
