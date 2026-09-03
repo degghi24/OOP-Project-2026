@@ -93,10 +93,7 @@ void TasksListWindow::search(){
 }
 
 void TasksListWindow::filterByCalendar(QDate newDate){
-    int dayOfWeek = newDate.dayOfWeek();
-
-    filterWindow->setStartDate(newDate.addDays(-(dayOfWeek-1)));
-    filterWindow->setEndDate(newDate.addDays(7 - dayOfWeek));
+    filterWindow->setStartDate(newDate);
     search();
 }
 

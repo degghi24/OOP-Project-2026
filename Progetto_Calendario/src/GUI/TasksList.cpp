@@ -94,6 +94,8 @@ void TasksList::unselect(){
 
 bool TasksList::filter(Filter filterValues){
 
+
+
     QList<int> indexesShowed;
     bool isEmptiedLater = false;
 
@@ -133,6 +135,44 @@ bool TasksList::filter(Filter filterValues){
         return true;
     }
 
+    //altrimenti di controlla uno a uno i campi
+    int size = containerLayout->count();
+
+    if(filterValues.startDate != nullptr){
+        for(int i = 0; i < size; ++i){
+            list[i]->show(); // nella prima iterazione mostra tutto
+            if(list[i]->getStartDate() && *list[i]->getStartDate() < *filterValues.startDate){ //e successivamente nasconde
+                list[i]->hide();
+            }
+        }
+    }
+
+    if(filterValues.endDate != nullptr){
+        for(int i = 0; i < size; ++i){
+            if(!list[i]->isHidden() && *list[i]->getEndDate() > *filterValues.endDate){
+                list[i]->hide();
+            }
+        }
+    }
+
+    if(filterValues.type != 0){
+        for(int i = 0; i < size; ++i){
+            if(!list[i]->isHidden() && filterValues.type-1 != list[i]->getType()){
+                list[i]->hide();
+            }
+        }
+    }
+
+    if(!filterValues.title.isEmpty() && !filterValues.title.isNull()){
+        for(int i = 0; i < size; ++i){
+            if(!list[i]->isHidden() && !list[i]->getTitle().contains(filterValues.title)){
+                list[i]->hide();
+            }
+        }
+    }
+
+
+    /*
     //altrimenti di controlla uno a uno i campi
 
     //end date
@@ -238,6 +278,7 @@ bool TasksList::filter(Filter filterValues){
         }
     }
 
+    */
     return true;
 }
 
