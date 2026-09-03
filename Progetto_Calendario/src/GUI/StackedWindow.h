@@ -1,7 +1,7 @@
 #ifndef STACKEDWINDOW_H
 #define STACKEDWINDOW_H
 
-#include "Model/Headers/AbstractTask.h"
+#include "../Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QStackedLayout>
 #include <QCalendarWidget>

@@ -1,37 +1,35 @@
 #ifndef BILL_H
 #define BILL_H
 
-#include <string>
-using std::string;
 #include "Deadline.h"
 
 class Bill : public Deadline {
 private:
     double amount;
     bool paid;
-    string provider;
-    string IBAN;
+    QString provider;
+    QString IBAN;
     bool recurring;
 
 public:
-    Bill(string title, string description,
-         string assignee, QDate creationDate,
+    Bill(QString title, QString description,
+         QString assignee, QDate creationDate,
          QDate dueDate, Priority priority,
          bool completed, bool skipped,
          double amount, bool paid,
-         string provider, string IBAN, bool recurring);
+         QString provider, QString IBAN, bool recurring);
     virtual ~Bill() override;
 
     double getAmount()   const;
     bool   isPaid()      const;
-    string getProvider() const;
-    string getIBAN()     const;
+    QString getProvider() const;
+    QString getIBAN()     const;
     bool   isRecurring() const;
 
     void setAmount   (const double& newAmount);
     void setPaid     (const bool& newPaid);
-    void setProvider (const string& newProvider);
-    void setIBAN     (const string& newIBAN);
+    void setProvider (const QString& newProvider);
+    void setIBAN     (const QString& newIBAN);
     void setRecurring(const bool& newRecurring);
 
     bool pay();

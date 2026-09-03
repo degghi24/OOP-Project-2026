@@ -2,7 +2,7 @@
 #define REPEATABLEEDITPAGE_H
 
 #include "AbstractEditPage.h"
-#include "Model/Headers/RepeatableTask.h"
+#include "../../../Model/Headers/RepeatableTask.h"
 
 #include <QWidget>
 #include <QCheckBox>

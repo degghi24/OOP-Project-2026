@@ -1,4 +1,4 @@
-#include "src/Model/data_persistancy/xml/xmlReader.h"
+#include "xmlReader.h"
 
 XmlReader::XmlReader() {}
 
@@ -53,16 +53,16 @@ Activity* XmlReader::readActivity(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Activity* res = new Activity(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         t.startDate, t.endDate,
-        t.startTime.toStdString(), t.totalDuration,
-        attr.value("location").toString().toStdString(),
+        t.startTime, t.totalDuration,
+        attr.value("location").toString(),
         attr.value("participantCount").toInt(),
-        attr.value("eventType").toString().toStdString(),
+        attr.value("eventType").toString(),
         (attr.value("online").toString() == "true"),
-        attr.value("meetingLink").toString().toStdString()
+        attr.value("meetingLink").toString()
         );
 
     xml.skipCurrentElement();
@@ -75,13 +75,13 @@ Reminder* XmlReader::readReminder(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Reminder* res = new Reminder(
-       a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+       a.title,
+        a.description, a.assignee,
         a.creationDate,
         t.startDate, t.endDate,
-        t.startTime.toStdString(), t.totalDuration,
-        attr.value("notifyTime").toString().toStdString(),
-        attr.value("alertMessage").toString().toStdString(),
+        t.startTime, t.totalDuration,
+        attr.value("notifyTime").toString(),
+        attr.value("alertMessage").toString(),
         (attr.value("snoozed").toString() == "true"),
         attr.value("snoozeMinutes").toInt()
         );
@@ -98,15 +98,15 @@ Work* XmlReader::readWork(QXmlStreamReader& xml) {
     QStringList subList = attr.value("subTasks").toString().split("|", Qt::SkipEmptyParts);
 
     Work* res = new Work(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         r.weekDays,
         r.repeatEndDate,
         subList, attr.value("progress").toInt(),
-        attr.value("client").toString().toStdString(),
-        attr.value("category").toString().toStdString(),
-        attr.value("notes").toString().toStdString()
+        attr.value("client").toString(),
+        attr.value("category").toString(),
+        attr.value("notes").toString()
         );
 
     xml.skipCurrentElement();
@@ -119,16 +119,16 @@ Bill* XmlReader::readBill(QXmlStreamReader& xml) {
     auto attr = xml.attributes();
 
     Bill* res = new Bill(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         attr.value("amount").toDouble(),
         (attr.value("paid").toString() == "true"),
-        attr.value("provider").toString().toStdString(),
-        attr.value("IBAN").toString().toStdString(),
+        attr.value("provider").toString(),
+        attr.value("IBAN").toString(),
         (attr.value("recurring").toString() == "true")
         );
 
@@ -147,16 +147,16 @@ Project* XmlReader::readProject(QXmlStreamReader& xml) {
     };
 
     Project* res = new Project(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
-        attr.value("milestone").toString().toStdString(),
+        attr.value("milestone").toString(),
         toStdVec(attr.value("team").toString()),
         attr.value("budget").toDouble(),
-        attr.value("status").toString().toStdString(),
+        attr.value("status").toString(),
         toStdVec(attr.value("tags").toString())
         );
 

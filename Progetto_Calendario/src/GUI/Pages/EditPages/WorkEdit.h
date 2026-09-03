@@ -2,7 +2,7 @@
 #define WORKEDIT_H
 
 #include "RepeatableEditPage.h"
-#include "Model/Headers/Work.h"
+#include "../../../Model/Headers/Work.h"
 
 #include <QWidget>
 
@@ -34,9 +34,9 @@ signals:
 public:
     QStringList getSubTasks();
     int getProgress() const;
-    std::string getClient() const;
-    std::string getCategory() const;
-    std::string getNotes() const;
+    QString getClient() const;
+    QString getCategory() const;
+    QString getNotes() const;
 
     WorkEdit(Work *task, QWidget *parent = nullptr);
     WorkEdit(QWidget *parent = nullptr);

@@ -2,7 +2,7 @@
 #define REMINDEREDIT_H
 
 #include "TimedEditPage.h"
-#include "Model/Headers/Reminder.h"
+#include "../../../Model/Headers/Reminder.h"
 
 #include <QWidget>
 #include <QRadioButton>
@@ -28,8 +28,8 @@ signals:
     void returnTask(Reminder *task);
 
 public:
-    std::string getNotifyTime() const;
-    std::string getalertMessage() const;
+    QString getNotifyTime() const;
+    QString getalertMessage() const;
     bool isSnoozed() const;
     int getSnoozeMinute() const;
 

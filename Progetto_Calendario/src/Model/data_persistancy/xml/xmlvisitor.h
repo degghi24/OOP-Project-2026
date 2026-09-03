@@ -1,8 +1,8 @@
 #ifndef XMLVISITOR_H
 #define XMLVISITOR_H
 
-#include <Qtxml\QDomDocument>
-#include <Qtxml\QDomElement>
+#include <QDomDocument>
+#include <QDomElement>
 
 #include "../ConstVisitor.h"
 

@@ -1,35 +1,34 @@
 #ifndef ABSTRACTTASK_H
 #define ABSTRACTTASK_H
 
-#include <string>
+#include <QString>
 #include <QDate>
-using std::string;
 #include "../data_persistancy/ConstVisitor.h"
-#include "../../src/GUI/GuiVisitors/Visitor.h"
+#include "../../GUI/GuiVisitors/Visitor.h"
 
 class AbstractTask {
 private:
     unsigned int id;
-    string title;
-    string description;
-    string assignee;
+    QString title;
+    QString description;
+    QString assignee;
     QDate creationDate;
 
 public:
-    AbstractTask(string title, string description,
-                 string assignee, QDate creationDate);
+    AbstractTask(QString title, QString description,
+                 QString assignee, QDate creationDate);
     virtual ~AbstractTask() = default;
 
     unsigned int getId()           const;
-    string getTitle()        const;
-    string getDescription()  const;
-    string getAssignee()     const;
+    QString getTitle()        const;
+    QString getDescription()  const;
+    QString getAssignee()     const;
     QDate getCreationDate() const;
 
     void setId         (const unsigned int &newId);
-    void setTitle      (const string& newTitle);
-    void setDescription(const string& newDesc);
-    void setAssignee   (const string& newAssignee);
+    void setTitle      (const QString& newTitle);
+    void setDescription(const QString& newDesc);
+    void setAssignee   (const QString& newAssignee);
 
     virtual bool remove()           = 0;
     virtual void accept(ConstVisitor& v) = 0;

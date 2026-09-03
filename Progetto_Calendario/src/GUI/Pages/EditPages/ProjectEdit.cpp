@@ -10,13 +10,13 @@ ProjectEdit::ProjectEdit(Project *task, QWidget *parent): DeadlineEditPage(task,
     setUp();
 
     if(task){
-        milestone->setText(task->getMilestone().c_str());
+        milestone->setText(task->getMilestone());
         for(const auto &it : task->getTeam()){
             team->setText(it);
             addTeamMember();
         }
         budget->setValue(task->getBudget());
-        status->setText(task->getStatus().c_str());
+        status->setText(task->getStatus());
         for(const auto &it : task->getTags()){
             tags->setText(it);
             addTag();
@@ -110,8 +110,8 @@ void ProjectEdit::addTag(){
 
 
 
-std::string ProjectEdit::getMilestone() const{
-    return milestone->text().toStdString();
+QString ProjectEdit::getMilestone() const{
+    return milestone->text();
 }
 
 QStringList ProjectEdit::getTeam() const{
@@ -125,8 +125,8 @@ QStringList ProjectEdit::getTeam() const{
 int ProjectEdit::getBudget() const{
     return budget->value();
 }
-std::string ProjectEdit::getStatus() const{
-    return status->text().toStdString();
+QString ProjectEdit::getStatus() const{
+    return status->text();
 }
 QStringList ProjectEdit::getTags() const{
     QStringList tagList;

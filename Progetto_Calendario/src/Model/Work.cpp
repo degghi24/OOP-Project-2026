@@ -7,12 +7,12 @@
 using std::cout;
 using std::endl;
 
-Work::Work(string title, string description,
-           string assignee, QDate creationDate,
+Work::Work(QString title, QString description,
+           QString assignee, QDate creationDate,
            QBitArray weekDays,
            QDate repeatEndDate,
            QStringList subTasks, int progress,
-           string client, string category, string notes)
+           QString client, QString category, QString notes)
     : AbstractTask(title, description, assignee, creationDate),
     RepeatableTask(title, description, assignee, creationDate,
                    weekDays, repeatEndDate),
@@ -22,15 +22,15 @@ Work::Work(string title, string description,
 
 QStringList Work::getSubTasks()  const { return subTasks; }
 int            Work::getProgress()  const { return progress; }
-string         Work::getClient()    const { return client;   }
-string         Work::getCategory()  const { return category; }
-string         Work::getNotes()     const { return notes;    }
+QString         Work::getClient()    const { return client;   }
+QString         Work::getCategory()  const { return category; }
+QString         Work::getNotes()     const { return notes;    }
 
 void Work::setSubTasks (const QStringList &newSubTasks) { subTasks = newSubTasks; }
 void Work::setProgress (const int& newProgress)            { progress = newProgress; }
-void Work::setClient   (const string& newClient)           { client   = newClient;   }
-void Work::setCategory (const string& newCategory)         { category = newCategory; }
-void Work::setNotes    (const string& newNotes)            { notes    = newNotes;    }
+void Work::setClient   (const QString& newClient)           { client   = newClient;   }
+void Work::setCategory (const QString& newCategory)         { category = newCategory; }
+void Work::setNotes    (const QString& newNotes)            { notes    = newNotes;    }
 
 void Work::addSubTask(const QString& task) {
     subTasks.append(task);

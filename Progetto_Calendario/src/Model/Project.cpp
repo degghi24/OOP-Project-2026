@@ -7,12 +7,12 @@
 using std::cout;
 using std::endl;
 
-Project::Project(string title, string description,
-                 string assignee, QDate creationDate,
+Project::Project(QString title, QString description,
+                 QString assignee, QDate creationDate,
                  QDate dueDate, Priority priority,
                  bool completed, bool skipped,
-                 string milestone, QStringList team,
-                 double budget, string status, QStringList tags)
+                 QString milestone, QStringList team,
+                 int budget, QString status, QStringList tags)
     : AbstractTask(title, description, assignee, creationDate),
     Deadline(title, description, assignee, creationDate,
              dueDate, priority, completed, skipped),
@@ -20,21 +20,21 @@ Project::Project(string title, string description,
     budget(budget), status(status), tags(tags)
 {}
 
-string         Project::getMilestone() const { return milestone; }
+QString         Project::getMilestone() const { return milestone; }
 QStringList    Project::getTeam()      const { return team;      }
 double         Project::getBudget()    const { return budget;    }
-string         Project::getStatus()    const { return status;    }
+QString         Project::getStatus()    const { return status;    }
 QStringList    Project::getTags()      const { return tags;      }
 
-void Project::setMilestone(const string& newMilestone) { milestone = newMilestone; }
+void Project::setMilestone(const QString& newMilestone) { milestone = newMilestone; }
 void Project::setBudget   (const double& newBudget)    { budget    = newBudget;    }
-void Project::setStatus   (const string& newStatus)    { status    = newStatus;    }
+void Project::setStatus   (const QString& newStatus)    { status    = newStatus;    }
 
 void Project::addMember(const QString& member) {
     team.push_back(member);
 }
 
-bool Project::removeMember(const string& member) {
+bool Project::removeMember(const QString& member) {
     auto it = std::find(team.begin(), team.end(), member);
     if (it != team.end()) {
         team.erase(it);

@@ -1,4 +1,4 @@
-#include "JsonReader.h"
+#include "jsonReader.h"
 #include <QDebug>
 
 JsonReader::JsonReader() {}
@@ -48,16 +48,16 @@ Activity* JsonReader::readActivity(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     TimedTaskData    t = readTimedTaskData(obj);
     return new Activity(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         t.startDate, t.endDate,
-        t.startTime.toStdString(), t.totalDuration,
-        obj["location"].toString().toStdString(),
+        t.startTime, t.totalDuration,
+        obj["location"].toString(),
         obj["participantCount"].toInt(),
-        obj["eventType"].toString().toStdString(),
+        obj["eventType"].toString(),
         obj["online"].toBool(),
-        obj["meetingLink"].toString().toStdString()
+        obj["meetingLink"].toString()
         );
 }
 
@@ -65,13 +65,13 @@ Reminder* JsonReader::readReminder(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     TimedTaskData    t = readTimedTaskData(obj);
     return new Reminder(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         t.startDate, t.endDate,
-        t.startTime.toStdString(), t.totalDuration,
-        obj["notifyTime"].toString().toStdString(),
-        obj["alertMessage"].toString().toStdString(),
+        t.startTime, t.totalDuration,
+        obj["notifyTime"].toString(),
+        obj["alertMessage"].toString(),
         obj["snoozed"].toBool(),
         obj["snoozeMinutes"].toInt()
         );
@@ -86,15 +86,15 @@ Work* JsonReader::readWork(const QJsonObject& obj) {
         subTasks.push_back(v.toString());
 
     return new Work(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         r.weekDays,
         r.repeatEndDate,
         subTasks, obj["progress"].toInt(),
-        obj["client"].toString().toStdString(),
-        obj["category"].toString().toStdString(),
-        obj["notes"].toString().toStdString()
+        obj["client"].toString(),
+        obj["category"].toString(),
+        obj["notes"].toString()
         );
 }
 
@@ -102,16 +102,16 @@ Bill* JsonReader::readBill(const QJsonObject& obj) {
     AbstractTaskData a = readAbstractTaskData(obj);
     DeadlineData     d = readDeadlineData(obj);
     return new Bill(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
         obj["amount"].toDouble(),
         obj["paid"].toBool(),
-        obj["provider"].toString().toStdString(),
-        obj["IBAN"].toString().toStdString(),
+        obj["provider"].toString(),
+        obj["IBAN"].toString(),
         obj["recurring"].toBool()
         );
 }
@@ -127,15 +127,15 @@ Project* JsonReader::readProject(const QJsonObject& obj) {
         tags.push_back(v.toString());
 
     return new Project(
-        a.title.toStdString(),
-        a.description.toStdString(), a.assignee.toStdString(),
+        a.title,
+        a.description, a.assignee,
         a.creationDate,
         d.dueDate,
         static_cast<Deadline::Priority>(d.priority),
         d.completed, d.skipped,
-        obj["milestone"].toString().toStdString(),
+        obj["milestone"].toString(),
         team, obj["budget"].toDouble(),
-        obj["status"].toString().toStdString(),
+        obj["status"].toString(),
         tags
         );
 }

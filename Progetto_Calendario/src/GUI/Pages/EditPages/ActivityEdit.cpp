@@ -7,11 +7,11 @@ ActivityEdit::ActivityEdit(Activity *task, QWidget *parent): TimedEditPage(task,
     setUp();
 
     if(task){
-        location->setText(task->getLocation().c_str());
+        location->setText(task->getLocation());
         partecipationCount->setValue(task->getParticipantCount());
-        eventType->setText(task->getEventType().c_str());
+        eventType->setText(task->getEventType());
         online->setChecked(task->isOnline());
-        meetingLink->setText(task->getMeetingLink().c_str());
+        meetingLink->setText(task->getMeetingLink());
     }
 }
 
@@ -43,20 +43,20 @@ void ActivityEdit::setUp(){
 
 }
 
-std::string ActivityEdit::getLocation() const{
-    return location->text().toStdString();
+QString ActivityEdit::getLocation() const{
+    return location->text();
 }
 int ActivityEdit::getPartecipationCount() const{
     return partecipationCount->value();
 }
-std::string ActivityEdit::getEventType() const{
-    return eventType->text().toStdString();
+QString ActivityEdit::getEventType() const{
+    return eventType->text();
 }
 bool ActivityEdit::isOnline() const{
     return online->isChecked();
 }
-std::string ActivityEdit::getMeetingLink() const{
-    return meetingLink->text().toStdString();
+QString ActivityEdit::getMeetingLink() const{
+    return meetingLink->text();
 }
 
 void ActivityEdit::createTask(){

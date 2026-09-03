@@ -9,8 +9,8 @@ BillEdit::BillEdit(Bill *task, QWidget *parent): DeadlineEditPage(task,parent) {
     if(task){
         amount->setValue(task->getAmount());
         paid->setChecked(task->isPaid());
-        provider->setText(task->getProvider().c_str());
-        iban->setText(task->getIBAN().c_str());
+        provider->setText(task->getProvider());
+        iban->setText(task->getIBAN());
         recurring->setChecked(task->isRecurring());
     }
 }
@@ -53,11 +53,11 @@ int BillEdit::getAmount() const{
 bool BillEdit::isPaid() const{
     return paid->isChecked();
 }
-std::string BillEdit::getProvider() const{
-    return provider->text().toStdString();
+QString BillEdit::getProvider() const{
+    return provider->text();
 }
-std::string BillEdit::getIban() const{
-    return iban->text().toStdString();
+QString BillEdit::getIban() const{
+    return iban->text();
 }
 bool BillEdit::isRecurring() const{
     return recurring->isChecked();

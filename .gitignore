@@ -1,5 +1,6 @@
 build
 .qtcreator
+.Identifier
 
 Progetto_Calendario/.qtcreator
 Progetto_Calendario/build
@@ -31,6 +32,7 @@ Progetto_Calendario/build
 *.la
 *.a
 *.lib
+*.Identifier
 
 # Executables
 *.exe

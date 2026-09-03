@@ -2,7 +2,6 @@
 #define TASKLISTMANAGER_H
 
 #include <vector>
-#include <string>
 #include "AbstractTask.h"
 
 class TaskListManager {
@@ -31,14 +30,14 @@ public:
         return instance;
     }
 
-    bool saveToFile(const string& filepath)const; //Saves the library to a file
-    bool loadFromFile(const string& filepath); //Loads the library from a file
+    bool saveToFile(const QString& filepath)const; //Saves the library to a file
+    bool loadFromFile(const QString& filepath); //Loads the library from a file
 
     void clearList();
 
     AbstractTask* getTaskById(const unsigned int &id) const;
 
-    std::vector<AbstractTask*> findByTitle(const std::string& text) const;
+    std::vector<AbstractTask*> findByTitle(const QString& text) const;
 };
 
 #endif

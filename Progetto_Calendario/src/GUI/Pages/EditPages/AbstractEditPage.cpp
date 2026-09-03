@@ -2,9 +2,9 @@
 
 AbstractEditPage::AbstractEditPage(AbstractTask *task, QWidget *parent):QWidget(parent), page(new QVBoxLayout(this)){
 
-    title = new QLineEdit(task->getTitle().c_str());
-    description = new QTextEdit(task->getDescription().c_str());
-    assignee = new QLineEdit(task->getAssignee().c_str());
+    title = new QLineEdit(task->getTitle());
+    description = new QTextEdit(task->getDescription());
+    assignee = new QLineEdit(task->getAssignee());
     //QDateEdit *creationDate = new QDateEdit();
 
     page->addWidget(new QLabel("Title"));
@@ -34,14 +34,14 @@ AbstractEditPage::AbstractEditPage(QWidget *parent):QWidget(parent), page(new QV
     page->addLayout(line);
 }
 
-std::string AbstractEditPage::getTitle() const{
-    return title->text().toStdString();
+QString AbstractEditPage::getTitle() const{
+    return title->text();
 }
-std::string AbstractEditPage::getDescription() const{
-    return description->toPlainText().toStdString();
+QString AbstractEditPage::getDescription() const{
+    return description->toPlainText();
 }
-std::string AbstractEditPage::getAssignee() const{
-    return assignee->text().toStdString();
+QString AbstractEditPage::getAssignee() const{
+    return assignee->text();
 }
 
 

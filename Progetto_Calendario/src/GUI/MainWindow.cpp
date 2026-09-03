@@ -76,7 +76,7 @@ void MainWindow::saveToFile(){
 
     if (!file.isEmpty())
     {
-        bool success = TaskListManager::getInstance().saveToFile(file.toStdString());
+        bool success = TaskListManager::getInstance().saveToFile(file);
         if (success){
             QMessageBox::information(this, "Success", "Content saved successfully");
         }
@@ -95,7 +95,7 @@ void MainWindow::loadFromFile(){
 
     if (!file.isEmpty())
     {
-        bool success = TaskListManager::getInstance().loadFromFile(file.toStdString());
+        bool success = TaskListManager::getInstance().loadFromFile(file);
         if (success){
             QMessageBox::information(this, "Success", "Content imported successfully");
             stackWindow->toHomePage();

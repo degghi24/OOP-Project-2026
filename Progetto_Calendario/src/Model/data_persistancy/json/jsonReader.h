@@ -6,12 +6,12 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-#include "src/Model/Headers/AbstractTask.h"
-#include "src/Model/Headers/Activity.h"
-#include "src/Model/Headers/Reminder.h"
-#include "src/Model/Headers/Work.h"
-#include "src/Model/Headers/Bill.h"
-#include "src/Model/Headers/Project.h"
+#include "../../Headers/AbstractTask.h"
+#include "../../Headers/Activity.h"
+#include "../../Headers/Reminder.h"
+#include "../../Headers/Work.h"
+#include "../../Headers/Bill.h"
+#include "../../Headers/Project.h"
 
 class JsonReader {
 private:

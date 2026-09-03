@@ -2,7 +2,7 @@
 #define TIMEDEDITPAGE_H
 
 #include "AbstractEditPage.h"
-#include "Model/Headers/TimedTask.h"
+#include "../../../Model/Headers/TimedTask.h"
 
 #include <QDateEdit>
 #include <QTimeEdit>
@@ -27,7 +27,7 @@ public:
 
     QDate getStartDate() const;
     QDate getEndDate() const;
-    std::string getStartTime() const;
+    QString getStartTime() const;
     int getDuration() const;
 
     TimedEditPage(TimedTask *task, QWidget *parent = nullptr);

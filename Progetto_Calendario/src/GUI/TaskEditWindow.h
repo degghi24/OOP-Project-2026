@@ -1,8 +1,8 @@
 #ifndef TASKEDITWINDOW_H
 #define TASKEDITWINDOW_H
 
-#include "GUI/GuiVisitors/EditVisitor.h"
-#include "Model/Headers/AbstractTask.h"
+#include "../GUI/GuiVisitors/EditVisitor.h"
+#include "../Model/Headers/AbstractTask.h"
 
 #include <QWidget>
 #include <QPushButton>

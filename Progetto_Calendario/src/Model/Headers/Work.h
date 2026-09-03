@@ -1,10 +1,8 @@
 #ifndef WORK_H
 #define WORK_H
 
-#include <string>
 #include <vector>
 #include "QList"
-using std::string;
 using std::vector;
 #include "RepeatableTask.h"
 
@@ -12,31 +10,31 @@ class Work : public RepeatableTask {
 private:
     QStringList subTasks;
     int progress;
-    string client;
-    string category;
-    string notes;
+    QString client;
+    QString category;
+    QString notes;
 
 
 public:
-    Work(string title, string description,
-         string assignee, QDate creationDate,
+    Work(QString title, QString description,
+         QString assignee, QDate creationDate,
          QBitArray weekDays,
          QDate repeatEndDate,
          QStringList subTasks, int progress,
-         string client, string category, string notes);
+         QString client, QString category, QString notes);
     virtual ~Work() override;
 
     QStringList getSubTasks()  const;
     int            getProgress()  const;
-    string         getClient()    const;
-    string         getCategory()  const;
-    string         getNotes()     const;
+    QString         getClient()    const;
+    QString         getCategory()  const;
+    QString         getNotes()     const;
 
     void setSubTasks (const QStringList& newSubTasks);
     void setProgress (const int& newProgress);
-    void setClient   (const string& newClient);
-    void setCategory (const string& newCategory);
-    void setNotes    (const string& newNotes);
+    void setClient   (const QString& newClient);
+    void setCategory (const QString& newCategory);
+    void setNotes    (const QString& newNotes);
 
     void addSubTask   (const QString& task);
     bool removeSubTask(const QString& task);

@@ -2,11 +2,11 @@
 #define BLOCKVISITOR_H
 
 #include "Visitor.h"
-#include "Model/Headers/Activity.h"
-#include "Model/Headers/Reminder.h"
-#include "Model/Headers/Work.h"
-#include "Model/Headers/Bill.h"
-#include "Model/Headers/Project.h"
+#include "../../Model/Headers/Activity.h"
+#include "../../Model/Headers/Reminder.h"
+#include "../../Model/Headers/Work.h"
+#include "../../Model/Headers/Bill.h"
+#include "../../Model/Headers/Project.h"
 
 #include "../TaskBlock.h"
 

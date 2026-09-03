@@ -1,7 +1,7 @@
 #ifndef ABSTRACTEDITPAGE_H
 #define ABSTRACTEDITPAGE_H
 
-#include "Model/Headers/AbstractTask.h"
+#include "../../../Model/Headers/AbstractTask.h"
 #include <QWidget>
 #include <QLabel>
 #include <QLineEdit>
@@ -26,9 +26,9 @@ protected:
 
 public:
 
-    std::string getTitle() const;
-    std::string getDescription() const;
-    std::string getAssignee() const;
+    QString getTitle() const;
+    QString getDescription() const;
+    QString getAssignee() const;
 
     AbstractEditPage(AbstractTask *task, QWidget *parent = nullptr);
     AbstractEditPage(QWidget *parent = nullptr);

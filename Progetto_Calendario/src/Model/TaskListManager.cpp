@@ -1,8 +1,8 @@
 #include "Headers/TaskListManager.h"
-#include "Model/data_persistancy/json/JsonReader.h"
-#include "Model/data_persistancy/json/JsonVisitor.h"
-#include "Model/data_persistancy/xml/xmlReader.h"
-#include "Model/data_persistancy/xml/xmlVisitor.h"
+#include "../Model/data_persistancy/json/jsonReader.h"
+#include "../Model/data_persistancy/json/jsonVisitor.h"
+#include "../Model/data_persistancy/xml/xmlReader.h"
+#include "../Model/data_persistancy/xml/xmlVisitor.h"
 
 
 TaskListManager::TaskListManager() : ID(0) {}
@@ -46,8 +46,9 @@ void TaskListManager::clearList() {
     taskList.clear();
 }
 
-bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the library to a file
-    string dataType = filepath.substr(filepath.find_last_of('.'));
+bool TaskListManager::saveToFile(const QString& filepath)const{  //Saves the library to a file
+    QString dataType = filepath.mid(filepath.lastIndexOf("."));
+    qDebug()<<dataType;
 
     if(dataType == ".xml"){
         XmlVisitor visitor = XmlVisitor();
@@ -58,7 +59,7 @@ bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the libr
 
         QDomDocument doc = visitor.getDocument();
 
-        QFile file(filepath.c_str());
+        QFile file(filepath);
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
             return false;
         }
@@ -70,7 +71,7 @@ bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the libr
     }
 
     if(dataType == ".json"){
-        QFile File(filepath.c_str());
+        QFile File(filepath);
         jsonVisitor visitor = jsonVisitor();
 
         QJsonArray jsonItems;
@@ -95,16 +96,17 @@ bool TaskListManager::saveToFile(const string& filepath)const{  //Saves the libr
     return true;
 }
 
-bool TaskListManager::loadFromFile(const string& filepath){ //Loads the library from a file
+bool TaskListManager::loadFromFile(const QString& filepath){ //Loads the library from a file
 
     clearList();
-    string dataType = filepath.substr(filepath.find_last_of('.'));
+    QString dataType = filepath.mid(filepath.lastIndexOf("."));
+    qDebug()<<dataType;
 
     if(dataType == ".xml"){
 
         XmlReader reader;
 
-        QList<AbstractTask*> tasks = reader.readAll(QString::fromStdString(filepath));
+        QList<AbstractTask*> tasks = reader.readAll(filepath);
 
         for (auto it = tasks.begin(); it != tasks.end(); ++it) {
             addTask(*it);
@@ -117,7 +119,7 @@ bool TaskListManager::loadFromFile(const string& filepath){ //Loads the library 
 
         JsonReader reader;
 
-        QList<AbstractTask*> tasks = reader.readAll(QString::fromStdString(filepath));
+        QList<AbstractTask*> tasks = reader.readAll(filepath);
 
         for (auto it = tasks.begin(); it != tasks.end(); ++it) {
             addTask(*it);
@@ -139,11 +141,11 @@ AbstractTask* TaskListManager::getTaskById(const unsigned int& id) const {
 }
 
 
-std::vector<AbstractTask*> TaskListManager::findByTitle(const std::string& text) const {
+std::vector<AbstractTask*> TaskListManager::findByTitle(const QString& text) const {
     std::vector<AbstractTask*> result;
 
     for (auto task : taskList) {
-        if (task->getTitle().find(text) != std::string::npos) {
+        if (task->getTitle().compare(text)) {
             result.push_back(task);
         }
     }

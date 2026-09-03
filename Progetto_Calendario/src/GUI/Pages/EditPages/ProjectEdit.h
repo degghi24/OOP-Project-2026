@@ -2,7 +2,7 @@
 #define PROJECTEDIT_H
 
 #include "DeadlineEditPage.h"
-#include "Model/Headers/Project.h"
+#include "../../../Model/Headers/Project.h"
 
 #include <QWidget>
 #include <QSpinBox>
@@ -36,10 +36,10 @@ signals:
     void returnTask(Project *task);
 
 public:
-    std::string getMilestone() const;
+    QString getMilestone() const;
     QStringList getTeam() const;
     int getBudget() const;
-    std::string getStatus() const;
+    QString getStatus() const;
     QStringList getTags() const;
 
     ProjectEdit(Project *task, QWidget *parent = nullptr);

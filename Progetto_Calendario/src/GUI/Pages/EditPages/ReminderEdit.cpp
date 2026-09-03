@@ -7,8 +7,8 @@ ReminderEdit::ReminderEdit(Reminder *task, QWidget *parent): TimedEditPage(task,
     setUp();
 
     if(task){
-        notifyTime->setText(task->getNotifyTime().c_str());
-        alertMessage->setText(task->getAlertMessage().c_str());
+        notifyTime->setText(task->getNotifyTime());
+        alertMessage->setText(task->getAlertMessage());
         snoozed->setChecked(task->isSnoozed());
         snoozeMinute->setValue(task->getSnoozeMinutes());
     }
@@ -40,11 +40,11 @@ void ReminderEdit::setUp(){
 
 }
 
-std::string ReminderEdit::getNotifyTime() const{
-    return notifyTime->text().toStdString();
+QString ReminderEdit::getNotifyTime() const{
+    return notifyTime->text();
 }
-std::string ReminderEdit::getalertMessage() const{
-    return alertMessage->text().toStdString();
+QString ReminderEdit::getalertMessage() const{
+    return alertMessage->text();
 }
 bool ReminderEdit::isSnoozed() const{
     return snoozed->isChecked();

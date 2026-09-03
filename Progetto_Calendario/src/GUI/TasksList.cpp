@@ -181,7 +181,6 @@ bool TasksList::filter(Filter filterValues){
                 }else if(list[it]->getStartDate() != nullptr && *filterValues.startDate <= *list[it]->getStartDate()){
                     list[it]->show();
                 }else{
-                    qDebug()<<*list[it]->getStartDate()<<" <===========> "<<*filterValues.startDate;
                     list[it]->hide();
                     indexesShowed.removeAll(it);
                     if(indexesShowed.isEmpty()){

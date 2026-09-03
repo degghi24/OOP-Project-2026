@@ -10,7 +10,7 @@ QStringList types{"Activity", "Work", "Bill", "Project", "Reminder"};
 //TaskBlock::TaskBlock(QWidget *parent): QWidget(parent) {}
 
 TaskBlock::TaskBlock(Activity *task):
-    title(new QLabel(task->getTitle().c_str())),
+    title(new QLabel(task->getTitle())),
     startDate(new QDate(task->getStartDate())),
     endDate(new QDate(task->getEndDate())),
     type(new QLabel("Activity"))
@@ -49,7 +49,7 @@ TaskBlock::TaskBlock(Activity *task):
 }
 
 TaskBlock::TaskBlock(Reminder *task):
-    title(new QLabel(task->getTitle().c_str())),
+    title(new QLabel(task->getTitle())),
     startDate(new QDate(task->getStartDate())),
     endDate(new QDate(task->getEndDate())),
     type(new QLabel("Reminder"))
@@ -87,7 +87,7 @@ TaskBlock::TaskBlock(Reminder *task):
 }
 
 TaskBlock::TaskBlock(Work *task):
-    title(new QLabel(task->getTitle().c_str())),
+    title(new QLabel(task->getTitle())),
     endDate(new QDate(task->getRepeatEndDate())),
     type(new QLabel("Work"))
 {
@@ -117,7 +117,7 @@ TaskBlock::TaskBlock(Work *task):
 }
 
 TaskBlock::TaskBlock(Bill *task):
-    title(new QLabel(task->getTitle().c_str())),
+    title(new QLabel(task->getTitle())),
     endDate(new QDate(task->getDueDate())),
     type(new QLabel("Bill"))
 {
@@ -148,7 +148,7 @@ TaskBlock::TaskBlock(Bill *task):
 }
 
 TaskBlock::TaskBlock(Project *task):
-    title(new QLabel(task->getTitle().c_str())),
+    title(new QLabel(task->getTitle())),
     endDate(new QDate(task->getDueDate())),
     type(new QLabel("Project"))
 {

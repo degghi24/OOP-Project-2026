@@ -2,7 +2,7 @@
 #define ACTIVITYEDIT_H
 
 #include "TimedEditPage.h"
-#include "Model/Headers/Activity.h"
+#include "../../../Model/Headers/Activity.h"
 
 #include <QWidget>
 #include <QCheckBox>
@@ -30,11 +30,11 @@ signals:
     void returnTask(Activity *task);
 
 public:
-    std::string getLocation() const;
+    QString getLocation() const;
     int getPartecipationCount() const;
-    std::string getEventType() const;
+    QString getEventType() const;
     bool isOnline() const;
-    std::string getMeetingLink() const;
+    QString getMeetingLink() const;
 
     ActivityEdit(Activity *task, QWidget *parent = nullptr);
     ActivityEdit(QWidget *parent = nullptr);

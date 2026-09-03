@@ -16,9 +16,9 @@ WorkEdit::WorkEdit(Work *task, QWidget *parent): RepeatableEditPage(task, parent
             addSubTask();
         }
         progress->setValue(task->getProgress());
-        client->setText(task->getClient().c_str());
-        category->setText(task->getCategory().c_str());
-        notes->setText(task->getNotes().c_str());
+        client->setText(task->getClient());
+        category->setText(task->getCategory());
+        notes->setText(task->getNotes());
     }
 }
 
@@ -87,14 +87,14 @@ QStringList WorkEdit::getSubTasks(){
 int WorkEdit::getProgress() const{
     return progress->value();
 }
-std::string WorkEdit::getClient() const{
-    return client->text().toStdString();
+QString WorkEdit::getClient() const{
+    return client->text();
 }
-std::string WorkEdit::getCategory() const{
-    return category->text().toStdString();
+QString WorkEdit::getCategory() const{
+    return category->text();
 }
-std::string WorkEdit::getNotes() const{
-    return notes->text().toStdString();
+QString WorkEdit::getNotes() const{
+    return notes->text();
 }
 
 void WorkEdit::createTask(){

@@ -2,7 +2,7 @@
 #define BILLEDIT_H
 
 #include "DeadlineEditPage.h"
-#include "Model/Headers/Bill.h"
+#include "../../../Model/Headers/Bill.h"
 
 #include <QWidget>
 #include <QSpinBox>
@@ -31,8 +31,8 @@ signals:
 public:
     int getAmount() const;
     bool isPaid() const;
-    std::string getProvider() const;
-    std::string getIban() const;
+    QString getProvider() const;
+    QString getIban() const;
     bool isRecurring() const;
 
     BillEdit(Bill *task, QWidget *parent = nullptr);

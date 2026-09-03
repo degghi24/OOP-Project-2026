@@ -41,11 +41,11 @@ DetailPage::DetailPage(const Activity *Activity, QWidget *parent): QWidget(paren
     QCheckBox *isOnline = new QCheckBox();
     QLineEdit *meetingLink = new QLineEdit();
 
-    location->setText(Activity->getLocation().c_str());
+    location->setText(Activity->getLocation());
     partecipationCount->setValue(Activity->getParticipantCount());
-    eventType->setText(Activity->getEventType().c_str());
+    eventType->setText(Activity->getEventType());
     isOnline->setChecked(Activity->isOnline());
-    meetingLink->setText(Activity->getMeetingLink().c_str());
+    meetingLink->setText(Activity->getMeetingLink());
 
     page->addWidget(new QLabel("Location:"));
     page->addWidget(location);
@@ -70,8 +70,8 @@ DetailPage::DetailPage(const Reminder *Reminder, QWidget *parent): QWidget(paren
     QRadioButton *snoozed = new QRadioButton();
     QSpinBox *snoozeMinute = new QSpinBox();
 
-    notifyTime->setText(Reminder->getNotifyTime().c_str());
-    alertMessage->setText(Reminder->getAlertMessage().c_str());
+    notifyTime->setText(Reminder->getNotifyTime());
+    alertMessage->setText(Reminder->getAlertMessage());
     snoozed->setChecked(Reminder->isSnoozed());
     snoozeMinute->setValue(Reminder->getSnoozeMinutes());
 
@@ -99,9 +99,9 @@ DetailPage::DetailPage(const Work *Work, QWidget *parent): QWidget(parent), page
 
     //subTask->setText(Work->getSubTasks().join(" "));
     progress->setValue(Work->getProgress());
-    client->setText(Work->getClient().c_str());
-    category->setText(Work->getCategory().c_str());
-    notes->setText(Work->getNotes().c_str());
+    client->setText(Work->getClient());
+    category->setText(Work->getCategory());
+    notes->setText(Work->getNotes());
 
     /*page->addWidget(new QLabel("Subtasks:"));
     page->addWidget(subTaskToAdd);*/
@@ -129,8 +129,8 @@ DetailPage::DetailPage(const Bill *Bill, QWidget *parent): QWidget(parent), page
 
     amount->setValue(Bill->getAmount());
     paid->setChecked(Bill->isPaid());
-    provider->setText(Bill->getProvider().c_str());
-    iban->setText(Bill->getIBAN().c_str());
+    provider->setText(Bill->getProvider());
+    iban->setText(Bill->getIBAN());
     recurring->setChecked(Bill->isRecurring());
 
     page->addWidget(new QLabel("Amount:"));
@@ -157,10 +157,10 @@ DetailPage::DetailPage(const Project *Project, QWidget *parent): QWidget(parent)
     QLineEdit *status = new QLineEdit(this);
     QLineEdit *tags = new QLineEdit(this); // multi insert
 
-    milestone->setText(Project->getMilestone().c_str());
+    milestone->setText(Project->getMilestone());
     team->setText(Project->getTeam().join(" "));
     budget->setValue(Project->getBudget());
-    status->setText(Project->getStatus().c_str());
+    status->setText(Project->getStatus());
     tags->setText(Project->getTags().join(" "));
 
     page->addWidget(new QLabel("Milestone:"));
@@ -181,9 +181,9 @@ DetailPage::DetailPage(const Project *Project, QWidget *parent): QWidget(parent)
 void DetailPage::abstractBase(const AbstractTask *task){
 
     //ID is auto assigned by the listManager
-    QLabel *title = new QLabel(task->getTitle().c_str());
-    QLabel *description = new QLabel(task->getDescription().c_str());
-    QLabel *assignee = new QLabel(task->getAssignee().c_str());
+    QLabel *title = new QLabel(task->getTitle());
+    QLabel *description = new QLabel(task->getDescription());
+    QLabel *assignee = new QLabel(task->getAssignee());
     QLabel *creationDate = new QLabel(task->getCreationDate().toString("yyyy-MM-d"));
 
     page->addWidget(title);
@@ -202,7 +202,7 @@ void DetailPage::timedBase(const TimedTask *task){
 
     QLabel *startDate = new QLabel(task->getStartDate().toString());
     QLabel *endDate = new QLabel(task->getEndDate().toString());
-    QLabel *starTime = new QLabel(task->getStartTime().c_str());
+    QLabel *starTime = new QLabel(task->getStartTime());
     QLabel *duration = new QLabel(QString::number(task->getTotalDuration()));
 
     QGridLayout *innerBox = new QGridLayout();

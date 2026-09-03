@@ -1,38 +1,36 @@
 #ifndef ACTIVITY_H
 #define ACTIVITY_H
 
-#include <string>
-using std::string;
 #include "TimedTask.h"
 
 class Activity : public TimedTask {
 private:
-    string location;
+    QString location;
     int participantCount;
-    string eventType;
+    QString eventType;
     bool online;
-    string meetingLink;
+    QString meetingLink;
 
 public:
-    Activity(string title, string description,
-             string assignee, QDate creationDate,
+    Activity(QString title, QString description,
+             QString assignee, QDate creationDate,
              QDate startDate, QDate endDate,
-             string startTime, int totalDuration,
-             string location, int participantCount,
-             string eventType, bool online, string meetingLink);
+             QString startTime, int totalDuration,
+             QString location, int participantCount,
+             QString eventType, bool online, QString meetingLink);
     virtual ~Activity() override;
 
-    string getLocation()         const;
+    QString getLocation()         const;
     int    getParticipantCount() const;
-    string getEventType()        const;
+    QString getEventType()        const;
     bool   isOnline()            const;
-    string getMeetingLink()      const;
+    QString getMeetingLink()      const;
 
-    void setLocation        (const string& newLocation);
+    void setLocation        (const QString& newLocation);
     void setParticipantCount(const int& newParticipantCount);
-    void setEventType       (const string& newEventType);
+    void setEventType       (const QString& newEventType);
     void setOnline          (const bool& newOnline);
-    void setMeetingLink     (const string& newMeetingLink);
+    void setMeetingLink     (const QString& newMeetingLink);
 
     bool remove()           override;
     void accept(ConstVisitor& v) override;

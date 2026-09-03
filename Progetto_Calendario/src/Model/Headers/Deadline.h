@@ -2,8 +2,6 @@
 #define DEADLINE_H
 
 #include <QDate>
-#include <string>
-using std::string;
 #include "AbstractTask.h"
 
 class Deadline : virtual public AbstractTask {
@@ -17,8 +15,8 @@ private:
     bool skipped;
 
 public:
-    Deadline(string title, string description,
-             string assignee, QDate creationDate,
+    Deadline(QString title, QString description,
+             QString assignee, QDate creationDate,
              QDate dueDate, Priority priority,
              bool completed, bool skipped);
     virtual ~Deadline() = default;

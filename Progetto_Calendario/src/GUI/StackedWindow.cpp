@@ -18,7 +18,6 @@ StackedWindow::StackedWindow(QWidget *parent): QWidget(parent) {
 
     connect(calendar, &QCalendarWidget::clicked, this, &StackedWindow::selectedFilterDate);
 
-
     stack->addWidget(first); // index 0
 
     detail = new TaskDetailWindow(this);

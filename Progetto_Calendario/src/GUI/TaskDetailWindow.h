@@ -1,8 +1,8 @@
 #ifndef TASKDETAILWINDOW_H
 #define TASKDETAILWINDOW_H
 
-#include "GUI/GuiVisitors/DetailVisitor.h"
-#include "Model/Headers/AbstractTask.h"
+#include "../GUI/GuiVisitors/DetailVisitor.h"
+#include "../Model/Headers/AbstractTask.h"
 
 #include <QWidget>
 #include <QPushButton>

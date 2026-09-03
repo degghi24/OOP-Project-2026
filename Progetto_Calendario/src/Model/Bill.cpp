@@ -5,12 +5,12 @@
 using std::cout;
 using std::endl;
 
-Bill::Bill(string title, string description,
-           string assignee, QDate creationDate,
+Bill::Bill(QString title, QString description,
+           QString assignee, QDate creationDate,
            QDate dueDate, Priority priority,
            bool completed, bool skipped,
            double amount, bool paid,
-           string provider, string IBAN, bool recurring)
+           QString provider, QString IBAN, bool recurring)
     : AbstractTask(title, description, assignee, creationDate),
     Deadline(title, description, assignee, creationDate,
              dueDate, priority, completed, skipped),
@@ -20,14 +20,14 @@ Bill::Bill(string title, string description,
 
 double Bill::getAmount()   const { return amount;    }
 bool   Bill::isPaid()      const { return paid;      }
-string Bill::getProvider() const { return provider;  }
-string Bill::getIBAN()     const { return IBAN;      }
+QString Bill::getProvider() const { return provider;  }
+QString Bill::getIBAN()     const { return IBAN;      }
 bool   Bill::isRecurring() const { return recurring; }
 
 void Bill::setAmount   (const double& newAmount)    { amount    = newAmount;    }
 void Bill::setPaid     (const bool& newPaid)        { paid      = newPaid;      }
-void Bill::setProvider (const string& newProvider)  { provider  = newProvider;  }
-void Bill::setIBAN     (const string& newIBAN)      { IBAN      = newIBAN;      }
+void Bill::setProvider (const QString& newProvider)  { provider  = newProvider;  }
+void Bill::setIBAN     (const QString& newIBAN)      { IBAN      = newIBAN;      }
 void Bill::setRecurring(const bool& newRecurring)   { recurring = newRecurring; }
 
 bool Bill::pay() {

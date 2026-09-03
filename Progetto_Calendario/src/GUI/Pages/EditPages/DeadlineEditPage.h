@@ -2,7 +2,7 @@
 #define DEADLINEEDITPAGE_H
 
 #include "AbstractEditPage.h"
-#include "Model/Headers/Deadline.h"
+#include "../../../Model/Headers/Deadline.h"
 
 #include <QWidget>
 #include <QDateEdit>

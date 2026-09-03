@@ -4,7 +4,7 @@ TimedEditPage::TimedEditPage(TimedTask *task,  QWidget *parent): AbstractEditPag
     setUp();
 
     if(task){
-        QString time = task->getStartTime().c_str();
+        QString time = task->getStartTime();
 
         startDate = new QDateEdit(task->getStartDate());
         endDate = new QDateEdit(task->getEndDate());
@@ -52,8 +52,8 @@ QDate TimedEditPage::getStartDate() const{
 QDate TimedEditPage::getEndDate() const{
     return endDate->date();
 }
-std::string TimedEditPage::getStartTime() const{
-    return starTime->time().toString("H-m-s").toStdString();
+QString TimedEditPage::getStartTime() const{
+    return starTime->time().toString("H-m-s");
 }
 int TimedEditPage::getDuration() const{
     return duration->value();

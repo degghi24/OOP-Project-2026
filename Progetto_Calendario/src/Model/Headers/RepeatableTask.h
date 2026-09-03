@@ -1,11 +1,9 @@
 #ifndef REPEATABLETASK_H
 #define REPEATABLETASK_H
 
-#include <string>
 #include <vector>
 #include <QBitArray>
 #include <QDate>
-using std::string;
 using std::vector;
 #include "AbstractTask.h"
 
@@ -18,8 +16,8 @@ private:
     QDate repeatEndDate;
 
 public:
-    RepeatableTask(string title, string description,
-                   string assignee, QDate creationDate,
+    RepeatableTask(QString title, QString description,
+                   QString assignee, QDate creationDate,
                    QBitArray weekDays,
                    QDate repeatEndDate);
     virtual ~RepeatableTask() override;

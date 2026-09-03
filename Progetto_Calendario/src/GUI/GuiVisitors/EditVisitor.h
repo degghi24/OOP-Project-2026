@@ -1,13 +1,13 @@
 #ifndef EDITVISITOR_H
 #define EDITVISITOR_H
 
-#include "GUI/Pages/EditPage.h"
+#include "../Pages/EditPage.h"
 #include "Visitor.h"
-#include "Model/Headers/Activity.h"
-#include "Model/Headers/Reminder.h"
-#include "Model/Headers/Work.h"
-#include "Model/Headers/Bill.h"
-#include "Model/Headers/Project.h"
+#include "../../Model/Headers/Activity.h"
+#include "../../Model/Headers/Reminder.h"
+#include "../../Model/Headers/Work.h"
+#include "../../Model/Headers/Bill.h"
+#include "../../Model/Headers/Project.h"
 
 class EditVisitor: public Visitor{
 

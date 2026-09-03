@@ -1,38 +1,35 @@
 #ifndef REMINDER_H
 #define REMINDER_H
 
-#include <string>
-using std::string;
 #include "TimedTask.h"
 
 class Reminder : public TimedTask {
 private:
-    string notifyTime;
-    string alertMessage;
+    QString notifyTime;
+    QString alertMessage;
     bool snoozed;
     int snoozeMinutes;
 
 
 public:
-    Reminder(string title, string description,
-             string assignee, QDate creationDate,
+    Reminder(QString title, QString description,
+             QString assignee, QDate creationDate,
              QDate startDate, QDate endDate,
-             string startTime, int totalDuration,
-             string notifyTime, string alertMessage,
+             QString startTime, int totalDuration,
+             QString notifyTime, QString alertMessage,
              bool snoozed, int snoozeMinutes);
     virtual ~Reminder() override;
 
-    string getNotifyTime()    const;
-    string getAlertMessage()  const;
+    QString getNotifyTime()    const;
+    QString getAlertMessage()  const;
     bool   isSnoozed()        const;
     int    getSnoozeMinutes() const;
 
-    void setNotifyTime   (const string& newNotifyTime);
-    void setAlertMessage (const string& newAlertMessage);
+    void setNotifyTime   (const QString& newNotifyTime);
+    void setAlertMessage (const QString& newAlertMessage);
     void setSnoozed      (const bool& newSnoozed);
     void setSnoozeMinutes(const int& newSnoozeMinutes);
 
-    void notify();
     void snooze(int min);
 
     bool remove()           override;
