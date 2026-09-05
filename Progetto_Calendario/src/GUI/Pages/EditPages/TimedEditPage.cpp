@@ -6,10 +6,9 @@ TimedEditPage::TimedEditPage(TimedTask *task,  QWidget *parent): AbstractEditPag
     if(task){
         QString time = task->getStartTime();
 
-        startDate = new QDateEdit(task->getStartDate());
-        endDate = new QDateEdit(task->getEndDate());
-        starTime = new QTimeEdit(QTime(time.section(":",0,0).toInt(), time.section(":",1,1).toInt(),time.section(":",2,2).toInt()));
-        duration = new QSpinBox();
+        startDate->setDate(task->getStartDate());
+        endDate->setDate(task->getEndDate());
+        starTime->setTime(QTime(time.section(":",0,0).toInt(), time.section(":",1,1).toInt(),time.section(":",2,2).toInt()));
         duration->setValue(task->getTotalDuration());
     }
 
