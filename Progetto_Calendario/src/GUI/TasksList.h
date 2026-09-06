@@ -26,6 +26,7 @@ public slots:
     bool filter(Filter filterValues);
     void unselect();
     void removeTask(AbstractTask* taskToRemove);
+    void updateList(AbstractTask* taskToUpdate);
 
 signals:
     void taskToShow(AbstractTask* task);

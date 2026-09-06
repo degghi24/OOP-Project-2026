@@ -27,6 +27,7 @@ StackedWindow::StackedWindow(QWidget *parent): QWidget(parent) {
     connect(detail, &TaskDetailWindow::removeTask, this, &StackedWindow::removeTask);
     connect(edit, &TaskEditWindow::emitClose, this, &StackedWindow::close);
     connect(edit, &TaskEditWindow::updateDetail, this, &StackedWindow::updateDetailPage);
+    connect(edit, &TaskEditWindow::updateDetail, this, &StackedWindow::updateTaskBlock);
 
     stack->addWidget(detail); //index 1
     stack->addWidget(edit); //index 2

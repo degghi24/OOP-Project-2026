@@ -4,21 +4,6 @@
 #include <QErrorMessage>
 
 TasksList::TasksList(QWidget *parent): QWidget(parent), containerLayout(new QVBoxLayout(this)){
-/*
-    TaskBlock *one = new TaskBlock("Attività", new QDate(2026,01,01), 0, new QDate(2026,01,01));
-    TaskBlock *two = new TaskBlock("Work", new QDate(2026,01,02), 1);
-    TaskBlock *three = new TaskBlock("Project", new QDate(2026,01,03), 3, new QDate(2026,01,04));
-    TaskBlock *four = new TaskBlock("Reminder", new QDate(2026,01,04), 4, new QDate(2026,01,04));
-
-    addTask(one);
-    addTask(two);
-    addTask(three);
-    addTask(four);
-*/
-
-    /*addTask(new Activity("Titolo Attività", "Desrizione", "IO", QDate::currentDate(), QDate::currentDate(), QDate::currentDate().addDays(1),
-                         "15.00", 60, "Casa Mia", 1, "Lavoro", false, "Tua Madre"));
-*/
 
     containerLayout->setSpacing(5);
     containerLayout->setAlignment(Qt::AlignTop);
@@ -26,7 +11,6 @@ TasksList::TasksList(QWidget *parent): QWidget(parent), containerLayout(new QVBo
 }
 
 void TasksList::addTask(TaskBlock* taskBlock){
-    //connect(taskBlock, &TaskBlock::clicked, this, &TasksList::selected);
     connect(taskBlock, static_cast<void (TaskBlock::*)(TaskBlock*)>(&TaskBlock::doubleClicked), this, &TasksList::selected);
     connect(taskBlock, static_cast<void (TaskBlock::*)(AbstractTask*)>(&TaskBlock::doubleClicked), this, &TasksList::taskToShow);
 
@@ -56,6 +40,7 @@ void TasksList::addTask(AbstractTask* task){
 void TasksList::removeTask(AbstractTask* taskToRemove){
     for(auto it = list.begin(); it != list.end(); ++it){
         if((*it)->getSavedTask()->getId() == taskToRemove->getId()){
+            unselect();
             containerLayout->removeWidget(*it);
             delete *it;
             list.erase(it);
@@ -63,6 +48,11 @@ void TasksList::removeTask(AbstractTask* taskToRemove){
             break;
         }
     }
+}
+
+void TasksList::updateList(AbstractTask* taskToUpdate){
+    removeTask(taskToUpdate);
+    addTask(taskToUpdate);
 }
 
 QList<TaskBlock*>& TasksList::getList(){
